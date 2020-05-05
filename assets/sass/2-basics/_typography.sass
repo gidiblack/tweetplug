@@ -1,43 +1,43 @@
 //	Headings
 
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,900')
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Oxygen:wght@300;400;700&display=swap')
 
 .gigantic, .huge, .large, .bigger, .big,
 h1, h2, h3, h4, h5, h6
   color: #222
   font-weight: bold
-  font-family: 'Roboto', sans-serif
-  font-weight: 900
+  font-family: 'Oxygen', sans-serif
+  font-weight: 700
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.07)
 
 .gigantic
-  font-size: 110px
+  font-size: 80px
   line-height: 1.09
   letter-spacing: -2px
 
 .huge, h1
-  font-size: 68px
+  font-size: 44px
   line-height: 1.05
   @media only screen and (max-width: 680px)
-    font-size: 44px
+    font-size: 38px
 
 .large, h2
-  font-size: 42px
+  font-size: 28px
   line-height: 1.14
   @media only screen and (max-width: 680px)
-    font-size: 32px
+    font-size: 28px
 
 .bigger, h3
-  font-size: 26px
-  line-height: 1.38
-  @media only screen and (max-width: 680px)
-    font-size: 22px
-
-.big, h4
   font-size: 22px
   line-height: 1.38
   @media only screen and (max-width: 680px)
-    font-size: 18px
+    font-size: 20px
+
+.big, h4
+  font-size: 20px
+  line-height: 1.38
+  @media only screen and (max-width: 680px)
+    font-size: 16px
 
 .small, small
   font-size: 10px
@@ -47,9 +47,10 @@ h1, h2, h3, h4, h5, h6
 // Basic Text Style
 
 p
-  margin: 0 0 20px 0
+  font-family: 'Montserrat', sans-serif
+  margin: 0 0 16px 0
   font-weight: 400
-  font-size: 14px
+  font-size: 16px
 
 em
   font-style: italic
@@ -63,3 +64,8 @@ hr
   clear: both
   margin: 10px 0 30px
   height: 0
+
+// special text styles
+.strong-blue
+  font-weight: bold
+  color: $accent

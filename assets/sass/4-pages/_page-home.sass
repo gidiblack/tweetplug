@@ -1,0 +1,21 @@
+.hero
+    .carousel-indicators
+        position: relative
+        margin-top: 1rem
+        @media screen and (max-width: 768px)
+            margin: .5rem 0
+        li
+            width: 16px
+            height: 16px
+            border-radius: 50%
+            background-color: $accent
+            border: none
+            margin: 0 8px
+            @media screen and (max-width: 768px)
+                width: 8px
+                height: 8px
+    .carousel-control-next-icon,
+    .carousel-control-prev-icon
+        @media screen and (max-width: 768px)
+            width: 12px
+            height: 12px

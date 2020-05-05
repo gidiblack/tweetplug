@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,900");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Oxygen:wght@300;400;700&display=swap");
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize * */
 html {
   font-family: sans-serif;
@@ -232,9 +232,8 @@ html {
 }
 
 body {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.6;
-  font-size: 14px;
   color: black;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
@@ -253,6 +252,12 @@ body {
 
 section {
   display: -webkit-box;
+  padding: 50px 0;
+}
+
+.w-90 {
+  width: 90%;
+  margin: 0 auto;
 }
 
 .button,
@@ -262,15 +267,16 @@ input[type=reset],
 input[type=button] {
   display: inline-block;
   padding: 20px 60px;
-  color: black;
+  color: #fff;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
+  font-family: "Oxygen", sans-serif;
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
-  background-color: white;
-  border-radius: 4px;
+  background-color: #1d2951;
+  border-radius: 5px;
   cursor: pointer;
   box-sizing: border-box;
   transition: all 0.2s ease;
@@ -288,18 +294,20 @@ input[type=reset]:focus,
 input[type=button]:hover,
 input[type=button]:active,
 input[type=button]:focus {
+  background-color: #344785;
   outline: 0;
   transform: scale(1.01);
   transform: translateY(3px);
 }
 
 a {
-  color: #0074D9;
+  color: #1d2951;
   text-decoration: none;
   outline: 0;
 }
 a:hover, a:focus {
-  color: #F012BE;
+  color: #344785;
+  text-decoration: none;
 }
 
 ::selection {
@@ -326,54 +334,54 @@ body {
 h1, h2, h3, h4, h5, h6 {
   color: #222;
   font-weight: bold;
-  font-family: "Roboto", sans-serif;
-  font-weight: 900;
+  font-family: "Oxygen", sans-serif;
+  font-weight: 700;
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.07);
 }
 
 .gigantic {
-  font-size: 110px;
+  font-size: 80px;
   line-height: 1.09;
   letter-spacing: -2px;
 }
 
 .huge, h1 {
-  font-size: 68px;
+  font-size: 44px;
   line-height: 1.05;
 }
 @media only screen and (max-width: 680px) {
   .huge, h1 {
-    font-size: 44px;
+    font-size: 38px;
   }
 }
 
 .large, h2 {
-  font-size: 42px;
+  font-size: 28px;
   line-height: 1.14;
 }
 @media only screen and (max-width: 680px) {
   .large, h2 {
-    font-size: 32px;
+    font-size: 28px;
   }
 }
 
 .bigger, h3 {
-  font-size: 26px;
-  line-height: 1.38;
-}
-@media only screen and (max-width: 680px) {
-  .bigger, h3 {
-    font-size: 22px;
-  }
-}
-
-.big, h4 {
   font-size: 22px;
   line-height: 1.38;
 }
 @media only screen and (max-width: 680px) {
+  .bigger, h3 {
+    font-size: 20px;
+  }
+}
+
+.big, h4 {
+  font-size: 20px;
+  line-height: 1.38;
+}
+@media only screen and (max-width: 680px) {
   .big, h4 {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 
@@ -383,9 +391,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-  margin: 0 0 20px 0;
+  font-family: "Montserrat", sans-serif;
+  margin: 0 0 16px 0;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 em {
@@ -402,6 +411,208 @@ hr {
   clear: both;
   margin: 10px 0 30px;
   height: 0;
+}
+
+.strong-blue {
+  font-weight: bold;
+  color: #1d2951;
+}
+
+.home-header {
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.6);
+}
+
+.main-nav {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+.main-nav li {
+  list-style: none;
+  margin: auto 0;
+}
+.main-nav li:first-child {
+  margin-right: auto;
+}
+.main-nav .logo {
+  padding: 10px 0;
+  margin: 0 !important;
+}
+.main-nav .logo img {
+  width: 180px;
+}
+.main-nav a {
+  color: #111;
+  display: block;
+  border-radius: 4px;
+  padding: 10px 24px;
+  margin: 10px 0;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+.main-nav a:hover {
+  color: #fff;
+  background-color: #1d2951;
+}
+.main-nav .logo:hover {
+  background-color: #fff !important;
+}
+
+.responsive-nav {
+  display: flex;
+}
+
+/* CSS hamburger menu */
+.menu-toggle {
+  padding: 1em 0;
+  position: relative;
+  cursor: pointer;
+  z-index: 6;
+  display: none;
+}
+
+.hamburger, .hamburger::before, .hamburger::after {
+  content: "";
+  display: block;
+  background: #d7c6c6;
+  height: 3px;
+  width: 1.8rem;
+  border-radius: 3px;
+  transition: all ease-in-out 500ms;
+}
+
+.hamburger::before {
+  transform: translateY(-8px);
+}
+
+.hamburger::after {
+  transform: translateY(5px);
+}
+
+/* X button with CSS */
+.close-menu .hamburger {
+  transform: rotate(45deg);
+  background: #6c6161;
+}
+
+.close-menu .hamburger::after {
+  transform: translateY(-3px) rotate(-90deg);
+  background: #6c6161;
+}
+
+.close-menu .hamburger::before {
+  opacity: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .responsive-nav {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .responsive-nav.unfold {
+    display: block;
+    width: 100%;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  }
+  .responsive-nav.unfold li {
+    display: block;
+  }
+  .responsive-nav.unfold a {
+    display: block;
+    text-align: center;
+    padding: 20px;
+    color: #de9e2c;
+  }
+  .responsive-nav.unfold a.nav-links {
+    color: #998b8b;
+  }
+  .responsive-nav.unfold a.nav-links.btn {
+    margin: 16px 50px !important;
+    color: #fff;
+  }
+
+  .main-nav .logo img {
+    width: 120px;
+  }
+}
+footer {
+  background-color: #e6e6e6;
+  padding: 40px 0;
+  margin-top: 50px;
+}
+footer ul {
+  padding: 0;
+  margin: 16px 0 0 0;
+}
+footer li {
+  list-style: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+footer .sm-links {
+  display: flex;
+  justify-content: center;
+}
+footer .sm-links a {
+  display: block;
+  padding: 10px 16px;
+}
+footer .sm-links a img {
+  width: 32px;
+}
+footer .sm-links a:hover {
+  color: #1d2951;
+}
+footer p {
+  margin: 20px 0 10px 0;
+  font-size: 15px;
+}
+footer h3 {
+  margin-top: 10px;
+}
+
+.hero .carousel-indicators {
+  position: relative;
+  margin-top: 1rem;
+}
+@media screen and (max-width: 768px) {
+  .hero .carousel-indicators {
+    margin: 0.5rem 0;
+  }
+}
+.hero .carousel-indicators li {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #1d2951;
+  border: none;
+  margin: 0 8px;
+}
+@media screen and (max-width: 768px) {
+  .hero .carousel-indicators li {
+    width: 8px;
+    height: 8px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .hero .carousel-control-next-icon,
+.hero .carousel-control-prev-icon {
+    width: 12px;
+    height: 12px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
