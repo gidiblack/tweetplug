@@ -1,5 +1,5 @@
 
 // JavaScript
-// $(document).ready(function(){
-//     $('.carousel').carousel('pause');
-// });
+$(document).ready(function(){
+    $('.carousel').carousel('pause');
+});

@@ -1,3 +1,4 @@
+// Home Hero & Carousel
 .hero
     .carousel-indicators
         position: relative
@@ -19,3 +20,75 @@
         @media screen and (max-width: 768px)
             width: 12px
             height: 12px
+        @media screen and (max-width: 425px)
+            width: 10px
+            height: 10px
+    .carousel-caption
+        top: 1rem
+        bottom: 1rem
+        max-width: 70%
+        @media screen and (max-width: 768px)
+            padding: 10px 0
+        @media screen and (max-width: 375px)
+            padding: 5px 0
+        @media screen and (max-width: 425px)
+            top: 8px
+            bottom: 8px
+        @media screen and (max-width: 320px)
+            top: 2px
+            bottom: 2px
+        h1 
+            font-family: 'montserrat'
+            font-weight: 800
+            @media screen and (max-width: 768px)
+                font-size: 28px
+                margin: 10px 0
+            @media screen and (max-width: 425px)
+                font-size: 16px
+                margin: 5px 0
+            @media screen and (max-width: 375px)
+                font-size: 13px
+            @media screen and (max-width: 320px)
+                font-size: 12px
+                
+        .button
+            background-color: $white
+            color: $accent
+            @media screen and (max-width: 768px)
+                padding: 10px 20px
+            @media screen and (max-width: 425px)
+                padding: 6px 12px
+                font-size: 10px
+            @media screen and (max-width: 375px)
+                padding: 4px 10px
+                font-size: 8px
+                margin-top: 5px
+            @media screen and (max-width: 320px)
+                padding: 2px 8px
+                font-size: 8px
+                margin: 0
+    
+// Pricing Cards
+.card
+    margin-left: 16px
+    margin-right: 16px
+.card-header
+    padding: 1.5rem 1rem
+    font-weight: normal
+.card-fee
+    padding: 1.5rem 1rem
+    background-color: $accent
+    color: $white
+    font-weight: 500
+    margin: 0
+.card-body
+    padding: 0
+    .card-text
+        border-bottom: 1px solid rgba(0,0,0,.125)
+        margin: 0
+        padding: 1.25rem 0
+    .button
+        margin: 1.5rem 0
+        border-radius: 30px
+        @media screen and (max-width: 425px)
+            padding: 12px 44px

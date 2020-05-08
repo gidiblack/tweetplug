@@ -9,32 +9,37 @@ h1, h2, h3, h4, h5, h6
   font-family: 'Oxygen', sans-serif
   font-weight: 700
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.07)
+  margin-bottom: .8rem
 
 .gigantic
-  font-size: 80px
+  font-size: 60px
   line-height: 1.09
   letter-spacing: -2px
 
 .huge, h1
-  font-size: 44px
-  line-height: 1.05
+  font-size: 42px
+  line-height: 1.2
   @media only screen and (max-width: 680px)
-    font-size: 38px
+    font-size: 34px
 
 .large, h2
-  font-size: 28px
-  line-height: 1.14
+  font-size: 26px
+  line-height: 1.16
   @media only screen and (max-width: 680px)
-    font-size: 28px
-
-.bigger, h3
-  font-size: 22px
-  line-height: 1.38
-  @media only screen and (max-width: 680px)
+    font-size: 24px
+  @media only screen and (max-width: 425px)
     font-size: 20px
 
-.big, h4
+.bigger, h3
   font-size: 20px
+  line-height: 1.38
+  @media only screen and (max-width: 680px)
+    font-size: 18px
+  @media only screen and (max-width: 425px)
+    font-size: 16px
+
+.big, h4
+  font-size: 18px
   line-height: 1.38
   @media only screen and (max-width: 680px)
     font-size: 16px
@@ -48,9 +53,11 @@ h1, h2, h3, h4, h5, h6
 
 p
   font-family: 'Montserrat', sans-serif
-  margin: 0 0 16px 0
+  margin: 0 0 12px 0
   font-weight: 400
-  font-size: 16px
+  font-size: 14px
+  @media only screen and (max-width: 425px)
+    font-size: 13px
 
 em
   font-style: italic
@@ -69,3 +76,5 @@ hr
 .strong-blue
   font-weight: bold
   color: $accent
+.strong-white
+  color: $white

@@ -1,6 +1,6 @@
 footer
     background-color: $footer
-    padding: 40px 0
+    padding: 1.5rem 0
     margin-top: 50px
     ul
         padding: 0
@@ -18,10 +18,17 @@ footer
             padding: 10px 16px
             img
                 width: 32px
+                @media only screen and (max-width: 768px)
+                    width: 28px
         a:hover
             color: $accent
     p
         margin: 20px 0 10px 0
-        font-size: 15px
     h3
         margin-top: 10px
+        @media only screen and (max-width: 770px)
+            font-size: 18px
+    .col-md-2, .col-md-4
+        padding-right: 10px
+        @media only screen and (min-width: 766px) 
+            padding-left: 0px

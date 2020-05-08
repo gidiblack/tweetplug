@@ -69,7 +69,7 @@ dfn {
 
 h1 {
   font-size: 2em;
-  margin: 0.67em 0;
+  margin: 0.5em 0;
 }
 
 mark {
@@ -252,7 +252,7 @@ body {
 
 section {
   display: -webkit-box;
-  padding: 50px 0;
+  margin: 50px 0;
 }
 
 .w-90 {
@@ -266,7 +266,7 @@ input[type=submit],
 input[type=reset],
 input[type=button] {
   display: inline-block;
-  padding: 20px 60px;
+  padding: 16px 50px;
   color: #fff;
   text-align: center;
   font-size: 16px;
@@ -295,6 +295,7 @@ input[type=button]:hover,
 input[type=button]:active,
 input[type=button]:focus {
   background-color: #344785;
+  color: #fff;
   outline: 0;
   transform: scale(1.01);
   transform: translateY(3px);
@@ -337,46 +338,57 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Oxygen", sans-serif;
   font-weight: 700;
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.07);
+  margin-bottom: 0.8rem;
 }
 
 .gigantic {
-  font-size: 80px;
+  font-size: 60px;
   line-height: 1.09;
   letter-spacing: -2px;
 }
 
 .huge, h1 {
-  font-size: 44px;
-  line-height: 1.05;
+  font-size: 42px;
+  line-height: 1.2;
 }
 @media only screen and (max-width: 680px) {
   .huge, h1 {
-    font-size: 38px;
+    font-size: 34px;
   }
 }
 
 .large, h2 {
-  font-size: 28px;
-  line-height: 1.14;
+  font-size: 26px;
+  line-height: 1.16;
 }
 @media only screen and (max-width: 680px) {
   .large, h2 {
-    font-size: 28px;
+    font-size: 24px;
   }
 }
-
-.bigger, h3 {
-  font-size: 22px;
-  line-height: 1.38;
-}
-@media only screen and (max-width: 680px) {
-  .bigger, h3 {
+@media only screen and (max-width: 425px) {
+  .large, h2 {
     font-size: 20px;
   }
 }
 
-.big, h4 {
+.bigger, h3 {
   font-size: 20px;
+  line-height: 1.38;
+}
+@media only screen and (max-width: 680px) {
+  .bigger, h3 {
+    font-size: 18px;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .bigger, h3 {
+    font-size: 16px;
+  }
+}
+
+.big, h4 {
+  font-size: 18px;
   line-height: 1.38;
 }
 @media only screen and (max-width: 680px) {
@@ -392,9 +404,14 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   font-family: "Montserrat", sans-serif;
-  margin: 0 0 16px 0;
+  margin: 0 0 12px 0;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
+}
+@media only screen and (max-width: 425px) {
+  p {
+    font-size: 13px;
+  }
 }
 
 em {
@@ -416,6 +433,10 @@ hr {
 .strong-blue {
   font-weight: bold;
   color: #1d2951;
+}
+
+.strong-white {
+  color: #fff;
 }
 
 .home-header {
@@ -549,7 +570,7 @@ hr {
 }
 footer {
   background-color: #e6e6e6;
-  padding: 40px 0;
+  padding: 1.5rem 0;
   margin-top: 50px;
 }
 footer ul {
@@ -573,15 +594,32 @@ footer .sm-links a {
 footer .sm-links a img {
   width: 32px;
 }
+@media only screen and (max-width: 768px) {
+  footer .sm-links a img {
+    width: 28px;
+  }
+}
 footer .sm-links a:hover {
   color: #1d2951;
 }
 footer p {
   margin: 20px 0 10px 0;
-  font-size: 15px;
 }
 footer h3 {
   margin-top: 10px;
+}
+@media only screen and (max-width: 770px) {
+  footer h3 {
+    font-size: 18px;
+  }
+}
+footer .col-md-2, footer .col-md-4 {
+  padding-right: 10px;
+}
+@media only screen and (min-width: 766px) {
+  footer .col-md-2, footer .col-md-4 {
+    padding-left: 0px;
+  }
 }
 
 .hero .carousel-indicators {
@@ -612,6 +650,131 @@ footer h3 {
 .hero .carousel-control-prev-icon {
     width: 12px;
     height: 12px;
+  }
+}
+@media screen and (max-width: 425px) {
+  .hero .carousel-control-next-icon,
+.hero .carousel-control-prev-icon {
+    width: 10px;
+    height: 10px;
+  }
+}
+.hero .carousel-caption {
+  top: 1rem;
+  bottom: 1rem;
+  max-width: 70%;
+}
+@media screen and (max-width: 768px) {
+  .hero .carousel-caption {
+    padding: 10px 0;
+  }
+}
+@media screen and (max-width: 375px) {
+  .hero .carousel-caption {
+    padding: 5px 0;
+  }
+}
+@media screen and (max-width: 425px) {
+  .hero .carousel-caption {
+    top: 8px;
+    bottom: 8px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .hero .carousel-caption {
+    top: 2px;
+    bottom: 2px;
+  }
+}
+.hero .carousel-caption h1 {
+  font-family: "montserrat";
+  font-weight: 800;
+}
+@media screen and (max-width: 768px) {
+  .hero .carousel-caption h1 {
+    font-size: 28px;
+    margin: 10px 0;
+  }
+}
+@media screen and (max-width: 425px) {
+  .hero .carousel-caption h1 {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+}
+@media screen and (max-width: 375px) {
+  .hero .carousel-caption h1 {
+    font-size: 13px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .hero .carousel-caption h1 {
+    font-size: 12px;
+  }
+}
+.hero .carousel-caption .button {
+  background-color: #fff;
+  color: #1d2951;
+}
+@media screen and (max-width: 768px) {
+  .hero .carousel-caption .button {
+    padding: 10px 20px;
+  }
+}
+@media screen and (max-width: 425px) {
+  .hero .carousel-caption .button {
+    padding: 6px 12px;
+    font-size: 10px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .hero .carousel-caption .button {
+    padding: 4px 10px;
+    font-size: 8px;
+    margin-top: 5px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .hero .carousel-caption .button {
+    padding: 2px 8px;
+    font-size: 8px;
+    margin: 0;
+  }
+}
+
+.card {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.card-header {
+  padding: 1.5rem 1rem;
+  font-weight: normal;
+}
+
+.card-fee {
+  padding: 1.5rem 1rem;
+  background-color: #1d2951;
+  color: #fff;
+  font-weight: 500;
+  margin: 0;
+}
+
+.card-body {
+  padding: 0;
+}
+.card-body .card-text {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  margin: 0;
+  padding: 1.25rem 0;
+}
+.card-body .button {
+  margin: 1.5rem 0;
+  border-radius: 30px;
+}
+@media screen and (max-width: 425px) {
+  .card-body .button {
+    padding: 12px 44px;
   }
 }
 
