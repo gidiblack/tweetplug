@@ -1,103 +1,90 @@
-.home-header
+.header
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.6)
-.main-nav
-    display: flex
-    padding: 0
-    margin: 0
-    li
-        list-style: none
-        margin: auto 0
-    li:first-child
-        margin-right: auto
+    position: absolute
+    width: 100%
+    z-index: 48
+    top: 0
+    background-color: $white
     .logo
-        padding: 10px 0
-        margin: 0!important
+        padding: 8px
+        margin: 4px 0!important
+        float: left
         img
-            width: 180px
-    a
-        color: $black
-        display: block
-        border-radius: 4px
-        padding: 10px 24px
-        margin: 10px 0
-        text-decoration: none 
-        font-weight: 700
-        text-transform: uppercase
-        transition: all 0.2s ease
-    a:hover
-        color: $white
-        background-color: $accent
-    .logo:hover
-        background-color: $white!important
-
-.responsive-nav
-    display: flex
-
-
-/* CSS hamburger menu */
-.menu-toggle 
-    padding: 1em 0
-    position: relative
-    cursor: pointer
-    z-index: 6
-    display: none
-
-
-.hamburger, .hamburger::before, .hamburger::after 
-    content: ""
-    display: block
-    background: #d7c6c6
-    height: 3px
-    width: 1.8rem
-    border-radius: 3px
-    transition: all ease-in-out 500ms
-
-.hamburger::before 
-    transform: translateY(-8px)
-
-.hamburger::after 
-    transform: translateY(5px) 
-
-
-/* X button with CSS */
-.close-menu .hamburger 
-    transform: rotate(45deg)
-    background: #6c6161
-
-.close-menu .hamburger::after
-    transform: translateY(-3px) rotate(-90deg)
-    background: #6c6161
-
-.close-menu .hamburger::before
-    opacity: 0
-
-@media screen and (max-width: 768px)
-    .responsive-nav
-        display: none
-    .menu-toggle
-        display: block
-
-    .responsive-nav.unfold
-        display: block
-        width: 100%
-        background: #fff
-        position: absolute
-        top: 0
-        right: 0
-        overflow-x: hidden
-        overflow-y: auto
-        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3)
+            width: 160px
+            @media screen and (max-width: 768px)
+                width: 120px
+    .main-nav
+        padding: 0
+        margin: 0
+        clear: both
+        max-height: 0
+        overflow: hidden
+        transition: max-height .8s ease-out
         li
-            display: block
+            list-style: none
+            margin: auto 0
         a
+            color: $black
             display: block
-            text-align: center
-            padding: 20px
-            color: #de9e2c
-        a.nav-links
-            color: #998b8b
-        a.nav-links.btn
-            margin: 16px 50px!important
-            color: #fff 
-    .main-nav .logo img
-        width: 120px
+            border-radius: 4px
+            padding: 10px 24px
+            margin: 10px 0
+            text-decoration: none 
+            font-weight: 700
+            text-transform: uppercase
+            transition: all 0.2s ease
+            @media screen and (max-width: 768px)
+                font-size: 14px
+        a:hover
+            color: $white
+            background-color: $accent
+    .menu-toggle
+        display: none
+    .menu-toggle:checked ~ .main-nav
+        max-height: 400px
+
+    /* CSS hamburger menu */
+    .menu-icon 
+        padding: 1em 1.2em
+        margin: .6rem 0
+        position: relative
+        cursor: pointer
+        z-index: 51
+        float: right
+        .hamburger, .hamburger::before, .hamburger::after 
+            content: ""
+            display: block
+            background: $accent
+            height: 3px
+            width: 1.8rem
+            border-radius: 4px
+            transition: all .4s ease-out
+
+        .hamburger::before 
+            transform: translateY(-8px)
+
+        .hamburger::after 
+            transform: translateY(5px) 
+
+    /* X button with CSS */
+    .menu-toggle:checked ~ .menu-icon .hamburger 
+        transform: rotate(45deg)
+        background: $accent
+
+    .menu-toggle:checked ~ .menu-icon .hamburger::after
+        transform: translateY(-3px) rotate(-90deg)
+        background: $accent
+
+    .menu-toggle:checked ~ .menu-icon .hamburger::before
+        opacity: 0
+
+    @media screen and (min-width: 768px)
+        li
+            float: left
+        .main-nav
+            clear: none
+            float: right
+            max-height: none
+        .menu-icon
+            display: none
+    

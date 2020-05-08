@@ -439,30 +439,42 @@ hr {
   color: #fff;
 }
 
-.home-header {
+.header {
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.6);
+  position: absolute;
+  width: 100%;
+  z-index: 48;
+  top: 0;
+  background-color: #fff;
+  /* CSS hamburger menu */
+  /* X button with CSS */
 }
-
-.main-nav {
-  display: flex;
+.header .logo {
+  padding: 8px;
+  margin: 4px 0 !important;
+  float: left;
+}
+.header .logo img {
+  width: 160px;
+}
+@media screen and (max-width: 768px) {
+  .header .logo img {
+    width: 120px;
+  }
+}
+.header .main-nav {
   padding: 0;
   margin: 0;
+  clear: both;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.8s ease-out;
 }
-.main-nav li {
+.header .main-nav li {
   list-style: none;
   margin: auto 0;
 }
-.main-nav li:first-child {
-  margin-right: auto;
-}
-.main-nav .logo {
-  padding: 10px 0;
-  margin: 0 !important;
-}
-.main-nav .logo img {
-  width: 180px;
-}
-.main-nav a {
+.header .main-nav a {
   color: #111;
   display: block;
   border-radius: 4px;
@@ -473,101 +485,69 @@ hr {
   text-transform: uppercase;
   transition: all 0.2s ease;
 }
-.main-nav a:hover {
+@media screen and (max-width: 768px) {
+  .header .main-nav a {
+    font-size: 14px;
+  }
+}
+.header .main-nav a:hover {
   color: #fff;
   background-color: #1d2951;
 }
-.main-nav .logo:hover {
-  background-color: #fff !important;
-}
-
-.responsive-nav {
-  display: flex;
-}
-
-/* CSS hamburger menu */
-.menu-toggle {
-  padding: 1em 0;
-  position: relative;
-  cursor: pointer;
-  z-index: 6;
+.header .menu-toggle {
   display: none;
 }
-
-.hamburger, .hamburger::before, .hamburger::after {
+.header .menu-toggle:checked ~ .main-nav {
+  max-height: 400px;
+}
+.header .menu-icon {
+  padding: 1em 1.2em;
+  margin: 0.6rem 0;
+  position: relative;
+  cursor: pointer;
+  z-index: 51;
+  float: right;
+}
+.header .menu-icon .hamburger, .header .menu-icon .hamburger::before, .header .menu-icon .hamburger::after {
   content: "";
   display: block;
-  background: #d7c6c6;
+  background: #1d2951;
   height: 3px;
   width: 1.8rem;
-  border-radius: 3px;
-  transition: all ease-in-out 500ms;
+  border-radius: 4px;
+  transition: all 0.4s ease-out;
 }
-
-.hamburger::before {
+.header .menu-icon .hamburger::before {
   transform: translateY(-8px);
 }
-
-.hamburger::after {
+.header .menu-icon .hamburger::after {
   transform: translateY(5px);
 }
-
-/* X button with CSS */
-.close-menu .hamburger {
+.header .menu-toggle:checked ~ .menu-icon .hamburger {
   transform: rotate(45deg);
-  background: #6c6161;
+  background: #1d2951;
 }
-
-.close-menu .hamburger::after {
+.header .menu-toggle:checked ~ .menu-icon .hamburger::after {
   transform: translateY(-3px) rotate(-90deg);
-  background: #6c6161;
+  background: #1d2951;
 }
-
-.close-menu .hamburger::before {
+.header .menu-toggle:checked ~ .menu-icon .hamburger::before {
   opacity: 0;
 }
-
-@media screen and (max-width: 768px) {
-  .responsive-nav {
+@media screen and (min-width: 768px) {
+  .header li {
+    float: left;
+  }
+  .header .main-nav {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
     display: none;
   }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  .responsive-nav.unfold {
-    display: block;
-    width: 100%;
-    background: #fff;
-    position: absolute;
-    top: 0;
-    right: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
-  }
-  .responsive-nav.unfold li {
-    display: block;
-  }
-  .responsive-nav.unfold a {
-    display: block;
-    text-align: center;
-    padding: 20px;
-    color: #de9e2c;
-  }
-  .responsive-nav.unfold a.nav-links {
-    color: #998b8b;
-  }
-  .responsive-nav.unfold a.nav-links.btn {
-    margin: 16px 50px !important;
-    color: #fff;
-  }
-
-  .main-nav .logo img {
-    width: 120px;
-  }
 }
+
 footer {
   background-color: #e6e6e6;
   padding: 1.5rem 0;
@@ -622,6 +602,14 @@ footer .col-md-2, footer .col-md-4 {
   }
 }
 
+.hero {
+  margin-top: 110px;
+}
+@media screen and (max-width: 768px) {
+  .hero {
+    margin-top: 85px;
+  }
+}
 .hero .carousel-indicators {
   position: relative;
   margin-top: 1rem;
