@@ -20,10 +20,10 @@
                 <input type="checkbox" name="" id="menu-toggle" class="menu-toggle">
                 <label for="menu-toggle" class="menu-icon"><span class="hamburger"></span></label>
                 <ul class="main-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="faqs.html">FAQs</a></li>
-                        <li><a href="register.html">Register</a></li>
-                        <li><a href="login.html">Login</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="register.html">Register</a></li>
+                    <li><a href="login.html">Login</a></li>
                 </ul>
             </div>
         </nav>
