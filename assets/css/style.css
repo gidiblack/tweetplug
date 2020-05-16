@@ -192,12 +192,6 @@ input[type=search]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
-fieldset {
-  border: 1px solid #c0c0c0;
-  margin: 0 2px;
-  padding: 0.35em 0.625em 0.75em;
-}
-
 legend {
   border: 0;
   padding: 0;
@@ -265,6 +259,10 @@ section {
   margin: 0 auto;
 }
 
+main {
+  padding-top: 60px;
+}
+
 .button,
 button,
 input[type=submit],
@@ -282,6 +280,7 @@ input[type=button] {
   white-space: nowrap;
   background-color: #1d2951;
   border-radius: 5px;
+  border: none;
   cursor: pointer;
   box-sizing: border-box;
   transition: all 0.2s ease;
@@ -330,10 +329,6 @@ img::selection {
 
 img::-moz-selection {
   background: transparent;
-}
-
-body {
-  -webkit-tap-highlight-color: #FFF498;
 }
 
 .gigantic, .huge, .large, .bigger, .big,
@@ -607,14 +602,6 @@ footer .col-md-2, footer .col-md-4 {
   }
 }
 
-.hero {
-  margin-top: 110px;
-}
-@media screen and (max-width: 768px) {
-  .hero {
-    margin-top: 85px;
-  }
-}
 .hero .carousel-indicators {
   position: relative;
   margin-top: 1rem;
@@ -769,6 +756,35 @@ footer .col-md-2, footer .col-md-4 {
   .card-body .button {
     padding: 12px 44px;
   }
+}
+
+#loginForm {
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+#loginForm input[type=checkbox] {
+  width: 1rem;
+  height: 1rem;
+}
+#loginForm #forgotPassword {
+  float: right;
+  font-size: 14px;
+}
+#loginForm fieldset:first-child {
+  padding-top: 1rem;
+  border-top: 1px solid #1d2951;
+}
+#loginForm fieldset:last-child {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #1d2951;
+}
+#loginForm button {
+  display: block;
+  margin: 0.5rem auto;
+  padding: 1rem 6rem;
+  border-radius: 0.5rem;
+  letter-spacing: 2px;
 }
 
 /*# sourceMappingURL=style.css.map */

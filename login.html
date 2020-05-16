@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css"/>
+    <title>Tweetplug</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-bar">
+            <div class="container">
+                <a class="logo" href="index.html"><img src="assets/img/tweetplug-logo.png" alt="tweetplug-logo"></a>
+                <input type="checkbox" name="" id="menu-toggle" class="menu-toggle">
+                <label for="menu-toggle" class="menu-icon"><span class="hamburger"></span></label>
+                <ul class="main-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="register.html">Register</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <!-- Login form -->
+        <section>
+            <div class="container">
+                <h1 class="text-center">Sign in <span>manage your account</span></h1>
+                <form action="login" id="loginForm">
+                    <fieldset class="form-group">
+                        <!-- <label for="username">Username</label> -->
+                        <input type="text" class="form-control" id="username" placeholder="Username" aria-placeholder="Username">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <!-- <label for="loginPassword">Password</label> -->
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Password" aria-placeholder="Password" >
+                    </fieldset>
+                    <fielset class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberLogin">
+                        <label class="form-check-label" for="rememberLogin">Remember me</label>
+                        <a href="#" id="forgotPassword">Forgot Password?</a>
+                    </fielset>
+                    <button type="submit" class="button">Login</button>
+                </form>
+                <p class="text-center my-3">Don't have an account?<span class="pl-3"><a href="register.html">Register!</a></span></p>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-lg-3">
+                    <h3>Get in touch with us</h3>
+                    <ul>
+                        <li class="strong-blue">Tweetplug Inc</li>
+                        <li>Nigeria</li>
+                        <li>+01000000000</li>
+                        <li>support@tweetplug.com</li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-lg-3">
+                    <h3>Information</h3>
+                    <ul>
+                        <li><a href="terms.html">Terms and Conditions</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="advertise.html">Advertise with us</a></li>
+                        <li><a href="contact-us.html">Contact us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h3>Pages</h3>
+                    <ul>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="register.html">Register Now!</a></li>
+                        <li><a href="login.hmtml">Login to your account</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3>Advertise</h3>
+                    <ul>
+                        <li>Want to take advantage of our incredible reach?</li>
+                        <li>Reach us at support@tweetplug.com</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-center">&copy; Tweetplug - All Rights Reserved</p>
+            <ul class="sm-links">
+                <li><a href="#"><img src="assets/img/twitter-icon.png" alt="twitter-icon"></a></li>
+                <li><a href="#"><img src="assets/img/whatsapp-icon.png" alt="whatsapp-icon"></a></li>
+                <li><a href="#"><img src="assets/img/facebook-icon.png" alt="facebook-icon"></a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+<script src="assets/js/vendors/jquery.min.js"></script>
+<script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js"></script>
+</html>
