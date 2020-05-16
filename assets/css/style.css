@@ -770,13 +770,14 @@ footer .col-md-2, footer .col-md-4 {
 #loginForm #forgotPassword {
   float: right;
   font-size: 14px;
+  margin-top: 3px;
 }
-#loginForm fieldset:first-child {
+#loginForm .first-child {
   padding-top: 1rem;
   border-top: 1px solid #1d2951;
 }
-#loginForm fieldset:last-child {
-  padding-bottom: 20px;
+#loginForm .last-child {
+  padding-bottom: 1em;
   border-bottom: 1px solid #1d2951;
 }
 #loginForm button {
@@ -784,7 +785,10 @@ footer .col-md-2, footer .col-md-4 {
   margin: 0.5rem auto;
   padding: 1rem 6rem;
   border-radius: 0.5rem;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
+}
+#loginForm .form-check-label {
+  font-size: 14px;
 }
 
 /*# sourceMappingURL=style.css.map */
