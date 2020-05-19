@@ -269,17 +269,18 @@ input[type=submit],
 input[type=reset],
 input[type=button] {
   display: inline-block;
-  padding: 16px 50px;
+  padding: 1rem 6rem;
   color: #fff;
   text-align: center;
   font-size: 16px;
+  letter-spacing: 1px;
   font-weight: 600;
   font-family: "Oxygen", sans-serif;
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
   background-color: #1d2951;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   border: none;
   cursor: pointer;
   box-sizing: border-box;
@@ -356,6 +357,11 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 34px;
   }
 }
+@media only screen and (max-width: 425px) {
+  .huge, h1 {
+    font-size: 30px;
+  }
+}
 
 .large, h2 {
   font-size: 26px;
@@ -368,7 +374,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 @media only screen and (max-width: 425px) {
   .large, h2 {
-    font-size: 20px;
+    font-size: 22px;
   }
 }
 
@@ -383,7 +389,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 @media only screen and (max-width: 425px) {
   .bigger, h3 {
-    font-size: 16px;
+    font-size: 17px;
   }
 }
 
@@ -406,11 +412,11 @@ p {
   font-family: "Montserrat", sans-serif;
   margin: 0 0 12px 0;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
 }
 @media only screen and (max-width: 425px) {
   p {
-    font-size: 13px;
+    font-size: 15px;
   }
 }
 
@@ -758,36 +764,35 @@ footer .col-md-2, footer .col-md-4 {
   }
 }
 
-#loginForm {
-  width: 80%;
-  max-width: 600px;
+#loginForm, #registerForm {
+  width: 85%;
+  max-width: 660px;
   margin: 0 auto;
+  border-top: 1px solid #1d2951;
+  padding-top: 1rem;
 }
-#loginForm input[type=checkbox] {
+#loginForm input[type=checkbox], #registerForm input[type=checkbox] {
   width: 1rem;
   height: 1rem;
 }
-#loginForm #forgotPassword {
+#loginForm #forgotPassword, #loginForm #agreeClick, #registerForm #forgotPassword, #registerForm #agreeClick {
   float: right;
   font-size: 14px;
   margin-top: 3px;
+  max-width: 80%;
 }
-#loginForm .first-child {
-  padding-top: 1rem;
-  border-top: 1px solid #1d2951;
-}
-#loginForm .last-child {
+#loginForm .last-child, #registerForm .last-child {
   padding-bottom: 1em;
   border-bottom: 1px solid #1d2951;
 }
-#loginForm button {
+#loginForm button, #registerForm button {
   display: block;
   margin: 0.5rem auto;
   padding: 1rem 6rem;
   border-radius: 0.5rem;
   letter-spacing: 1px;
 }
-#loginForm .form-check-label {
+#loginForm .form-check-label, #registerForm .form-check-label {
   font-size: 14px;
 }
 
