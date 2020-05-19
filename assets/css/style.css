@@ -778,8 +778,12 @@ footer .col-md-2, footer .col-md-4 {
 #loginForm #forgotPassword, #loginForm #agreeClick, #registerForm #forgotPassword, #registerForm #agreeClick {
   float: right;
   font-size: 14px;
-  margin-top: 3px;
   max-width: 80%;
+}
+@media screen and (max-width: 320px) {
+  #loginForm #forgotPassword, #loginForm #agreeClick, #registerForm #forgotPassword, #registerForm #agreeClick {
+    max-width: 75%;
+  }
 }
 #loginForm .last-child, #registerForm .last-child {
   padding-bottom: 1em;
