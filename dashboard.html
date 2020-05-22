@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css"/>
+    <title>Tweetplug</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-bar">
+            <div class="container">
+                <a class="logo" href="index.html"><img src="assets/img/tweetplug-logo.png" alt="tweetplug-logo"></a>
+                <input type="checkbox" name="menu-toggle" id="menu-toggle" class="menu-toggle">
+                <label for="menu-toggle" class="menu-icon"><span class="hamburger"></span></label>
+                <ul class="main-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="withdraw.html">Withdraw</a></li>
+                    <li><a href="upgrade.html">Upgrade</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">JohnDoe</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item total-balance" href="#"><span>&#8358;</span>4500</a>
+                            <a class="dropdown-item" href="#">Edit profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <!-- Dashboard Hero -->
+        <section class="dashboard-hero">
+            <div class="container">
+                <div class="welcome-user">
+                    <p><strong><span id="username">John-Doe</span>, Welcome to your personalized dashboard!</strong></p>
+                </div>
+                <div class="row mt-5">
+                    <div class="hero-card col-lg-3 col-md-6">
+                        <h3>Current Plan</h3>
+                        <p id="currentPlan">Junior Influencer: <span id="planDuration">23 Day(s) Left</span></p>
+                    </div>
+                    <div class="hero-card col-lg-3 col-md-6">
+                        <h3>Daily Revenue</h3>
+                        <p id="dailyRevenue"><span>&#8358;</span>4500</p>
+                    </div>
+                    <div class="hero-card col-lg-3 col-md-6">
+                        <h3>Today's Action</h3>
+                        <p id="todayAction">Still Open</p>
+                    </div>
+                    <div class="hero-card col-lg-3 col-md-6">
+                        <h3>Yesterday</h3>
+                        <p id="yesterdayAction">Missed</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Tasks -->
+        <section class="tasks">
+            <div class="container">
+                <div class="task-hero">
+                    <p id="task-info">The task for today is currently not available</p>
+                </div>
+                <form action="" id="tweetLinks">
+                    <div class="tweet-links row">
+                        <fieldset class="form-group col-md-4">
+                            <label for="tweet-1">Tweet #1: <span>(copy&paste)</span></label>
+                            <textarea name="tweet-1" id="tweet-1" rows="5" readonly>Not available yet!</textarea>
+                        </fieldset>
+                        <fieldset class="form-group col-md-4">
+                            <label for="tweet-2">Tweet #2: <span>(copy&paste)</span></label>
+                            <textarea name="tweet-2" id="tweet-2" rows="5" readonly>Not available yet!</textarea>
+                        </fieldset>
+                        <fieldset class="form-group col-md-4">
+                            <label for="tweet-3">Tweet #3: <span>(copy&paste)</span></label>
+                            <textarea name="tweet-3" id="tweet-3" rows="5" readonly>Not available yet!</textarea>
+                        </fieldset>
+                    </div>
+                    <fieldset class="form-group">
+                        <label for="tweet-link-1">Tweet link #1:</label>
+                        <input type="text" class="form-control" id="tweet-link-1" placeholder="Link to tweet 1" aria-placeholder="Link to tweet 1" required aria-required="true">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="tweet-link-2">Tweet link #2:</label>
+                        <input type="text" class="form-control" id="tweet-link-2" placeholder="Link to tweet 2" aria-placeholder="Link to tweet 2" required aria-required="true">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="tweet-link-3">Tweet link #3:</label>
+                        <input type="text" class="form-control" id="tweet-link-3" placeholder="Link to tweet 3" aria-placeholder="Link to tweet 3" required aria-required="true">
+                    </fieldset><button type="submit" class="button">Submit Links for Confirmation</button>
+                </form>
+                <br>
+                <div class="confirm-note">
+                    <p>Please note that confirmation takes a few hours, after confirmation, your tweetplug account will be credited with your revenue share immediately. Please note that posting incorrect links or tweets without getting the required number of retweets may lead to account suspension.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-lg-3">
+                    <h3>Get in touch with us</h3>
+                    <ul>
+                        <li class="strong-blue">Tweetplug Inc</li>
+                        <li>Nigeria</li>
+                        <li>+01000000000</li>
+                        <li>support@tweetplug.com</li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-lg-3">
+                    <h3>Information</h3>
+                    <ul>
+                        <li><a href="terms.html">Terms and Conditions</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="advertise.html">Advertise with us</a></li>
+                        <li><a href="contact-us.html">Contact us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h3>Pages</h3>
+                    <ul>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="register.html">Register Now!</a></li>
+                        <li><a href="login.hmtml">Login to your account</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3>Advertise</h3>
+                    <ul>
+                        <li>Want to take advantage of our incredible reach?</li>
+                        <li>Reach us at support@tweetplug.com</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-center">&copy; Tweetplug - All Rights Reserved</p>
+            <ul class="sm-links">
+                <li><a href="#"><img src="assets/img/twitter-icon.png" alt="twitter-icon"></a></li>
+                <li><a href="#"><img src="assets/img/whatsapp-icon.png" alt="whatsapp-icon"></a></li>
+                <li><a href="#"><img src="assets/img/facebook-icon.png" alt="facebook-icon"></a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+<script src="assets/js/vendors/jquery.min.js"></script>
+<script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js"></script>
+</html>
