@@ -540,7 +540,7 @@ hr {
 .nav-bar .menu-toggle:checked ~ .menu-icon .hamburger::before {
   opacity: 0;
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 770px) {
   .nav-bar li {
     float: left;
   }
@@ -564,6 +564,9 @@ hr {
   background-color: #1d2951;
   color: #fff !important;
   border-radius: 0px !important;
+}
+.nav-bar a.dropdown-toggle {
+  text-transform: none;
 }
 
 footer {
@@ -832,6 +835,10 @@ footer .col-md-2, footer .col-md-4 {
 .hero-card h3, .hero-card p {
   color: #fff;
 }
+.hero-card img {
+  float: left;
+  margin-right: 12px;
+}
 
 @media screen and (min-width: 992px) {
   .col-lg-3 {
@@ -854,7 +861,7 @@ footer .col-md-2, footer .col-md-4 {
   margin: 0;
   font-size: 15px;
   font-weight: normal;
-  color: #FF4136;
+  color: #344785;
 }
 
 .confirm-note {
@@ -867,7 +874,7 @@ footer .col-md-2, footer .col-md-4 {
   margin: 0;
   font-size: 15px;
   font-weight: normal;
-  color: #FF4136;
+  color: #344785;
 }
 
 #tweetLinks {

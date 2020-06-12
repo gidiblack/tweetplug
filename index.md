@@ -126,7 +126,7 @@
                                 <p class="card-text"><strong>Revenue share:</strong> &#8358;5 Daily</p>
                                 <p class="card-text">UNLIMITED (5 RETWEETS PER TWEET)</p>
                                 <p class="card-text">Sunday Withdrawals</p>
-                                <a href="#" class="button">Subscribe</a>
+                                <a href="subscribe.html" class="button">Subscribe</a>
                             </div>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                                 <p class="card-text"><strong>Revenue share:</strong> <span>&#8358;</span>270 Daily</p>
                                 <p class="card-text">14 Days (12 RETWEETS PER TWEET)</p>
                                 <p class="card-text">Sunday Withdrawals</p>
-                                <a href="#" class="button">Subscribe</a>
+                                <a href="subscribe.html" class="button">Subscribe</a>
                             </div>
                         </div>
                     </div>
@@ -150,7 +150,7 @@
                                 <p class="card-text"><strong>Revenue share:</strong> <span>&#8358;</span>250 Daily</p>
                                 <p class="card-text">30 Days (11 RETWEETS PER TWEET)</p>
                                 <p class="card-text">Sunday Withdrawals</p>
-                                <a href="#" class="button">Subscribe</a>
+                                <a href="subscribe.html" class="button">Subscribe</a>
                             </div>
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                                 <p class="card-text"><strong>Revenue share:</strong> &#8358;500 Daily</p>
                                 <p class="card-text">30 Days (10 RETWEETS PER TWEET)</p>
                                 <p class="card-text">Sunday Withdrawals</p>
-                                <a href="#" class="button">Subscribe</a>
+                                <a href="subscribe.html" class="button">Subscribe</a>
                             </div>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                                 <p class="card-text"><strong>Revenue share:</strong> &#8358;1,000 Daily</p>
                                 <p class="card-text">30 Days (9 RETWEETS PER TWEET)</p>
                                 <p class="card-text">Sunday Withdrawals</p>
-                                <a href="#" class="button">Subscribe</a>
+                                <a href="subscribe.html" class="button">Subscribe</a>
                             </div>
                         </div>
                     </div>
@@ -186,7 +186,7 @@
                                 <p class="card-text"><strong>Revenue share:</strong> &#8358;1,500 Daily</p>
                                 <p class="card-text">30 Days (8 RETWEETS PER TWEET)</p>
                                 <p class="card-text">Sunday Withdrawals</p>
-                                <a href="#" class="button">Subscribe</a>
+                                <a href="subscribe.html" class="button">Subscribe</a>
                             </div>
                         </div>
                     </div>
@@ -198,7 +198,7 @@
                                 <p class="card-text"><strong>Revenue share:</strong> &#8358;2,000 Daily</p>
                                 <p class="card-text">30 Days (7 RETWEETS PER TWEET)</p>
                                 <p class="card-text">Sunday Withdrawals</p>
-                                <a href="#" class="button">Subscribe</a>
+                                <a href="subscribe.html" class="button">Subscribe</a>
                             </div>
                         </div>
                     </div>
@@ -210,7 +210,7 @@
                                 <p class="card-text"><strong>Revenue share:</strong> &#8358;2,500 Daily</p>
                                 <p class="card-text">30 Days (6 RETWEETS PER TWEET)</p>
                                 <p class="card-text">Sunday Withdrawals</p>
-                                <a href="#" class="button">Subscribe</a>
+                                <a href="subscribe.html" class="button">Subscribe</a>
                             </div>
                         </div>
                     </div>
@@ -222,7 +222,7 @@
                                 <p class="card-text"><strong>Revenue share:</strong> &#8358;3,000 Daily</p>
                                 <p class="card-text">30 Days (5 RETWEETS PER TWEET)</p>
                                 <p class="card-text">Sunday Withdrawals</p>
-                                <a href="#" class="button">Subscribe</a>
+                                <a href="subscribe.html" class="button">Subscribe</a>
                             </div>
                         </div>
                     </div>
@@ -234,7 +234,7 @@
                                 <p class="card-text"><strong>Revenue share:</strong> &#8358;4,000 Daily</p>
                                 <p class="card-text">30 Days (4 RETWEETS PER TWEET)</p>
                                 <p class="card-text">Sunday Withdrawals</p>
-                                <a href="#" class="button">Subscribe</a>
+                                <a href="subscribe.html" class="button">Subscribe</a>
                             </div>
                         </div>
                     </div>
@@ -246,7 +246,7 @@
                                 <p class="card-text"><strong>Revenue share:</strong> &#8358;5,000 Daily</p>
                                 <p class="card-text">30 Days (3 RETWEETS PER TWEET)</p>
                                 <p class="card-text">Sunday Withdrawals</p>
-                                <a href="#" class="button">Subscribe</a>
+                                <a href="subscribe.html" class="button">Subscribe</a>
                             </div>
                         </div>
                     </div>
@@ -258,7 +258,7 @@
                                 <p class="card-text"><strong>Revenue share:</strong> &#8358;6,000 Daily</p>
                                 <p class="card-text">30 Days (2 RETWEETS PER TWEET)</p>
                                 <p class="card-text">Sunday Withdrawals</p>
-                                <a href="#" class="button">Subscribe</a>
+                                <a href="subscribe.html" class="button">Subscribe</a>
                             </div>
                         </div>
                     </div>
@@ -275,7 +275,7 @@
                     <ul>
                         <li class="strong-blue">Tweetplug Inc</li>
                         <li>Nigeria</li>
-                        <li>+01000000000</li>
+                        <li>+2347045284378</li>
                         <li>support@tweetplug.com</li>
                     </ul>
                 </div>
@@ -306,9 +306,9 @@
             </div>
             <p class="text-center">&copy; Tweetplug - All Rights Reserved</p>
             <ul class="sm-links">
-                <li><a href="#"><img src="assets/img/twitter-icon.png" alt="twitter-icon"></a></li>
-                <li><a href="#"><img src="assets/img/whatsapp-icon.png" alt="whatsapp-icon"></a></li>
-                <li><a href="#"><img src="assets/img/facebook-icon.png" alt="facebook-icon"></a></li>
+                <li><a href="https://twitter.com/Tweetpluginc" target="_blank"><img src="assets/img/twitter-icon.png" alt="twitter-icon"></a></li>
+                <li><a href="https://wa.me/2347045284378" target="_blank"><img src="assets/img/whatsapp-icon.png" alt="whatsapp-icon"></a></li>
+                <li><a href="https://www.facebook.com/tweetpluginc" target="_blank"><img src="assets/img/facebook-icon.png" alt="facebook-icon"></a></li>
             </ul>
         </div>
     </footer>
