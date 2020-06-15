@@ -10,7 +10,7 @@
     <link rel="manifest" href="assets/favicon/site.webmanifest">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css"/>
-    <title>Tweetplug | Withdraw Revenue </title>
+    <title>Tweetplug | Withdrawal Dashboard</title>
 </head>
 <body>
     <header class="header">
@@ -51,6 +51,74 @@
                 </ul>
             </div>
         </section>
+        <section id="withdraw-form">
+            <div class="container">
+                <div id="user-info">
+                    <p>Account holder: <span id="accountHolder">FirstName LastName</span></p>
+                    <p>Mobile number: <span id="mobileNumber">+1 000 000 000</span></p>
+                    <p>Email address: <span id="userEmail">username@example.com</span></p>
+                </div>
+                <!-- Withdrawal Request Form -->
+                <form action="" id="withdrawalRequest">
+                    <fieldset class="form-group">
+                        <label for="withdrawalAmount">Withdrawal Amount(&#8358;)</label>
+                        <input type="number" class="form-control" id="withdrawalAmount" placeholder="Withdrawal Amount" aria-placeholder="Withdrawal Amount" required aria-required="true" aria-describedby="withdrawHelp">
+                        <small id="withdrawHelp" class="form-text text-muted">minimum withdrawal amount is &#8358;1,000</small>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="bankAccountNo">Bank Account Number</label>
+                        <input type="number" class="form-control" id="bankAccountNo" placeholder="Bank Account Number" aria-placeholder="Bank Account Number" required aria-required="true">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="bankName">Bank Name</label>
+                        <select class="form-control" name="bank" id="bankName" placeholder="Select Bank" aria-placeholder="Select Bank" required aria-required="true">
+                            <option value="Select Bank" disabled selected>Select Bank...</option>
+                            <option value="Access
+                            Bank">Access Bank</option>
+                            <option value="First Bank">First Bank</option>
+                            <option value="Fidelity Bank">Fidelity Bank</option>
+                            <option value="UBA">UBA</option>
+                            <option value="Polaris Bank">Polaris Bank</option>
+                            <option value="GTB">GTB</option>
+                        </select>
+                    </fieldset>
+                    <button type="submit">Make Withdrawal</button>
+                </form>
+            </div>
+        </section>
+        <!-- Withdrawal History -->
+        <section id="withdraw-history">
+            <div class="container">
+                <h2 class="text-center">Withdrawal History</h2>
+                
+                <table style="width:100%" class="my-5">
+                    <tr>
+                    <th>#</th>
+                    <th>DATE</th>
+                    <th>AMOUNT</th> 
+                    <th>STATUS</th>
+                    </tr>
+                    <tr>
+                    <td>1</td>
+                    <td>01/01/2020</td>
+                    <td>&#8358;3,000</td>
+                    <td>Successful</td>
+                    </tr>
+                    <tr>
+                    <td>2</td>
+                    <td>06/04/2020</td>
+                    <td>&#8358;3,000</td>
+                    <td>Failed</td>
+                    </tr>
+                    <tr>
+                    <td>3</td>
+                    <td>14/06/2020</td>
+                    <td>&#8358;5,000</td>
+                    <td>Pending</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
     </main>
     <!-- Footer -->
     <footer>
@@ -78,8 +146,8 @@
                     <h3>Pages</h3>
                     <ul>
                         <li><a href="faqs.html">FAQs</a></li>
-                        <li><a href="register.html">Register Now!</a></li>
-                        <li><a href="login.hmtml">Login to your account</a></li>
+                        <li><a href="withdraw.html">Withdraw</a></li>
+                        <li><a href="upgrade.html">Upgrade Plan</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
