@@ -10,7 +10,7 @@
     <link rel="manifest" href="assets/favicon/site.webmanifest">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css"/>
-    <title>Tweetplug</title>
+    <title>Tweetplug | Manage User</title>
 </head>
 <body>
     <header class="header">
@@ -22,13 +22,10 @@
                 <ul class="main-nav">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="faqs.html">FAQs</a></li>
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="withdraw.html">Withdraw</a></li>
-                    <li><a href="upgrade.html">Upgrade</a></li>
+                    <li><a href="admin-dashboard.html">Dashboard</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">JohnDoe</a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">administrator</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item total-balance" href="#"><span>&#8358;</span>4500</a>
                             <a class="dropdown-item" href="user-profile.html">Edit profile</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Logout</a>
@@ -39,73 +36,42 @@
         </nav>
     </header>
     <main>
-        <!-- Dashboard Hero -->
-        <section class="dashboard-hero">
+        <section>
             <div class="container">
-                <div class="welcome-user">
-                    <p><strong><span id="username">JohnDoe</span>, Welcome to your personalized dashboard!</strong></p>
-                </div>
-                <div class="row mt-5">
-                    <div class="hero-card col-lg-3 col-md-6">
-                        <img src="assets/img/tag-icon.png" alt="currentPlan" style="width: 24px;">
-                        <h3>Current Plan</h3>
-                        <p id="currentPlan">Junior Influencer: <span id="planDuration">23 Day(s) Left</span></p>
-                    </div>
-                    <div class="hero-card col-lg-3 col-md-6">
-                        <img src="assets/img/nairabills-icon.png" alt="nairabills-icon" style="width: 36px;">
-                        <h3>Daily Revenue</h3>
-                        <p id="dailyRevenue"><span>&#8358;</span>4500</p>
-                    </div>
-                    <div class="hero-card col-lg-3 col-md-6">
-                        <h3>Today's Action</h3>
-                        <p id="todayAction">Still Open</p>
-                    </div>
-                    <div class="hero-card col-lg-3 col-md-6">
-                        <h3>Yesterday</h3>
-                        <p id="yesterdayAction">Missed</p>
-                    </div>
+                <!-- User Profile Summary -->
+                <h2 class="mb-4">Profile Summary</h2>
+                <div id="user-summary">
+                    <p>Full Name: <span id="fullName">FirstName LastName</span></p>
+                    <p>Username: <span id="username">example_01</span></p>
+                    <p>Total Revenue: <span id="totalRevenue">&#8358;5000</span></p>
+                    <p>Current Plan: <span id="currentPlan">Whiz Influencer</span></p>
+                    <p>Withdrawal Request: <span id="withdraw-request">Not Available</span></p>
+                    <p>Remaining Duration: <span id="remainingDuration">13 Days</span></p>
+                    <p>Today's Acton: <span id="todayAction">Still Open</span></p>
+                    <button>Change Plan</button>
+                    <button class="sec-btn">Suspend Account</button>
+                    <button class="del-btn">Delete Account</button>
                 </div>
             </div>
         </section>
-        <!-- Tasks -->
-        <section class="tasks">
+        <section id="withdraw-form">
             <div class="container">
-                <div class="task-hero">
-                    <p id="task-info">Tasks would be put up anytime from 6am daily and you are expected to do your task before 10pm. You won’t be allowed to submit task any time after 10pm.</p>
-                </div>
-                <form action="" id="tweetLinks">
-                    <div class="tweet-links row">
-                        <fieldset class="form-group col-md-4">
-                            <label for="tweet-1">Tweet #1: <span>(copy&paste)</span></label>
-                            <textarea name="tweet-1" id="tweet-1" rows="5" readonly>Not available yet!</textarea>
-                        </fieldset>
-                        <fieldset class="form-group col-md-4">
-                            <label for="tweet-2">Tweet #2: <span>(copy&paste)</span></label>
-                            <textarea name="tweet-2" id="tweet-2" rows="5" readonly>Not available yet!</textarea>
-                        </fieldset>
-                        <fieldset class="form-group col-md-4">
-                            <label for="tweet-3">Tweet #3: <span>(copy&paste)</span></label>
-                            <textarea name="tweet-3" id="tweet-3" rows="5" readonly>Not available yet!</textarea>
-                        </fieldset>
-                    </div>
+                <!-- Withdrawal Request Form -->
+                <h2 class="text-center mb-5">Today's Action</h2>
+                <form action="" id="">
                     <fieldset class="form-group">
                         <label for="tweet-link-1">Tweet link #1:</label>
-                        <input type="text" class="form-control" id="tweet-link-1" placeholder="Link to tweet 1" aria-placeholder="Link to tweet 1" required aria-required="true">
+                        <input type="text" class="form-control" id="tweet-link-1" placeholder="Link to tweet 1" aria-placeholder="Link to tweet 1">
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="tweet-link-2">Tweet link #2:</label>
-                        <input type="text" class="form-control" id="tweet-link-2" placeholder="Link to tweet 2" aria-placeholder="Link to tweet 2" required aria-required="true">
+                        <input type="text" class="form-control" id="tweet-link-2" placeholder="Link to tweet 2" aria-placeholder="Link to tweet 2">
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="tweet-link-3">Tweet link #3:</label>
-                        <input type="text" class="form-control" id="tweet-link-3" placeholder="Link to tweet 3" aria-placeholder="Link to tweet 3" required aria-required="true">
+                        <input type="text" class="form-control" id="tweet-link-3" placeholder="Link to tweet 3" aria-placeholder="Link to tweet 3">
                     </fieldset>
-                    <button type="submit" class="button">Submit Links for Confirmation</button>
                 </form>
-                <br>
-                <div class="confirm-note">
-                    <p>Please note that confirmation takes a few hours, after confirmation, your tweetplug account will be credited with your revenue share immediately. Please note that posting incorrect links or tweets without getting the required number of retweets may lead to account suspension.</p>
-                </div>
             </div>
         </section>
     </main>

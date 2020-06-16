@@ -1135,4 +1135,30 @@ footer .col-md-2, footer .col-md-4 {
   }
 }
 
+#user-summary {
+  padding-left: 16px;
+}
+#user-summary span {
+  font-weight: bold;
+  font-size: 15px;
+}
+#user-summary p {
+  font-size: 14px;
+}
+#user-summary button {
+  padding: 1rem 2.5rem;
+  margin-right: 16px;
+  margin-top: 16px;
+  text-transform: none;
+}
+#user-summary .sec-btn {
+  color: #1d2951;
+  border: 1px solid #1d2951;
+  background-color: #fff;
+}
+#user-summary .del-btn {
+  color: #fff;
+  background-color: #FF4136;
+}
+
 /*# sourceMappingURL=style.css.map */
