@@ -1,6 +1,8 @@
 
 // Form styling
-#loginForm, #registerForm
+#loginForm,
+#registerForm, 
+#editProfile
     width: 85%
     max-width: 660px
     margin: 0 auto
@@ -24,5 +26,7 @@
         padding: 1rem 6rem
         border-radius: .5rem
         letter-spacing: 1px
+        @media screen and (max-width: 425px)
+            padding: 1rem 3rem
     .form-check-label
         font-size: 14px

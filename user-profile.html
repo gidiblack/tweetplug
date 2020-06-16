@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css"/>
+    <title>Tweetplug | Profile</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-bar">
+            <div class="container">
+                <a class="logo" href="index.html"><img src="assets/img/tweetplug-logo.png" alt="tweetplug-logo"></a>
+                <input type="checkbox" name="menu-toggle" id="menu-toggle" class="menu-toggle">
+                <label for="menu-toggle" class="menu-icon"><span class="hamburger"></span></label>
+                <ul class="main-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="withdraw.html">Withdraw</a></li>
+                    <li><a href="upgrade.html">Upgrade</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">JohnDoe</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item total-balance" href="#"><span>&#8358;</span>4500</a>
+                            <a class="dropdown-item" href="user-profile.html">Edit profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <div class="container">
+                <h1 class="large text-center">Personal Information</h1>
+                <form action="edit-profile" id="editProfile" class="row">
+                    <fieldset class="form-group col-md-6">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="First Name" aria-placeholder="First Name" required aria-required="true" value="John">
+                    </fieldset>
+                    <fieldset class="form-group col-md-6">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Last Name" aria-placeholder="Last Name" required aria-required="true" value="Doe">
+                    </fieldset>
+                    <fieldset class="form-group col-md-12">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" placeholder="Username" aria-placeholder="Username" required aria-required="true" value="JohnDoe">
+                    </fieldset>
+                    <fieldset class="form-group col-md-6">
+                        <label for="twitterHandle">Twitter Handle</label>
+                        <input type="text" class="form-control" id="twitterHandle" placeholder="Twitter Handle" aria-placeholder="Twitter Handle" required aria-required="true" value="@John_Doe">
+                    </fieldset>
+                    <fieldset class="form-group col-md-6">
+                        <label for="gender">Gender</label>
+                        <select class="form-control" name="gender" id="gender" placeholder="Gender" aria-placeholder="Gender" required aria-required="true">
+                            <option value="" disabled>Gender</option>
+                            <option value="Male" selected>Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </fieldset>
+                    <fieldset class="form-group col-md-7">
+                        <label for="email">Email Address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email Address" aria-placeholder="Email Address" required aria-required="true" value="johndoe@example.com">
+                    </fieldset>
+                    <fieldset class="form-group col-md-5">
+                        <label for="mobileNumber">Mobile Number</label>
+                        <input type="number" class="form-control" id="mobileNumber" placeholder="Mobile number" aria-placeholder="Mobile number" required aria-required="true" value="08000000000">
+                    </fieldset>
+                    <h2 class="big col-md-12 mt-3 text-center last-child">Bank Details</h2>
+                    <fieldset class="form-group col-md-12">
+                        <label for="accountName">Account Name</label>
+                        <input type="text" class="form-control" id="accountName" placeholder="Account Name" aria-placeholder="Account Name" required aria-required="true" value="John Felix Doe">
+                    </fieldset>
+                    <fieldset class="form-group col-md-6">
+                        <label for="accountNumber">Account Number</label>
+                        <input type="number" class="form-control" id="accountNumber" placeholder="Account number" aria-placeholder="Account number" required aria-required="true" value="010010010">
+                    </fieldset>
+                    <fieldset class="form-group col-md-6">
+                        <label for="bank">Bank</label>
+                        <select class="form-control" name="bank" id="bank" placeholder="Select Bank" aria-placeholder="Select Bank" required aria-required="true">
+                            <option value="Select Bank" disabled>Select Bank...</option>
+                            <option value="Access
+                            Bank">Access Bank</option>
+                            <option value="First Bank">First Bank</option>
+                            <option value="Fidelity Bank" selected>Fidelity Bank</option>
+                            <option value="UBA">UBA</option>
+                            <option value="Polaris Bank">Polaris Bank</option>
+                            <option value="GTB">GTB</option>
+                        </select>
+                    </fieldset>
+                    <h2 class="big col-md-12 mt-3 text-center last-child">Security Details</h2>
+                    <fieldset class="form-group col-md-12 mt-2">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Current Password" aria-placeholder="Current Password" required aria-required="true">
+                    </fieldset>
+                    <fieldset class="form-group col-md-12 mt-2">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="New Password" aria-placeholder="New Password" required aria-required="true">
+                    </fieldset>
+                    <fieldset class="form-group col-md-12 mt-2">
+                        <label for="passwordConfirm">Confirm Password</label>
+                        <input type="password" class="form-control" id="passwordConfirm" placeholder="Confirm Password" aria-placeholder="Confirm Password" required aria-required="true">
+                    </fieldset>
+                    <button type="submit" class="button">Save Changes</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-lg-3">
+                    <h3>Get in touch with us</h3>
+                    <ul>
+                        <li class="strong-blue">Tweetplug Inc</li>
+                        <li>Nigeria</li>
+                        <li>+2347045284378</li>
+                        <li>support@tweetplug.com</li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-lg-3">
+                    <h3>Information</h3>
+                    <ul>
+                        <li><a href="terms.html">Terms and Conditions</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="advertise.html">Advertise with us</a></li>
+                        <li><a href="contact-us.html">Contact us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h3>Pages</h3>
+                    <ul>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="withdraw.html">Withdraw</a></li>
+                        <li><a href="upgrade.html">Upgrade Plan</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3>Advertise</h3>
+                    <ul>
+                        <li>Want to take advantage of our incredible reach?</li>
+                        <li>Reach us at support@tweetplug.com</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-center">&copy; Tweetplug - All Rights Reserved</p>
+            <ul class="sm-links">
+                <li><a href="https://twitter.com/Tweetpluginc" target="_blank"><img src="assets/img/twitter-icon.png" alt="twitter-icon"></a></li>
+                <li><a href="https://wa.me/2347045284378" target="_blank"><img src="assets/img/whatsapp-icon.png" alt="whatsapp-icon"></a></li>
+                <li><a href="https://www.facebook.com/tweetpluginc" target="_blank"><img src="assets/img/facebook-icon.png" alt="facebook-icon"></a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+<script src="assets/js/vendors/jquery.min.js"></script>
+<script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js"></script>
+</html>
