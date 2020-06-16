@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/css/style.css"/>
+    <title>Tweetplug | Admin Dashboard</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-bar">
+            <div class="container">
+                <a class="logo" href="index.html"><img src="assets/img/tweetplug-logo.png" alt="tweetplug-logo"></a>
+                <input type="checkbox" name="menu-toggle" id="menu-toggle" class="menu-toggle">
+                <label for="menu-toggle" class="menu-icon"><span class="hamburger"></span></label>
+                <ul class="main-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="withdraw.html">Withdraw</a></li>
+                    <li><a href="upgrade.html">Upgrade</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">JohnDoe</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item total-balance" href="#"><span>&#8358;</span>4500</a>
+                            <a class="dropdown-item" href="user-profile.html">Edit profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="welcome-user mt-5">
+                <p><strong><span id="username">administrator</span>, Welcome to your admin dashboard! From here you can manage all influencers and set tasks</strong></p>
+            </div>
+        </div>
+        <!-- Daily Tasks -->
+        <section>
+            <div class="container">
+                <h2 class="text-center my-5">Today's Tasks</h2>
+                <form action="" id="tweetLinks">
+                    <div class="tweet-links row">
+                        <fieldset class="form-group col-md-4">
+                            <label for="tweet-1">Tweet #1: <span>(copy&paste)</span></label>
+                            <textarea name="tweet-1" id="tweet-1" rows="5" readonly>Not available yet!</textarea>
+                        </fieldset>
+                        <fieldset class="form-group col-md-4">
+                            <label for="tweet-2">Tweet #2: <span>(copy&paste)</span></label>
+                            <textarea name="tweet-2" id="tweet-2" rows="5" readonly>Not available yet!</textarea>
+                        </fieldset>
+                        <fieldset class="form-group col-md-4">
+                            <label for="tweet-3">Tweet #3: <span>(copy&paste)</span></label>
+                            <textarea name="tweet-3" id="tweet-3" rows="5" readonly>Not available yet!</textarea>
+                        </fieldset>
+                    </div>
+                    <button type="submit" class="button">Add New Tasks</button>
+                </form>
+            </div>
+        </section>
+        <!-- Manage subscribers section -->
+        <section>
+            <div class="container">
+                <h2 class="text-center mb-5">Manage Subscribers</h2>
+                <!-- Subscribers Data Table -->
+                <table id="influencers" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Twitter Handle</th>
+                            <th>Current Plan</th>
+                            <th>Total Revenue(&#8358;)</th>
+                            <th>Remaining Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>example_01</td>
+                            <td>example_01</td>
+                            <td>Free Trial</td>
+                            <td>425</td>
+                            <td>UNLIMITED</td>
+                        </tr>
+                        <tr>
+                            <td>johndoe</td>
+                            <td>johndoe</td>
+                            <td>Junior Influencer</td>
+                            <td>4500</td>
+                            <td>28 Days</td>
+                        </tr>
+                        <tr>
+                            <td>justkind</td>
+                            <td>just_kind</td>
+                            <td>Whiz Influencer</td>
+                            <td>3000</td>
+                            <td>11 Days</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>  
+        </section>
+        <!-- Withdrawal Requests -->
+        <section id="withdraw-requests">
+            <div class="container">
+                <h2 class="text-center my-4">Withdrawal Requests</h2>
+                <!-- Withdrawal Requests table -->
+                <table id="withdrawalRequests" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Withdrawal Amount(&#8358;)</th>
+                            <th>Current Plan</th>
+                            <th>Total Revenue(&#8358;)</th>
+                            <th>Remaining Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>example_01</td>
+                            <td>2000</td>
+                            <td>Free Trial</td>
+                            <td>2500</td>
+                            <td>UNLIMITED</td>
+                        </tr>
+                        <tr>
+                            <td>johndoe</td>
+                            <td>3500</td>
+                            <td>Junior Influencer</td>
+                            <td>4500</td>
+                            <td>28 Days</td>
+                        </tr>
+                        <tr>
+                            <td>justkind</td>
+                            <td>1000</td>
+                            <td>Whiz Influencer</td>
+                            <td>3000</td>
+                            <td>11 Days</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="mt-5">Confirm all</button>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-lg-3">
+                    <h3>Get in touch with us</h3>
+                    <ul>
+                        <li class="strong-blue">Tweetplug Inc</li>
+                        <li>Nigeria</li>
+                        <li>+2347045284378</li>
+                        <li>support@tweetplug.com</li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-lg-3">
+                    <h3>Information</h3>
+                    <ul>
+                        <li><a href="terms.html">Terms and Conditions</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="advertise.html">Advertise with us</a></li>
+                        <li><a href="contact-us.html">Contact us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h3>Pages</h3>
+                    <ul>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="withdraw.html">Withdraw</a></li>
+                        <li><a href="upgrade.html">Upgrade Plan</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3>Advertise</h3>
+                    <ul>
+                        <li>Want to take advantage of our incredible reach?</li>
+                        <li>Reach us at support@tweetplug.com</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-center">&copy; Tweetplug - All Rights Reserved</p>
+            <ul class="sm-links">
+                <li><a href="https://twitter.com/Tweetpluginc" target="_blank"><img src="assets/img/twitter-icon.png" alt="twitter-icon"></a></li>
+                <li><a href="https://wa.me/2347045284378" target="_blank"><img src="assets/img/whatsapp-icon.png" alt="whatsapp-icon"></a></li>
+                <li><a href="https://www.facebook.com/tweetpluginc" target="_blank"><img src="assets/img/facebook-icon.png" alt="facebook-icon"></a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+<script src="assets/js/vendors/jquery.min.js"></script>
+<script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+<!-- Data Tables plugin -->
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script src="assets/js/app.js"></script>
+</html>
