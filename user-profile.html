@@ -14,17 +14,21 @@
 </head>
 <body>
     <header class="header">
+        <!-- navigation -->
         <nav class="nav-bar">
             <div class="container">
                 <a class="logo" href="index.html"><img src="assets/img/tweetplug-logo.png" alt="tweetplug-logo"></a>
+                <!-- hamburger menu toggler -->
                 <input type="checkbox" name="menu-toggle" id="menu-toggle" class="menu-toggle">
                 <label for="menu-toggle" class="menu-icon"><span class="hamburger"></span></label>
                 <ul class="main-nav">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="faqs.html">FAQs</a></li>
+                    <!-- user logged in nav -->
                     <li><a href="dashboard.html">Dashboard</a></li>
                     <li><a href="withdraw.html">Withdraw</a></li>
                     <li><a href="upgrade.html">Upgrade</a></li>
+                    <!-- dropdown menu -->
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">JohnDoe</a>
                         <div class="dropdown-menu">
@@ -105,11 +109,11 @@
                     </fieldset>
                     <fieldset class="form-group col-md-12 mt-2">
                         <label for="newPassword">New Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="New Password" aria-placeholder="New Password" required aria-required="true">
+                        <input type="password" class="form-control" id="password" placeholder="New Password" aria-placeholder="New Password">
                     </fieldset>
                     <fieldset class="form-group col-md-12 mt-2">
                         <label for="passwordConfirm">Confirm Password</label>
-                        <input type="password" class="form-control" id="passwordConfirm" placeholder="Confirm Password" aria-placeholder="Confirm Password" required aria-required="true">
+                        <input type="password" class="form-control" id="passwordConfirm" placeholder="Confirm Password" aria-placeholder="Confirm Password">
                     </fieldset>
                     <button type="submit" class="button">Save Changes</button>
                 </form>

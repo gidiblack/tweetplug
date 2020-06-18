@@ -269,7 +269,7 @@ input[type=submit],
 input[type=reset],
 input[type=button] {
   display: inline-block;
-  padding: 1rem 6rem;
+  padding: 1rem 5rem;
   color: #fff;
   text-align: center;
   font-size: 16px;
@@ -1091,48 +1091,58 @@ footer .col-md-2, footer .col-md-4 {
   }
 }
 
-#withdraw-history table {
+.withdraw-history table {
   border: 1px solid black;
   background: #a3b0d8;
 }
-#withdraw-history table th, #withdraw-history table td {
+.withdraw-history table th, .withdraw-history table td {
   padding: 10px;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
 }
 @media screen and (max-width: 425px) {
-  #withdraw-history table th, #withdraw-history table td {
+  .withdraw-history table th, .withdraw-history table td {
     padding: 6px;
   }
 }
-#withdraw-history table th {
+.withdraw-history table th {
   text-align: center;
   font-size: 16px;
   font-family: Oxygen;
 }
 @media screen and (max-width: 425px) {
-  #withdraw-history table th {
+  .withdraw-history table th {
     font-size: 14px;
   }
 }
 @media screen and (max-width: 321px) {
-  #withdraw-history table th {
+  .withdraw-history table th {
     font-size: 12px;
   }
 }
-#withdraw-history table td {
+.withdraw-history table td {
   font-size: 15px;
   font-family: Montserrat;
 }
 @media screen and (max-width: 425px) {
-  #withdraw-history table td {
+  .withdraw-history table td {
     font-size: 12px;
   }
 }
 @media screen and (max-width: 321px) {
-  #withdraw-history table td {
+  .withdraw-history table td {
     font-size: 10px;
   }
+}
+.withdraw-history button {
+  text-transform: none;
+  padding: 0.7rem 2.5rem;
+  margin-right: 16px;
+  margin-top: 16px;
+}
+.withdraw-history .del-btn {
+  color: #fff;
+  background-color: #FF4136;
 }
 
 #user-summary {
@@ -1146,7 +1156,7 @@ footer .col-md-2, footer .col-md-4 {
   font-size: 14px;
 }
 #user-summary button {
-  padding: 1rem 2.5rem;
+  padding: 0.7rem 2.5rem;
   margin-right: 16px;
   margin-top: 16px;
   text-transform: none;
@@ -1159,6 +1169,20 @@ footer .col-md-2, footer .col-md-4 {
 #user-summary .del-btn {
   color: #fff;
   background-color: #FF4136;
+}
+
+.action-confirm {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.action-confirm form {
+  max-width: 600px;
+  width: 100%;
+  padding-left: 16px;
+}
+.action-confirm button {
+  text-transform: none;
+  padding: 0.7rem 2.5rem;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -14,21 +14,25 @@
 </head>
 <body>
     <header class="header">
+        <!-- navigation -->
         <nav class="nav-bar">
             <div class="container">
                 <a class="logo" href="index.html"><img src="assets/img/tweetplug-logo.png" alt="tweetplug-logo"></a>
+                <!-- hamburger menu toggler -->
                 <input type="checkbox" name="menu-toggle" id="menu-toggle" class="menu-toggle">
                 <label for="menu-toggle" class="menu-icon"><span class="hamburger"></span></label>
                 <ul class="main-nav">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="faqs.html">FAQs</a></li>
+                    <!-- user logged in nav -->
                     <li><a href="dashboard.html">Dashboard</a></li>
                     <li><a href="withdraw.html">Withdraw</a></li>
                     <li><a href="upgrade.html">Upgrade</a></li>
+                    <!-- dropdown menu -->
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">JohnDoe</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item total-balance" href="#"><span>&#8358;</span>4500</a>
+                            <a class="dropdown-item total-balance" href=""><span>&#8358;</span>4500</a>
                             <a class="dropdown-item" href="user-profile.html">Edit profile</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Logout</a>
@@ -42,6 +46,7 @@
         <!-- Dashboard Hero -->
         <section class="dashboard-hero">
             <div class="container">
+                <!-- user welcome message -->
                 <div class="welcome-user">
                     <p><strong><span id="username">JohnDoe</span>, Welcome to your personalized dashboard!</strong></p>
                 </div>
@@ -67,7 +72,7 @@
                 </div>
             </div>
         </section>
-        <!-- Tasks -->
+        <!-- User Tasks -->
         <section class="tasks">
             <div class="container">
                 <div class="task-hero">
@@ -135,6 +140,7 @@
                     <h3>Pages</h3>
                     <ul>
                         <li><a href="faqs.html">FAQs</a></li>
+                        <!-- user logged in pages -->
                         <li><a href="withdraw.html">Withdraw</a></li>
                         <li><a href="upgrade.html">Upgrade Plan</a></li>
                     </ul>

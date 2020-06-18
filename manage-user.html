@@ -54,10 +54,10 @@
                 </div>
             </div>
         </section>
-        <section id="withdraw-form">
-            <div class="container">
-                <!-- Withdrawal Request Form -->
-                <h2 class="text-center mb-5">Today's Action</h2>
+        <section>
+            <div class="container action-confirm">
+                <!-- Today's Action confirmation -->
+                <h2 class="mb-5">Today's Action</h2>
                 <form action="" id="">
                     <fieldset class="form-group">
                         <label for="tweet-link-1">Tweet link #1:</label>
@@ -71,10 +71,46 @@
                         <label for="tweet-link-3">Tweet link #3:</label>
                         <input type="text" class="form-control" id="tweet-link-3" placeholder="Link to tweet 3" aria-placeholder="Link to tweet 3">
                     </fieldset>
+                    <button type="submit"class="mt-3">Confirm Tweets</button>
                 </form>
             </div>
         </section>
     </main>
+     <!-- Withdrawal History -->
+     <section class="withdraw-history">
+        <div class="container">
+            <h2>Withdrawal History</h2>
+            <!-- table -->
+            <table style="width:100%" class="my-5 pl-1">
+                <tr>
+                <th>#</th>
+                <th>DATE</th>
+                <th>AMOUNT</th> 
+                <th>STATUS</th>
+                </tr>
+                <tr>
+                <td>1</td>
+                <td>01/01/2020</td>
+                <td>&#8358;3,000</td>
+                <td>Successful</td>
+                </tr>
+                <tr>
+                <td>2</td>
+                <td>06/04/2020</td>
+                <td>&#8358;3,000</td>
+                <td>Failed</td>
+                </tr>
+                <tr>
+                <td>3</td>
+                <td>14/06/2020</td>
+                <td>&#8358;5,000</td>
+                <td>Pending</td>
+                </tr>
+            </table>
+            <button>Confirm Withdrawal</button>
+            <button class="del-btn">Deny Withdrawal</button>
+        </div>
+    </section>
     <!-- Footer -->
     <footer>
         <div class="container">

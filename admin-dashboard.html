@@ -8,22 +8,25 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="assets/favicon/site.webmanifest">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"> 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="assets/css/style.css"/>
     <title>Tweetplug | Admin Dashboard</title>
 </head>
 <body>
     <header class="header">
+        <!-- navigation -->
         <nav class="nav-bar">
             <div class="container">
                 <a class="logo" href="index.html"><img src="assets/img/tweetplug-logo.png" alt="tweetplug-logo"></a>
+                <!-- hamburger menu toggle -->
                 <input type="checkbox" name="menu-toggle" id="menu-toggle" class="menu-toggle">
                 <label for="menu-toggle" class="menu-icon"><span class="hamburger"></span></label>
                 <ul class="main-nav">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="faqs.html">FAQs</a></li>
                     <li><a href="admin-dashboard.html">Dashboard</a></li>
+                    <!-- dropdown menu -->
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">administrator</a>
                         <div class="dropdown-menu">
@@ -38,8 +41,9 @@
     </header>
     <main>
         <div class="container">
+            <!-- admin welcome message -->
             <div class="welcome-user mt-5">
-                <p><strong><span id="username">administrator</span>, Welcome to your admin dashboard! From here you can manage all influencers and set tasks</strong></p>
+                <p><strong><span id="admin-username">administrator</span>, Welcome to your admin dashboard! From here you can manage all influencers and set tasks</strong></p>
             </div>
         </div>
         <!-- Daily Tasks -->
@@ -69,7 +73,7 @@
         <section>
             <div class="container">
                 <h2 class="text-center mb-3">Manage Subscribers</h2>
-                <p>> Click on a username to manage subscriber</p>
+                <p class="text-center mb-3">Click on a username to manage subscriber</p>
                 <!-- Subscribers Data Table -->
                 <table id="influencers" class="table table-striped table-bordered" style="width:100%">
                     <thead>
@@ -79,6 +83,7 @@
                             <th>Current Plan</th>
                             <th>Total Revenue(&#8358;)</th>
                             <th>Remaining Duration</th>
+                            <th>Today's task</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,6 +93,7 @@
                             <td>Free Trial</td>
                             <td>425</td>
                             <td>UNLIMITED</td>
+                            <td>Pending confirmation</td>
                         </tr>
                         <tr>
                             <td><a href="manage-user.html">johndoe</a></td>
@@ -95,6 +101,7 @@
                             <td>Junior Influencer</td>
                             <td>4500</td>
                             <td>28 Days</td>
+                            <td>Open</td>
                         </tr>
                         <tr>
                             <td><a href="manage-user.html">justkind</a></td>
@@ -102,6 +109,7 @@
                             <td>Whiz Influencer</td>
                             <td>3000</td>
                             <td>11 Days</td>
+                            <td>Confirmed</td>
                         </tr>
                     </tbody>
                 </table>
@@ -203,4 +211,13 @@
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 <script src="assets/js/app.js"></script>
+<script>
+    // datatables plugin gotten from https://datatables.net/examples/styling/bootstrap4
+
+    $(document).ready(function() {
+        // Datatable plugin call
+        $('#influencers').DataTable();
+        $('#withdrawalRequests').DataTable();
+    } );
+</script>
 </html>
