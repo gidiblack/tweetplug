@@ -902,34 +902,48 @@ footer .col-md-2, footer .col-md-4 {
   color: #344785;
 }
 
-#tweetLinks {
+.tweetLinks {
   margin: 4rem 0 2.5rem;
 }
-#tweetLinks label {
+.tweetLinks label {
   font-weight: bold;
 }
-#tweetLinks span {
+.tweetLinks span {
   font-size: 14px;
   font-weight: normal;
 }
-#tweetLinks textarea {
+.tweetLinks textarea {
   width: 100%;
   background-color: #a3b0d8;
   padding: 8px;
 }
-#tweetLinks input {
-  width: 80%;
+.tweetLinks input {
+  max-width: 600px;
 }
-@media screen and (min-width: 992px) {
-  #tweetLinks input {
-    width: 60%;
-  }
-}
-#tweetLinks .button {
+.tweetLinks .button {
   display: block;
   text-transform: inherit;
   margin: 2rem auto 0;
   padding: 1rem 2rem;
+}
+@media screen and (max-width: 425px) {
+  .tweetLinks .button {
+    padding: 0.7rem 1.5rem;
+    font-size: 14px;
+  }
+}
+
+#withdraw-requests .button {
+  display: block;
+  text-transform: inherit;
+  margin: 2rem auto 0;
+  padding: 1rem 2rem;
+}
+@media screen and (max-width: 425px) {
+  #withdraw-requests .button {
+    padding: 0.7rem 1.5rem;
+    font-size: 14px;
+  }
 }
 
 #address-tabs {

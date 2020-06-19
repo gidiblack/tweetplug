@@ -47,7 +47,7 @@
         color: $blue
 
 // Tasks Form
-#tweetLinks
+.tweetLinks
     margin: 4rem 0 2.5rem
     label
         font-weight: bold
@@ -59,11 +59,22 @@
         background-color: $light-blue
         padding: 8px
     input
-        width: 80%
-        @media screen and (min-width: 992px)
-            width: 60%
+        max-width: 600px
     .button
         display: block
         text-transform: inherit
         margin: 2rem auto 0
         padding: 1rem 2rem
+        @media screen and (max-width: 425px)
+            padding: .7rem 1.5rem
+            font-size: 14px
+
+#withdraw-requests
+    .button
+        display: block
+        text-transform: inherit
+        margin: 2rem auto 0
+        padding: 1rem 2rem
+        @media screen and (max-width: 425px)
+            padding: .7rem 1.5rem
+            font-size: 14px
