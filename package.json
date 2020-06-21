@@ -43,6 +43,7 @@
     "method-override": "^3.0.0",
     "moment": "^2.27.0",
     "mongoose": "^5.9.19",
-    "nodemailer": "^6.4.10"
+    "nodemailer": "^6.4.10",
+    "validator": "^13.1.1"
   }
 }
