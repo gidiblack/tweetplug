@@ -66,8 +66,8 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Please enter a password'],
-    minlength: [8, 'password must be at least 8 characters long'],
     select: false,
+    minlength: [8, 'password must be at least 8 characters long'],
   },
   passwordConfirm: {
     type: String,
@@ -104,7 +104,6 @@ const userSchema = new mongoose.Schema({
   active: {
     type: Boolean,
     default: true,
-    select: false,
   },
 });
 

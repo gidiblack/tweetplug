@@ -54,16 +54,17 @@ exports.approveWithdrawal = catchAsync(async (req, res, next) => {
   const approvedWithdrawal = await Withdrawal.findByIdAndUpdate(
     req.params.withdrawalId,
     {
-      status: 'confirmed',
+      status: 'approved',
     }
   );
   if (!approvedWithdrawal) {
     return next(new AppError('No withdrawal request found with that id', 404));
   }
+  const withdrawal = await Withdrawal.findById(req.params.withdrawalId);
   res.status(200).json({
     status: 'sucess',
     data: {
-      approvedWithdrawal,
+      withdrawal,
     },
   });
 });
@@ -78,10 +79,11 @@ exports.rejectWithdrawal = catchAsync(async (req, res, next) => {
   if (!rejectedWithdrawal) {
     return next(new AppError('No withdrawal request found with that id', 404));
   }
+  const withdrawal = await Withdrawal.findById(req.params.withdrawalId);
   res.status(200).json({
     status: 'sucess',
     data: {
-      rejectedWithdrawal,
+      withdrawal,
     },
   });
 });
@@ -89,7 +91,7 @@ exports.rejectWithdrawal = catchAsync(async (req, res, next) => {
 exports.suspendUser = catchAsync(async (req, res, next) => {
   const user = await User.findByIdAndUpdate(req.params.userId, {
     active: false,
-  });
+  }).select('+active');
   if (!user) {
     return next(new AppError('No user found with that id'));
   }
