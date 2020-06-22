@@ -12,8 +12,16 @@ const withdrawalSchema = new mongoose.Schema({
   status: {
     type: String,
     default: 'unconfirmed',
-    enum: ['unconfirmed', 'confirmed'],
+    enum: ['unconfirmed', 'approved', 'rejected'],
   },
+});
+
+withdrawalSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'user',
+    select: '-_id -__v -photo -links -withdrawals -role -gender',
+  });
+  next();
 });
 
 const Withdrawal = mongoose.model('Withdrawal', withdrawalSchema);
