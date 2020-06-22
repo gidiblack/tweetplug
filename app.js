@@ -8,6 +8,7 @@ const AppError = require('./utils/AppError');
 const globalErrorHandler = require('./controllers/errorController');
 
 const userRouter = require('./routers/userRoutes');
+const adminRouter = require('./routers/adminRoutes');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }));
 app.use(cookieParser());
 
 app.use('/api/v1/user', userRouter);
+app.use('/api/v1/admin', adminRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`));

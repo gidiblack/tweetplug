@@ -48,7 +48,9 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!user || !(await user.checkPassword(password, user.password))) {
     return next(new AppError('Incorrect username or password', 401));
   }
-
+  if (user.active === false) {
+    return next(new AppError('User cannot login'));
+  }
   const token = signToken(user._id);
   res.status(200).json({
     status: 'success',

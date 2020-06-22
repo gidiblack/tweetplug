@@ -20,6 +20,12 @@ const linkSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+linkSchema.pre(/^find/, function (next) {
+  this.populate({
+    user: 'user',
+    select: '-_id -__v',
+  });
+});
 
 const Link = mongoose.model('Link', linkSchema);
 module.exports = Link;
