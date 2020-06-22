@@ -135,7 +135,7 @@
                             <h3 class="card-header"><span class="strong-blue">Junior</span> Influencer</h3>
                             <h5 class="card-fee">Fee : &#8358;2,500</h5>
                             <div class="card-body">
-                                <p class="card-text"><strong>Revenue share:</strong> <span>&#8358;</span>170 Daily</p>
+                                <p class="card-text"><strong>Revenue share:</strong> <span>&#8358;</span>270 Daily</p>
                                 <p class="card-text">14 Days (12 RETWEETS PER TWEET)</p>
                                 <p class="card-text">Sunday Withdrawals</p>
                                 <a href="subscribe.html" class="button">Subscribe</a>
