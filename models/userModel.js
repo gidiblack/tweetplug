@@ -3,6 +3,14 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
+  firstname: {
+    type: String,
+    required: [true, 'Please enter your firstname'],
+  },
+  lastname: {
+    type: String,
+    required: [true, 'Please enter your lastname'],
+  },
   username: {
     type: String,
     required: [true, 'Please enter a username'],
@@ -10,6 +18,32 @@ const userSchema = new mongoose.Schema({
       true,
       'Seems like that username is already taken, please try another',
     ],
+  },
+  gender: {
+    type: String,
+    required: [true, 'Please state your gender'],
+    enum: ['male', 'female'],
+  },
+  twitterhandle: {
+    type: String,
+    required: [true, 'Please enter your twitter handle'],
+  },
+  bankAccountNumber: {
+    type: Number,
+    required: [true, 'Please enter your bank account number'],
+  },
+  bankAccountName: {
+    type: String,
+    required: [true, 'Please enter your bank account name'],
+  },
+  bank: {
+    type: String,
+    required: [true, 'Please select your bank'],
+  },
+  mobileNumber: {
+    type: Number,
+    required: [true, 'please enter your phone number'],
+    min: [11, 'A phone number must be at least 11 characters in length'],
   },
   email: {
     type: String,
@@ -23,6 +57,7 @@ const userSchema = new mongoose.Schema({
   },
   photo: {
     type: String,
+    default: 'default.jpg',
   },
   Plan: {
     type: String,
@@ -44,6 +79,23 @@ const userSchema = new mongoose.Schema({
       message: 'passwords do not match',
     },
   },
+  links: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Link',
+    },
+  ],
+  withdrawals: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Withdrawal',
+    },
+  ],
+  role: {
+    type: String,
+    default: 'user',
+  },
+
   passwordChangedAt: {
     type: Date,
   },

@@ -13,6 +13,15 @@ const signToken = (id) => {
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
     username: req.body.username,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    gender: req.body.gender,
+    twitterhandle: req.body.twitterhandle,
+    bankAccountNumber: req.body.bankAccountNumber,
+    bankAccountName: req.body.bankAccountName,
+    bank: req.body.bank,
+    mobileNumber: req.body.mobileNumber,
+    photo: req.body.photo,
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
