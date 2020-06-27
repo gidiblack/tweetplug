@@ -56,3 +56,55 @@ exports.login = catchAsync(async (req, res, next) => {
     token,
   });
 });
+
+exports.authenticate = catchAsync(async (req, res, next) => {
+  //get token from req
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+  if (!token) {
+    return next(
+      new AppError('You are not logged in, please log in to get access', 401)
+    );
+  }
+  //validate token
+  const decoded = await promisify(JWT.verify)(token, process.env.JWT_SECRET);
+  //check if user still exits
+  const user = await User.findById(decoded.id);
+  if (!user) {
+    return next(
+      new AppError('The user associated with this token no longer exist', 401)
+    );
+  }
+  //check if user has changed password after token was issued using the passwordChangeTimeStamp instance method (userModel)
+  if (user.passwordChangeTimeStamp(decoded.iat)) {
+    return next(
+      new AppError('User recently changed password please log in again', 401)
+    );
+  }
+  //access granted to user
+  //store user details in the request
+  req.user = user;
+  next();
+});
+
+//restiction function accepts an array of roles can only be used after the authenticate function
+exports.restrictTo = (...roles) => {
+  return (req, res, next) => {
+    //if roles array does not includes the specified  role of the user currently on the request throw an error
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError(
+          'You do not have authorization to perform this action',
+          403
+        )
+      );
+    }
+    //if user roles is included allow access
+    next();
+  };
+};

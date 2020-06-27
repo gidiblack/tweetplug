@@ -61,7 +61,21 @@ const userSchema = new mongoose.Schema({
   },
   Plan: {
     type: String,
-    default: 'Free trial',
+    default: 'free influencer',
+    enum: [
+      'free influencer',
+      'junior Influencer',
+      'whiz Influencer',
+      'adept Influencer',
+      'chief Influencer',
+      'expert Influencer',
+      'principal Influencer',
+      'liege Influencer',
+      'professional Influencer',
+      'prime Influencer',
+      'monarch Influencer',
+      'genius Influencer',
+    ],
   },
   password: {
     type: String,
@@ -94,8 +108,10 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     default: 'user',
+    enum: ['user', 'admin'],
   },
 
+  //records date password was changed at
   passwordChangedAt: {
     type: Date,
   },
@@ -120,12 +136,33 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
+//instance method to validate password available on all user instances
 userSchema.methods.checkPassword = async function (
   inputpassword,
   userpassword
 ) {
   return await bcrypt.compare(inputpassword, userpassword);
 };
+
+//
+userSchema.methods.passwordChangeTimeStamp = function (JWTTimeStamp) {
+  //if passwordchangedat field exists ie user has changed password
+  if (this.passwordChangedAt) {
+    //convert date user changed his password to seconds
+    const changeDateTimeStamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10
+    );
+    //console.log(this.passwordChangedAt, JWTTimeStamp);
+    //check if the time in the JWT time stamp is greater than the time the user changed his password, if jwttimestamp is greater jwt was issues after user changed his password, if not jwt was issued before user changed his password in such an instance we want to deny access
+    const check = JWTTimeStamp < changeDateTimeStamp;
+    //check is true if user has changed his password after jwt was issued, it is false if jwt was issued before user changed password
+    return check;
+  }
+  //return false if the passwordchangedat field is empty ie user has not chnaged his password
+  return false;
+};
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

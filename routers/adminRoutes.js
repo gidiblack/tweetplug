@@ -3,6 +3,7 @@ const authController = require('../controllers/authController');
 const adminController = require('../controllers/adminController');
 
 const router = express.Router();
+router.use(authController.authenticate, authController.restrictTo('admin'));
 
 router.route('/users').get(adminController.getUsers);
 router.route('/withdrawals').get(adminController.getwithdrawals);
@@ -16,4 +17,15 @@ router
   .patch(adminController.rejectWithdrawal);
 
 router.route('/:userId/suspend').patch(adminController.suspendUser);
+
+router.route('/task').post(adminController.setTask);
+router.route('/task/all').get(adminController.getTasks);
+
+router.route('/task/deactivated').get(adminController.getDeactivatedTasks);
+router
+  .route('/task/:taskId')
+  .get(adminController.getSingleTask)
+  .delete(adminController.deleteTask);
+
+router.route('/task/:taskId/deactivate').patch(adminController.deactivateTask);
 module.exports = router;

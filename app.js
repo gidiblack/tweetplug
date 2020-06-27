@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
-
+const morgan = require('morgan');
 const AppError = require('./utils/AppError');
 const globalErrorHandler = require('./controllers/errorController');
 
@@ -11,6 +11,7 @@ const userRouter = require('./routers/userRoutes');
 const adminRouter = require('./routers/adminRoutes');
 
 const app = express();
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -18,6 +19,10 @@ app.use(methodOverride('_method'));
 app.use(express.json({ limit: '10kb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }));
 app.use(cookieParser());
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/admin', adminRouter);
