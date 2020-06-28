@@ -4,6 +4,14 @@ const Withdrawal = require('../models/withdrawalModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
 
+const filterObj = (obj, ...allowedFields) => {
+  const approvedFields = {};
+  Object.keys(obj).forEach((el) => {
+    if (allowedFields.includes(el)) approvedFields[el] = obj[el];
+  });
+  return approvedFields;
+};
+
 exports.addLink = catchAsync(async (req, res, next) => {
   const newLink = await Link.create({
     user: req.params.userId,
@@ -24,20 +32,33 @@ exports.addLink = catchAsync(async (req, res, next) => {
 });
 
 exports.updateMe = catchAsync(async (req, res, next) => {
+  //create error is user tries to update password with this route
+  if (req.body.password || req.body.passwordConfirm) {
+    return next(
+      new AppError(
+        'This route is not to be used for updating the user password, kindly use the update password route: /updatepassword',
+        401
+      )
+    );
+  }
+
+  //update user document and filter out restricted fields
+  const filteredBody = filterObj(
+    req.body,
+    'firstname',
+    'lastname',
+    'username',
+    'twitterhandle',
+    'gender',
+    'email',
+    'bankAccountNumber',
+    'bankAccountName',
+    'bank',
+    'mobileNumber'
+  );
   const updatedUser = await User.findByIdAndUpdate(
     req.params.userId,
-    {
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      username: req.body.username,
-      twitterhandle: req.body.twitterhandle,
-      gender: req.body.gender,
-      email: req.body.email,
-      bankAccountNumber: req.body.bankAccountNumber,
-      bankAccountName: req.body.bankAccountName,
-      bank: req.body.bank,
-      mobileNumber: req.body.mobileNumber,
-    },
+    filteredBody,
     {
       runValidators: true,
       new: true,
@@ -49,7 +70,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
-      updatedUser,
+      user: updatedUser,
     },
   });
 });
