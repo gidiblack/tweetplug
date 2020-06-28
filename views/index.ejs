@@ -1,54 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
-    <link rel="manifest" href="assets/favicon/site.webmanifest">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css"/>
-    <title>Tweetplug</title>
-</head>
+    <%- include('partials/head'); -%>
 <body>
-    <header class="header">
-        <nav class="nav-bar">
-            <div class="container">
-                <a class="logo" href="index.html"><img src="assets/img/tweetplug-logo.png" alt="tweetplug-logo"></a>
-                <input type="checkbox" name="" id="menu-toggle" class="menu-toggle">
-                <label for="menu-toggle" class="menu-icon"><span class="hamburger"></span></label>
-                <ul class="main-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="faqs.html">FAQs</a></li>
-                        <li><a href="register.html">Register</a></li>
-                        <li><a href="login.html">Login</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <%- include('partials/nav'); -%>
     <main>
         <!-- Carousel section -->
         <section class="hero container">
             <div id="carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                    <img src="assets/img/tweetplug-carousel1.png" class="d-block w-90" alt="tweet-daily">
+                    <img src="/assets/img/tweetplug-carousel1.png" class="d-block w-90" alt="tweet-daily">
                     <div class="carousel-caption d-block">
                         <h1 class="strong-blue">Start Getting Paid by Tweeting 3 times Daily for Businesses and Brands</h1>
                         <a href="register.html" class="button">get started</a>
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="assets/img/tweetplug-carousel2.png" class="d-block w-90" alt="tweet-adverts">
+                    <img src="/assets/img/tweetplug-carousel2.png" class="d-block w-90" alt="tweet-adverts">
                     <div class="carousel-caption d-block">
                         <h1 class="strong-white">Do you know you can make Money by Tweeting Adverts on Twitter?</h1>
                         <a href="register.html" class="button">register now!</a>
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="assets/img/tweetplug-carousel3.png" class="d-block w-90" alt="get-paid">
+                    <img src="/assets/img/tweetplug-carousel3.png" class="d-block w-90" alt="get-paid">
                     <div class="carousel-caption d-block">
                         <h1 class="strong-white">Share in our revenue daily by Tweeting our Adverts 3 times Daily</h1>
                         <a href="register.html" class="button">get started</a>
@@ -266,54 +241,7 @@
             </div>
         </section>
     </main>
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-lg-3">
-                    <h3>Get in touch with us</h3>
-                    <ul>
-                        <li class="strong-blue">Tweetplug Inc</li>
-                        <li>Nigeria</li>
-                        <li>+2347045284378</li>
-                        <li>support@tweetplug.com</li>
-                    </ul>
-                </div>
-                <div class="col-md-2 col-lg-3">
-                    <h3>Information</h3>
-                    <ul>
-                        <li><a href="terms.html">Terms and Conditions</a></li>
-                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li><a href="advertise.html">Advertise with us</a></li>
-                        <li><a href="contact-us.html">Contact us</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2">
-                    <h3>Pages</h3>
-                    <ul>
-                        <li><a href="faqs.html">FAQs</a></li>
-                        <li><a href="register.html">Register Now!</a></li>
-                        <li><a href="login.hmtml">Login to your account</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h3>Advertise</h3>
-                    <ul>
-                        <li>Want to take advantage of our incredible reach?</li>
-                        <li>Reach us at support@tweetplug.com</li>
-                    </ul>
-                </div>
-            </div>
-            <p class="text-center">&copy; Tweetplug - All Rights Reserved</p>
-            <ul class="sm-links">
-                <li><a href="https://twitter.com/Tweetpluginc" target="_blank"><img src="assets/img/twitter-icon.png" alt="twitter-icon"></a></li>
-                <li><a href="https://wa.me/2347045284378" target="_blank"><img src="assets/img/whatsapp-icon.png" alt="whatsapp-icon"></a></li>
-                <li><a href="https://www.facebook.com/tweetpluginc" target="_blank"><img src="assets/img/facebook-icon.png" alt="facebook-icon"></a></li>
-            </ul>
-        </div>
-    </footer>
+    <%- include('partials/footer'); -%>
 </body>
-<script src="assets/js/vendors/jquery.min.js"></script>
-<script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
-<script src="assets/js/app.js"></script>
+    <%- include('partials/scripts'); -%>
 </html>
