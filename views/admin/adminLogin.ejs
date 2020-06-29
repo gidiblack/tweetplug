@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head'); -%>
+<body>
+    <%- include('../partials/nav'); -%>
+    <main>
+        <!-- Login form -->
+        <section>
+            <div class="container adminlogin-box">
+                <h1 class="text-center large">Sign in <span class="big">admin login</span></h1>
+                <form action="login" id="loginForm">
+                    <fieldset class="form-group first-child">
+                        <input type="text" class="form-control" id="username" placeholder="Username" aria-placeholder="Username" required aria-required="true">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Password" aria-placeholder="Password" required aria-required="true">
+                    </fieldset>
+                    <fielset class="form-group form-check last-child">
+                        <input type="checkbox" class="form-check-input" id="rememberLogin">
+                        <label class="form-check-label" for="rememberLogin">Remember me</label>
+                        <a href="#" id="forgotPassword">Forgot Password?</a>
+                    </fielset>
+                    <button type="submit" class="button">Login</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <%- include('../partials/footer'); -%>
+</body>
+    <%- include('../partials/scripts'); -%>
+    <script src="/auth/adminLogin.js"></script>
+</html>

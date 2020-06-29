@@ -1,6 +1,5 @@
 /* The Modal (background) */
 .error-modal
-    display: none
     position: fixed
     z-index: 5
     left: 0
@@ -11,16 +10,31 @@
     background-color: rgba(0,0,0,0.4)
 
 /* Modal Content/Box */
-.modal-content
+.modal-content-error
     display: block
     background-color: #fefefe
-    margin: 45% auto
+    margin: 20% auto
     padding: 20px
     border: 1px solid #888
     width: 85%
     max-width: 700px
     p
         color: $red
+    @media screen and (min-width: 500px)
+        margin: 25% auto 
+    @media screen and (min-width: 770px)
+        margin: 18% auto
+
+.modal-content-success
+    display: block
+    background-color: #fefefe
+    margin: 20% auto
+    padding: 20px
+    border: 1px solid #888
+    width: 85%
+    max-width: 700px
+    p
+        color: $green
     @media screen and (min-width: 500px)
         margin: 25% auto 
     @media screen and (min-width: 770px)
