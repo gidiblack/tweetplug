@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const intervalController = require('./controllers/intervalControllers');
 
 process.on('uncaughtException', (err) => {
   console.log('Uncaught exception, Shuting down...');
@@ -23,6 +24,10 @@ const port = process.env.PORT || 3000;
 const mode = process.env.NODE_ENV;
 const server = app.listen(port, () => {
   console.log(`App runnng  in ${mode} mode, on port ${port}`);
+});
+
+setInterval(() => {
+  intervalController.clearTask, 24 * 60 * 60;
 });
 
 process.on('unhandledRejection', (err) => {

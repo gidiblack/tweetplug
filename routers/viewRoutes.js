@@ -3,6 +3,7 @@ const viewController = require('../controllers/viewController');
 const userController = require('../controllers/userControlle');
 const adminController = require('../controllers/adminController');
 const authController = require('../controllers/authController');
+const intervaleController = require('../controllers/intervalControllers');
 
 const router = express.Router();
 
@@ -26,6 +27,9 @@ router
   .route('/user/dashboard')
   .get(authController.authenticate, viewController.getUserDashboard);
 
-router.route('/admin/newtask').post(viewController.setTask);
+router
+  .route('/admin/newtask')
+  .post(viewController.setTask)
+  .get(intervaleController.clearTask);
 
 module.exports = router;
