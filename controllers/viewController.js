@@ -27,8 +27,29 @@ exports.getAdminLogin = catchAsync(async (req, res, next) => {
   res.status(200).render('admin/adminLogin');
 });
 
+const DateToNumber = (dateString, newArr) => {
+  const stringArr = dateString.split(':');
+  stringArr.forEach((element) => {
+    const conEl = parseInt(element);
+    newArr.push(conEl);
+  });
+};
 exports.getAdminDashboard = catchAsync(async (req, res, next) => {
   const tasks = await Task.find({ active: true });
+  const timeCreated = moment(tasks[0].date).format('H:mm:ss');
+  const currentTime = moment(Date.now()).format('H:mm:ss');
+  //typet = typeof timeCreated;
+  //console.log(typet);
+  const timeCreatedArr = [];
+  const currentTimeArr = [];
+  DateToNumber(timeCreated, timeCreatedArr);
+  DateToNumber(currentTime, currentTimeArr);
+  //console.log(timeCreatedArr);
+  //console.log(currentTimeArr);
+
+  const diff = currentTimeArr[0] - timeCreatedArr[0];
+  //console.log(diff);
+
   res.status(200).render('admin/adminDashboard', {
     tasks,
     moment,
