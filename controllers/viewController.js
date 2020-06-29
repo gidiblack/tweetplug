@@ -16,3 +16,15 @@ exports.getRegister = catchAsync(async (req, res, next) => {
 exports.getFAQ = catchAsync(async (req, res, next) => {
   res.status(200).render('faq');
 });
+
+exports.getUserDashboard = catchAsync(async (req, res, next) => {
+  res.status(200).render('userDashboard');
+});
+
+exports.getAdminLogin = catchAsync(async (req, res, next) => {
+  res.status(200).render('admin/adminLogin');
+});
+
+exports.getAdminDashboard = catchAsync(async (req, res, next) => {
+  res.status(200).render('admin/adminDashboard');
+});

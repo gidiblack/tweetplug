@@ -1,21 +1,4 @@
-<% if (!locals.user) {%>
-    <header class="header">
-        <nav class="nav-bar">
-            <div class="container">
-                <a class="logo" href="index.html"><img src="/assets/img/tweetplug-logo.png" alt="tweetplug-logo"></a>
-                <input type="checkbox" name="" id="menu-toggle" class="menu-toggle">
-                <label for="menu-toggle" class="menu-icon"><span class="hamburger"></span></label>
-                <ul class="main-nav">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/faq">FAQs</a></li>
-                        <li><a href="/register">Register</a></li>
-                        <li><a href="/login">Login</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-<% } else { %>
-     <header class="header">
+ <header class="header">
         <!-- navigation -->
         <nav class="nav-bar">
             <div class="container">
@@ -24,15 +7,15 @@
                 <input type="checkbox" name="menu-toggle" id="menu-toggle" class="menu-toggle">
                 <label for="menu-toggle" class="menu-icon"><span class="hamburger"></span></label>
                 <ul class="main-nav">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/faq">FAQs</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
                     <!-- user logged in nav -->
-                    <li><a href="/user/dashboard">Dashboard</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
                     <li><a href="withdraw.html">Withdraw</a></li>
                     <li><a href="upgrade.html">Upgrade</a></li>
                     <!-- dropdown menu -->
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> <%= locals.user.username %></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">JohnDoe</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item total-balance" href=""><span>&#8358;</span>4500</a>
                             <a class="dropdown-item" href="user-profile.html">Edit profile</a>
@@ -44,4 +27,3 @@
             </div>
         </nav>
     </header>
-<% } %>

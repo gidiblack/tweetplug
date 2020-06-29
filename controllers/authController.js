@@ -78,6 +78,8 @@ exports.authenticate = catchAsync(async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   ) {
     token = req.headers.authorization.split(' ')[1];
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
   }
   if (!token) {
     return next(
@@ -201,4 +203,27 @@ exports.updateMyPassword = catchAsync(async (req, res, next) => {
   await user.save();
   //log user in and send token
   createSendToken(user, 200, res);
+});
+
+exports.isLoggedIn = catchAsync(async (req, res, next) => {
+  if (req.cookies.jwt) {
+    try {
+      const decoded = await promisify(JWT.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      );
+      const user = await User.findById(decoded.id);
+      if (!user) {
+        return next();
+      }
+      if (user.passwordChangeTimeStamp(decoded.iat)) {
+        return next();
+      }
+      res.locals.user = user;
+      return next();
+    } catch (error) {
+      return next();
+    }
+  }
+  next();
 });

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('partials/head'); -%>
+<body>
+    <%- include('partials/nav'); -%>
+    <main>
+        <!-- Dashboard Hero -->
+        <section class="dashboard-hero">
+            <div class="container">
+                <!-- user welcome message -->
+                <div class="welcome-user">
+                    <p><strong><span id="username"><%=locals.user.username %></span>, Welcome to your personalized dashboard!</strong></p>
+                </div>
+                <div class="row mt-5">
+                    <div class="hero-card col-lg-3 col-md-6">
+                        <img src="/assets/img/tag-icon.png" alt="currentPlan" style="width: 24px;">
+                        <h3>Current Plan</h3>
+                        <p id="currentPlan"><%=locals.user.Plan %>: <span id="planDuration">23 Day(s) Left</span></p>
+                    </div>
+                    <div class="hero-card col-lg-3 col-md-6">
+                        <img src="/assets/img/nairabills-icon.png" alt="nairabills-icon" style="width: 36px;">
+                        <h3>Daily Revenue</h3>
+                        <p id="dailyRevenue"><span>&#8358;</span>4500</p>
+                    </div>
+                    <div class="hero-card col-lg-3 col-md-6">
+                        <h3>Today's Action</h3>
+                        <p id="todayAction">Still Open</p>
+                    </div>
+                    <div class="hero-card col-lg-3 col-md-6">
+                        <h3>Yesterday</h3>
+                        <p id="yesterdayAction">Missed</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- User Tasks -->
+        <section class="tasks">
+            <div class="container">
+                <div class="task-hero">
+                    <p id="task-info">Tasks would be put up anytime from 6am daily and you are expected to do your task before 10pm. You won’t be allowed to submit task any time after 10pm.</p>
+                </div>
+                <form action="" class="tweetLinks">
+                    <div class="tweet-links row">
+                        <fieldset class="form-group col-md-4">
+                            <label for="tweet-1">Tweet #1: <span>(copy&paste)</span></label>
+                            <textarea name="tweet-1" id="tweet-1" rows="5" readonly>Not available yet!</textarea>
+                        </fieldset>
+                        <fieldset class="form-group col-md-4">
+                            <label for="tweet-2">Tweet #2: <span>(copy&paste)</span></label>
+                            <textarea name="tweet-2" id="tweet-2" rows="5" readonly>Not available yet!</textarea>
+                        </fieldset>
+                        <fieldset class="form-group col-md-4">
+                            <label for="tweet-3">Tweet #3: <span>(copy&paste)</span></label>
+                            <textarea name="tweet-3" id="tweet-3" rows="5" readonly>Not available yet!</textarea>
+                        </fieldset>
+                    </div>
+                    <fieldset class="form-group">
+                        <label for="tweet-link-1">Tweet link #1:</label>
+                        <input type="text" class="form-control" id="tweet-link-1" placeholder="Link to tweet 1" aria-placeholder="Link to tweet 1" required aria-required="true">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="tweet-link-2">Tweet link #2:</label>
+                        <input type="text" class="form-control" id="tweet-link-2" placeholder="Link to tweet 2" aria-placeholder="Link to tweet 2" required aria-required="true">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="tweet-link-3">Tweet link #3:</label>
+                        <input type="text" class="form-control" id="tweet-link-3" placeholder="Link to tweet 3" aria-placeholder="Link to tweet 3" required aria-required="true">
+                    </fieldset>
+                    <button type="submit" class="button">Submit Links for Confirmation</button>
+                </form>
+                <br>
+                <div class="confirm-note">
+                    <p>Please note that confirmation takes a few hours, after confirmation, your tweetplug account will be credited with your revenue share immediately. Please note that posting incorrect links or tweets without getting the required number of retweets may lead to account suspension.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <%- include('partials/footer'); -%>
+</body>
+    <%- include('partials/scripts'); -%>
+</html>
