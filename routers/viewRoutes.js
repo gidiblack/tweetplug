@@ -26,4 +26,6 @@ router
   .route('/user/dashboard')
   .get(authController.authenticate, viewController.getUserDashboard);
 
+router.route('/admin/newtask').post(viewController.setTask);
+
 module.exports = router;

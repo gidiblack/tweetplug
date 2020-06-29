@@ -1,7 +1,16 @@
 const mongoose = require('mongoose');
 
 const taskSchema = new mongoose.Schema({
-  task: {
+  taskTitle: {
+    type: String,
+  },
+  tweet1: {
+    type: String,
+  },
+  tweet2: {
+    type: String,
+  },
+  tweet3: {
     type: String,
   },
   date: {

@@ -9,7 +9,9 @@ const { json } = require('body-parser');
 //
 exports.setTask = catchAsync(async (req, res, next) => {
   const newTask = await Task.create({
-    task: req.body.task,
+    tweet1: req.body.tweet1,
+    tweet2: req.body.tweet2,
+    tweet3: req.body.tweet3,
   });
   res.status(201).json({
     status: 'success',
