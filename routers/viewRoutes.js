@@ -74,5 +74,5 @@ router
     viewController.setUserStatus
   );
 
-//export router
+//export router to app
 module.exports = router;
