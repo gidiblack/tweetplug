@@ -37,7 +37,7 @@
             <div class="container">
                 <h2 class="text-center mb-3">Current Tasks</h2>
                 <!-- Task Data Table -->
-                <table id="influencers" class="table table-striped table-bordered" style="width:100%">
+                <table id="tasks" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
                             <th>Task</th>
@@ -75,30 +75,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <% users.forEach ( user => { %>
                         <tr>
-                            <td><a href="manage-user.html">example_01</a></td>
-                            <td>example_01</td>
-                            <td>Free Trial</td>
-                            <td>425</td>
-                            <td>UNLIMITED</td>
-                            <td>Pending confirmation</td>
+                            <td><a href="/admin/user/<%=user._id %>"><%=user.username %></a></td>
+                            <td><%= user.twitterhandle %></td>
+                            <td><%= user.Plan %></td>
+                            <td>revneue</td>
+                            <td>time left</td>
+                            <% if (user.links[0] == undefined) { %>
+                            <td> No link yet</td>
+                            <% } else { %>
+                             <td><%= user.links[0].status %></td>
+                             <% } %>
                         </tr>
-                        <tr>
-                            <td><a href="manage-user.html">johndoe</a></td>
-                            <td>johndoe</td>
-                            <td>Junior Influencer</td>
-                            <td>4500</td>
-                            <td>28 Days</td>
-                            <td>Open</td>
-                        </tr>
-                        <tr>
-                            <td><a href="manage-user.html">justkind</a></td>
-                            <td>just_kind</td>
-                            <td>Whiz Influencer</td>
-                            <td>3000</td>
-                            <td>11 Days</td>
-                            <td>Confirmed</td>
-                        </tr>
+                    <% }) %>
                     </tbody>
                 </table>
             </div>  
@@ -119,27 +109,15 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <% users.forEach ( user => { %>
                         <tr>
-                            <td><a href="manage-user.html">example_01</a></td>
+                            <td><a href="/admin/user/<%=user._id %>"><%= user.username %></a></td>
                             <td>2000</td>
-                            <td>1122334455 - Access Bank</td>
-                            <td>Example Lastname</td>
-                            <td>4750</td>
+                            <td><%=user.bankAccountNumber %> - <%=user.bank %></td>
+                            <td><%= user.bankAccountName %></td>
+                            <td>Revenue left</td>
                         </tr>
-                        <tr>
-                            <td><a href="manage-user.html">johndoe</a></td>
-                            <td>3500</td>
-                            <td>2233445566 - Zenith Bank</td>
-                            <td>John Patrick Doe</td>
-                            <td>6800</td>
-                        </tr>
-                        <tr>
-                            <td><a href="manage-user.html">justkind</a></td>
-                            <td>1000</td>
-                            <td>1020304050 - GTB</td>
-                            <td>Justice Emeka Kind</td>
-                            <td>2300</td>
-                        </tr>
+                    <% }) %>
                     </tbody>
                 </table>
                 <button class="button mt-5">Confirm all</button>
@@ -155,12 +133,13 @@
 <!-- Data Tables plugin -->
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-<script src="assets/js/app.js"></script>
+<script src="/assets/js/app.js"></script>
 <script>
     // datatables plugin gotten from https://datatables.net/examples/styling/bootstrap4
 
     $(document).ready(function() {
         // Datatable plugin call
+        $('#tasks').DataTable();
         $('#influencers').DataTable();
         $('#withdrawalRequests').DataTable();
     } );

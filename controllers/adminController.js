@@ -1,5 +1,5 @@
 const User = require('../models/userModel');
-const List = require('../models/LinkModel');
+const Link = require('../models/LinkModel');
 const Task = require('../models/taskModel');
 const Withdrawal = require('../models/withdrawalModel');
 const catchAsync = require('../utils/catchAsync');
@@ -82,7 +82,10 @@ exports.deleteTask = catchAsync(async (req, res, next) => {
 });
 
 exports.getUsers = catchAsync(async (req, res, next) => {
-  const users = await User.find();
+  const users = await User.find().populate({
+    path: 'links',
+    select: '-_id -user ',
+  });
   const deactivatedUser = [];
   users.forEach((user) => {
     if (user.active === false) {
@@ -185,5 +188,15 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
   res.status(204).json({
     status: 'success',
     data: null,
+  });
+});
+
+exports.getAllLinks = catchAsync(async (req, res, next) => {
+  const links = await Link.find();
+  res.status(200).json({
+    status: 'success',
+    data: {
+      links,
+    },
   });
 });

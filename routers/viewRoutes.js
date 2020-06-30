@@ -15,6 +15,11 @@ router.route('/register').get(viewController.getRegister);
 router.route('/faq').get(viewController.getFAQ);
 router.route('/admin').get(viewController.getAdminLogin);
 
+router
+  .route('/user/dashboard')
+  .get(authController.authenticate, viewController.getUserDashboard);
+
+//admin routes
 //admin dashboard
 router
   .route('/admin/dashboard')
@@ -23,13 +28,51 @@ router
     authController.restrictTo('admin'),
     viewController.getAdminDashboard
   );
-router
-  .route('/user/dashboard')
-  .get(authController.authenticate, viewController.getUserDashboard);
 
+//route for admin to set a new task (POST)
 router
   .route('/admin/newtask')
-  .post(viewController.setTask)
-  .get(intervaleController.clearTask);
+  .post(
+    authController.authenticate,
+    authController.restrictTo('admin'),
+    viewController.setTask
+  );
 
+//router to get user details page(GET)
+router
+  .route('/admin/user/:userId')
+  .get(
+    authController.authenticate,
+    authController.restrictTo('admin'),
+    viewController.getIndividualPageAdmin
+  );
+
+//router to set the status of user withdrawal request
+router
+  .route('/admin/withdrawals/setstatus')
+  .patch(
+    authController.authenticate,
+    authController.restrictTo('admin'),
+    viewController.setWithdrawalStatus
+  );
+
+//router to set the status of user submitted link
+router
+  .route('/admin/links/setstatus')
+  .patch(
+    authController.authenticate,
+    authController.restrictTo('admin'),
+    viewController.setLinkStatus
+  );
+
+//router to set the status of user
+router
+  .route('/admin/user/status')
+  .patch(
+    authController.authenticate,
+    authController.restrictTo('admin'),
+    viewController.setUserStatus
+  );
+
+//export router
 module.exports = router;
