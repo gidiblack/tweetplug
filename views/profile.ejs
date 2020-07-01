@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('partials/head'); -%>
+<body>
+    <%- include('partials/nav'); -%>
+    <main>
+        <section>
+            <div class="container">
+                <h1 class="large text-center">Personal Information</h1>
+                <form action="/user/edit?_method=PATCH" id="editProfile" class="row" method="POST">
+                    <fieldset class="form-group col-md-6">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" name="firstname" id="firstName" placeholder="First Name" aria-placeholder="First Name" required aria-required="true" value="<%=user.firstname %>">
+                    </fieldset>
+                    <fieldset class="form-group col-md-6">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" name="lastname" id="lastName" placeholder="Last Name" aria-placeholder="Last Name" required aria-required="true" value="<%=user.lastname %>">
+                    </fieldset>
+                    <fieldset class="form-group col-md-12">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username" aria-placeholder="Username" required aria-required="true" value="<%=user.username %>">
+                    </fieldset>
+                    <fieldset class="form-group col-md-6">
+                        <label for="twitterHandle">Twitter Handle</label>
+                        <input type="text" class="form-control" name="twitterhandle" id="twitterHandle" placeholder="Twitter Handle" aria-placeholder="Twitter Handle" required aria-required="true" value="<%=user.twitterhandle%>">
+                    </fieldset>
+                    <fieldset class="form-group col-md-6">
+                        <label for="gender">Gender</label>
+                        <select class="form-control" name="gender" id="gender" placeholder="Gender" aria-placeholder="Gender" required aria-required="true">
+                            <option value="" disabled>Gender</option>
+                            <option value="male" selected><%=user.gender%></option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </fieldset>
+                    <fieldset class="form-group col-md-7">
+                        <label for="email">Email Address</label>
+                        <input type="email" class="form-control"  name="email" id="email" placeholder="Email Address" aria-placeholder="Email Address" required aria-required="true" value="<%=user.email%>">
+                    </fieldset>
+                    <fieldset class="form-group col-md-5">
+                        <label for="mobileNumber">Mobile Number</label>
+                        <input type="number" class="form-control" name="mobile" id="mobileNumber" placeholder="Mobile number" aria-placeholder="Mobile number" required aria-required="true" value="<%=user.mobileNumber%>">
+                    </fieldset>
+                    <h2 class="big col-md-12 mt-3 text-center last-child">Bank Details</h2>
+                    <fieldset class="form-group col-md-12">
+                        <label for="accountName">Account Name</label>
+                        <input type="text" class="form-control" name="bankaccountname" id="accountName" placeholder="Account Name" aria-placeholder="Account Name" required aria-required="true" value="<%=user.bankAccountName %>">
+                    </fieldset>
+                    <fieldset class="form-group col-md-6">
+                        <label for="accountNumber">Account Number</label>
+                        <input type="number" class="form-control" name="bankaccountnumber" id="accountNumber" placeholder="Account number" aria-placeholder="Account number" required aria-required="true" value="<%=user.bankAccountNumber%>">
+                    </fieldset>
+                    <fieldset class="form-group col-md-6">
+                        <label for="bank">Bank</label>
+                        <select class="form-control" name="bank" id="bank" placeholder="Select Bank" aria-placeholder="Select Bank" required aria-required="true">
+                            <option value="Select Bank" disabled>Select Bank...</option>
+                            <option value="Access
+                            Bank">Access Bank</option>
+                            <option value="First Bank">First Bank</option>
+                            <option value="Fidelity Bank" selected><%=user.bank%></option>
+                            <option value="UBA">UBA</option>
+                            <option value="Polaris Bank">Polaris Bank</option>
+                            <option value="GTB">GTB</option>
+                        </select>
+                    </fieldset>
+                    <input type="hidden" name="userId" value="<%=user._id %>">
+                    <button type="submit" class="button">Save Changes</button>
+                    </form>
+
+                <form action="/user/updatepassword?_method=PATCH" method="post" id="editProfile" class="row">
+                    <h2 class="big col-md-12 mt-3 text-center last-child">Security Details</h2>
+                    <fieldset class="form-group col-md-12 mt-2">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" class="form-control"  name="passwordCurrent" id="password" placeholder="Current Password" aria-placeholder="Current Password" required aria-required="true">
+                    </fieldset>
+                    <fieldset class="form-group col-md-12 mt-2">
+                        <label for="newPassword">New Password</label>
+                        <input type="password"  name="password" class="form-control" id="password" placeholder="New Password" aria-placeholder="New Password">
+                    </fieldset>
+                    <fieldset class="form-group col-md-12 mt-2">
+                        <label for="passwordConfirm">Confirm Password</label>
+                        <input type="password"  name="passwordConfirm" class="form-control" id="passwordConfirm" placeholder="Confirm Password" aria-placeholder="Confirm Password">
+                    </fieldset>
+                    <input type="hidden" name="userId" value="<%=user._id%>">
+                    <button type="submit" class="button">Save Changes</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <%- include('partials/footer'); -%>
+</body>
+    <%- include('partials/scripts'); -%>
+</html>

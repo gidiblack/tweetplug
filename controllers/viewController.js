@@ -65,6 +65,75 @@ exports.userSubmitLinks = catchAsync(async (req, res, next) => {
   res.status(201).redirect('/user/dashboard');
 });
 
+exports.getWithdrawalPage = catchAsync(async (req, res, nex) => {
+  const user = await User.findById(req.params.userId).populate({
+    path: 'withdrawals',
+  });
+  res.status(200).render('withdrawals', {
+    moment,
+    user,
+  });
+});
+
+exports.makeWithdrawalRequest = catchAsync(async (req, res, next) => {
+  const newWithdrawal = await Withdrawal.create({
+    user: req.body.userID,
+    amount: req.body.amount,
+  });
+  const updatedUser = await User.findByIdAndUpdate(req.body.userID, {
+    $push: { withdrawals: newWithdrawal._id },
+  });
+
+  res.status(200).redirect('/');
+});
+
+exports.getMyProfile = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.userId);
+  res.status(200).render('profile', {
+    user,
+  });
+});
+
+exports.editProfile = catchAsync(async (req, res, next) => {
+  const updatedUser = await User.findByIdAndUpdate(
+    req.body.userId,
+    {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      username: req.body.username,
+      gender: req.body.gender,
+      twitterhandle: req.body.twitterhandle,
+      bankAccountNumber: req.body.bankaccountnumber,
+      bankAccountName: req.body.bankaccountname,
+      bank: req.body.bank,
+      mobileNumber: req.body.mobile,
+      email: req.body.email,
+    },
+    {
+      runValidators: true,
+    }
+  );
+  res.status(200).redirect(`/user/profile/${updatedUser._id}`);
+});
+
+exports.changePassowrd = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.body.userId).select('+password');
+  console.log(req.body.passwordCurrent);
+  console.log(user.password);
+
+  if (!(await user.checkPassword(req.body.passwordCurrent, user.password))) {
+    return next(new AppError('Current password entered is wrong', 401));
+  }
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+  res.redirect('/');
+});
+
+exports.getUpgradePage = catchAsync(async (req, res, next) => {
+  res.status(200).render('upgrade');
+});
+
 exports.getAdminLogin = catchAsync(async (req, res, next) => {
   res.status(200).render('admin/adminLogin');
 });

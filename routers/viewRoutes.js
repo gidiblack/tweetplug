@@ -20,6 +20,12 @@ router
   .get(authController.authenticate, viewController.getUserDashboard);
 
 router.route('/user/links/new').post(viewController.userSubmitLinks);
+router.route('/user/withdrawals/:userId').get(viewController.getWithdrawalPage);
+router.route('/user/withdrawals').post(viewController.makeWithdrawalRequest);
+router.route('/user/profile/:userId').get(viewController.getMyProfile);
+router.route('/user/edit').patch(viewController.editProfile);
+router.route('/user/updatepassword').patch(viewController.changePassowrd);
+router.route('/user/upgrade').get(viewController.getUpgradePage);
 
 //admin routes
 //admin dashboard

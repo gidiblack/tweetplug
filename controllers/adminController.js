@@ -4,7 +4,6 @@ const Task = require('../models/taskModel');
 const Withdrawal = require('../models/withdrawalModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
-const { json } = require('body-parser');
 
 //
 exports.setTask = catchAsync(async (req, res, next) => {

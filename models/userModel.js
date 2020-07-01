@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
   gender: {
     type: String,
     required: [true, 'Please state your gender'],
-    enum: ['male', 'female'],
+    enum: ['male', 'female', 'other'],
   },
   twitterhandle: {
     type: String,
