@@ -66,17 +66,17 @@ const userSchema = new mongoose.Schema({
     enum: [
       'Free trial',
       'free influencer',
-      'junior Influencer',
-      'whiz Influencer',
-      'adept Influencer',
-      'chief Influencer',
-      'expert Influencer',
-      'principal Influencer',
-      'liege Influencer',
-      'professional Influencer',
-      'prime Influencer',
-      'monarch Influencer',
-      'genius Influencer',
+      'junior influencer',
+      'whiz influencer',
+      'adept influencer',
+      'chief influencer',
+      'expert influencer',
+      'principal influencer',
+      'liege influencer',
+      'professional influencer',
+      'prime influencer',
+      'monarch influencer',
+      'genius influencer',
     ],
   },
   password: {
@@ -122,6 +122,9 @@ const userSchema = new mongoose.Schema({
   active: {
     type: Boolean,
     default: true,
+  },
+  timeLeft: {
+    type: Number,
   },
 });
 
@@ -187,6 +190,21 @@ userSchema.methods.createPasswordResetToken = function () {
   //reset plain text token to send to user via email
   return resetToken;
 };
+
+userSchema.pre('save', function (next) {
+  if (this.Plan === 'free influencer') {
+    this.timeLeft = 999;
+    next();
+  }
+  if (this.Plan === 'junior influencer') {
+    this.timeLeft = 14;
+    next();
+  } else {
+    this.timeLeft = 30;
+    next();
+  }
+  next();
+});
 
 const User = mongoose.model('User', userSchema);
 

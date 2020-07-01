@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const intervalController = require('./controllers/intervalControllers');
+
+const schedule = require('node-schedule');
+const User = require('./models/userModel');
+const Task = require('./models/taskModel');
+const moment = require('moment');
 
 process.on('uncaughtException', (err) => {
   console.log('Uncaught exception, Shuting down...');
@@ -9,6 +13,7 @@ process.on('uncaughtException', (err) => {
 });
 
 const app = require('./app');
+const { validate } = require('node-cron');
 dotenv.config({ path: './config.env' });
 
 mongoose
@@ -36,4 +41,33 @@ process.on('unhandledRejection', (err) => {
   server.close(() => {
     process.exit(1);
   });
+});
+
+//scheduled fucntions
+const j = schedule.scheduleJob('28 21 * * *', async function () {
+  try {
+    await Task.deleteMany({ active: false });
+    await Task.updateMany({ active: true }, { $set: { active: false } });
+    console.log('Task job done');
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+const j2 = schedule.scheduleJob('51 21 * * *', async function () {
+  try {
+    const users = await User.find({ Plan: { $ne: 'free influencer' } });
+    users.forEach(async (user) => {
+      try {
+        const newTimeLeft = user.timeLeft - 1;
+        //console.log(newTimeLeft);
+        await User.findByIdAndUpdate(user._id, { timeLeft: newTimeLeft });
+      } catch (error) {
+        console.log(error);
+      }
+    });
+    console.log('User job done');
+  } catch (error) {
+    console.log(error);
+  }
 });

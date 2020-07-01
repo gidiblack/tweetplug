@@ -81,7 +81,7 @@
                             <td><%= user.twitterhandle %></td>
                             <td><%= user.Plan %></td>
                             <td>revneue</td>
-                            <td>time left</td>
+                            <td><%= user.timeLeft %> day(s)</td>
                             <% if (user.links[0] == undefined) { %>
                             <td> No link yet</td>
                             <% } else { %>

@@ -27,13 +27,17 @@ exports.getFAQ = catchAsync(async (req, res, next) => {
 
 exports.getUserDashboard = catchAsync(async (req, res, next) => {
   //time from which link submissions are no longer allowed
+  const user = await User.findById(res.locals.user._id).populate({
+    path: 'links',
+  });
   const taskSubmissionLimit = '22:00:00';
-  console.log(taskSubmissionLimit);
+  //console.log(taskSubmissionLimit);
   const tasks = await Task.find({ active: true });
   res.status(200).render('userDashboard', {
     tasks,
     moment,
     taskSubmissionLimit,
+    user,
   });
 });
 
