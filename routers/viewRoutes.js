@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.use(authController.isLoggedIn);
 
-router.route('/').get(viewController.getHome);
+router.route('/').get(intervaleController.clearTask, viewController.getHome);
 router.route('/login').get(viewController.getLogin);
 router.route('/register').get(viewController.getRegister);
 router.route('/faq').get(viewController.getFAQ);
@@ -18,6 +18,8 @@ router.route('/admin').get(viewController.getAdminLogin);
 router
   .route('/user/dashboard')
   .get(authController.authenticate, viewController.getUserDashboard);
+
+router.route('/user/links/new').post(viewController.userSubmitLinks);
 
 //admin routes
 //admin dashboard

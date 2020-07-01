@@ -6,7 +6,6 @@ const Link = require('../models/LinkModel');
 const User = require('../models/userModel');
 
 const moment = require('moment');
-const { check } = require('prettier');
 
 exports.getHome = catchAsync(async (req, res, next) => {
   res.status(200).render('index');
@@ -25,20 +24,50 @@ exports.getFAQ = catchAsync(async (req, res, next) => {
 });
 
 exports.getUserDashboard = catchAsync(async (req, res, next) => {
-  res.status(200).render('userDashboard');
+  //time from which link submissions are no longer allowed
+  const taskSubmissionLimit = '22:00:00';
+  console.log(taskSubmissionLimit);
+  const tasks = await Task.find({ active: true });
+  res.status(200).render('userDashboard', {
+    tasks,
+    moment,
+    taskSubmissionLimit,
+  });
+});
+
+//function for user to submit new links anytime a new link set(3) is submitted the previous links set(3) are deleted from the DB
+exports.userSubmitLinks = catchAsync(async (req, res, next) => {
+  //first we get the link set from the the req and save the 3 links into an array
+  const linksArr = [req.body.link1, req.body.link2, req.body.link3];
+  //get the User that is making the request
+  const user = await User.findById(req.body.userId);
+  //get all previous linksIds of links the user has submitted (user.links is an array of linksIDs associated with the user)
+  const linksToBeDeactivated = user.links;
+  //console.log(linksToBeDeactivated);
+  //loop through the array and delete each link from the link collection
+  //also pull the link id of the links from the user document
+  linksToBeDeactivated.forEach(async (link) => {
+    await Link.findByIdAndDelete(link);
+    await User.findByIdAndUpdate(req.body.userId, { $pull: { links: link } });
+  });
+  //create new link based on linkArr which is an array of incoming links on the req
+  linksArr.forEach(async (link) => {
+    const newLink = await Link.create({
+      user: req.body.userId,
+      link: link,
+    });
+    //add id of new links created to the user document
+    await User.findByIdAndUpdate(req.body.userId, {
+      $push: { links: newLink._id },
+    });
+  });
+
+  res.status(201).redirect('/user/dashboard');
 });
 
 exports.getAdminLogin = catchAsync(async (req, res, next) => {
   res.status(200).render('admin/adminLogin');
 });
-
-//const DateToNumber = (dateString, newArr) => {
-//  const stringArr = dateString.split(':');
-//  stringArr.forEach((element) => {
-//    const conEl = parseInt(element);
-//    newArr.push(conEl);
-//  });
-//};
 
 //get the admin dashboard
 exports.getAdminDashboard = catchAsync(async (req, res, next) => {
@@ -60,6 +89,12 @@ exports.getAdminDashboard = catchAsync(async (req, res, next) => {
 
 //function to set a new task by admin
 exports.setTask = catchAsync(async (req, res, next) => {
+  const oldTasks = await Task.find({ active: true });
+  if (oldTasks.length > 0) {
+    oldTasks.forEach(async (task) => {
+      await Task.findByIdAndUpdate(task._id, { active: false });
+    });
+  }
   const newTask = await Task.create({
     tweet1: req.body.tweet1,
     tweet2: req.body.tweet2,

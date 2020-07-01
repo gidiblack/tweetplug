@@ -8,6 +8,12 @@ const { json } = require('body-parser');
 
 //
 exports.setTask = catchAsync(async (req, res, next) => {
+  const oldTasks = await Task.find({ active: true });
+  if (oldTasks.length > 0) {
+    oldTasks.forEach(async (task) => {
+      await Task.findByIdAndUpdate(task._id, { active: false });
+    });
+  }
   const newTask = await Task.create({
     tweet1: req.body.tweet1,
     tweet2: req.body.tweet2,

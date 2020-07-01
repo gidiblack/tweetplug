@@ -30,13 +30,14 @@ exports.clearTask = catchAsync(async (req, res, next) => {
   DateToNumber(currentTime, currentTimeArr);
   console.log(`current Time is : ${currentTimeArr}`);
   //loop through all tasks currently present in database
-  tasks.forEach(async (task) => {
+  tasks.forEach(async (task, index) => {
     //convert each tasks time of creation using moment
     const timeCreated = moment(task.date).format('H:mm:ss');
     //use helper function to convert time string which moment returns to integer values seperated by a comma
     DateToNumber(timeCreated, timeCreatedArr);
     //compare hour values of the current time and the time the task was created
     //if the difference between the hour values of the current time and the time the task was created is greated than 22 i.e. 22 hours have elapsed since the task was created, delete the task
+    console.log(`time stamp for task ${index + 1}:${timeCreatedArr}`);
     if (currentTimeArr[0] - timeCreatedArr[0] >= 22) {
       await Task.findByIdAndDelete(task._id);
     }
@@ -46,6 +47,7 @@ exports.clearTask = catchAsync(async (req, res, next) => {
     //console.log(`time creatd at this  2nd point is ${timeCreatedArr}`);
     //console.log(timeCreatedArr);
   });
+  next();
 });
 
 //logs to test should be placed in if statement

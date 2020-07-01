@@ -26,9 +26,9 @@ const server = app.listen(port, () => {
   console.log(`App runnng  in ${mode} mode, on port ${port}`);
 });
 
-setInterval(() => {
-  intervalController.clearTask, 24 * 60 * 60;
-});
+//setInterval(() => {
+//  intervalController.clearTask, 24 * 60 * 60;
+//});
 
 process.on('unhandledRejection', (err) => {
   console.log('unhandled rejection, Shutting down ...');
