@@ -27,6 +27,15 @@ router.route('/user/edit').patch(viewController.editProfile);
 router.route('/user/updatepassword').patch(viewController.changePassowrd);
 router.route('/user/upgrade').get(viewController.getUpgradePage);
 
+router.route('/forgotpassword').get(viewController.getForgotPasswordPage);
+router
+  .route('/passwordresettoken')
+  .patch(viewController.sendPasswordResetToken);
+
+router
+  .route('/resetpassword/:token')
+  .get(viewController.getResetPasswordPage)
+  .patch(viewController.resetPassword);
 //admin routes
 //admin dashboard
 router

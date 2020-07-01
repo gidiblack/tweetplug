@@ -4,6 +4,8 @@ const Task = require('../models/taskModel');
 const Withdrawal = require('../models/withdrawalModel');
 const Link = require('../models/LinkModel');
 const User = require('../models/userModel');
+const sendEmail = require('../utils/email');
+const crypto = require('crypto');
 
 const moment = require('moment');
 
@@ -118,8 +120,8 @@ exports.editProfile = catchAsync(async (req, res, next) => {
 
 exports.changePassowrd = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.body.userId).select('+password');
-  console.log(req.body.passwordCurrent);
-  console.log(user.password);
+  //console.log(req.body.passwordCurrent);
+  //console.log(user.password);
 
   if (!(await user.checkPassword(req.body.passwordCurrent, user.password))) {
     return next(new AppError('Current password entered is wrong', 401));
@@ -136,6 +138,78 @@ exports.getUpgradePage = catchAsync(async (req, res, next) => {
 
 exports.getAdminLogin = catchAsync(async (req, res, next) => {
   res.status(200).render('admin/adminLogin');
+});
+
+exports.getForgotPasswordPage = catchAsync(async (req, res, next) => {
+  res.status(200).render('forgotPassword');
+});
+
+exports.sendPasswordResetToken = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    return next(
+      new AppError(
+        'There is no registered user with that email address, please enter a registered email address',
+        404
+      )
+    );
+  }
+  const resetToken = user.createPasswordResetToken();
+  await user.save({ validateBeforeSave: false });
+
+  const resetUrl = `${req.protocol}://${req.get(
+    'host'
+  )}/resetpassword/${resetToken}`;
+  const message = `Forgot your password ? Submit a patch request with your new password and passwordConfirm to ${resetUrl}.\n If you didn't make this request please ignore`;
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: 'Password reset token(Valid for 10 minutes)',
+      message,
+    });
+    res.status(200).redirect('/login');
+  } catch (error) {
+    //console.log(error);
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+    return next(
+      new AppError(
+        'There was an error sending your email, try again later',
+        500
+      )
+    );
+  }
+});
+
+exports.getResetPasswordPage = catchAsync(async (req, res, next) => {
+  res.status(200).render('resetPassword', {
+    req,
+  });
+});
+
+exports.resetPassword = catchAsync(async (req, res, next) => {
+  //get user based on token(first encrypt plain text token and compare with encrypted token in db)
+  const hashedtoken = crypto
+    .createHash('sha256')
+    .update(req.params.token)
+    .digest('hex');
+
+  const user = await User.findOne({
+    passwordResetToken: hashedtoken,
+    passwordResetExpires: { $gt: Date.now() }, //check if reset token has expired
+  });
+  //set new password if token has not expired
+  if (!user) {
+    return next(new AppError('Token is invalid or has expired', 400));
+  }
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+  await user.save();
+
+  res.redirect('/login');
 });
 
 //get the admin dashboard
