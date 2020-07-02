@@ -28,7 +28,7 @@ const register = async (userObj) => {
     if (res.data.status === 'success') {
       showAlert('success', 'Registered successfully');
       window.setTimeout(() => {
-        location.assign('/user/dashboard');
+        location.assign('/login');
       }, 1500);
     } else {
       console.log(fail);

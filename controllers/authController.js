@@ -4,7 +4,7 @@ const JWT = require('jsonwebtoken');
 const crypto = require('crypto');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
-const sendEmail = require('../utils/email');
+const Email = require('../utils/email');
 
 const signToken = (id) => {
   return JWT.sign({ id }, process.env.JWT_SECRET, {
@@ -50,7 +50,18 @@ exports.signup = catchAsync(async (req, res, next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
+  const url = `${req.protocol}://${req.get('host')}/emailconfirm/${
+    newUser._id
+  }`;
+  await new Email(newUser, url).sendWelcome();
   createSendToken(newUser, 201, res);
+});
+
+exports.confirmEmail = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(req.params.userId, {
+    emailConfirmed: true,
+  });
+  res.status(200).redirect('/login');
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -66,6 +77,14 @@ exports.login = catchAsync(async (req, res, next) => {
   }
   if (user.active == false) {
     return next(new AppError('User cannot login. Please contact Admin', 401));
+  }
+  if (user.emailConfirmed == false) {
+    return next(
+      new AppError(
+        'You have not confirmed your email yet, Please do so before you can login',
+        403
+      )
+    );
   }
   createSendToken(user, 200, res);
 });
@@ -93,6 +112,14 @@ exports.authenticate = catchAsync(async (req, res, next) => {
   if (!user) {
     return next(
       new AppError('The user associated with this token no longer exist', 401)
+    );
+  }
+  if (user.emailConfirmed == false) {
+    return next(
+      new AppError(
+        'You have not confirmed your email yet, Please do so before you can login',
+        403
+      )
     );
   }
   //check if user has changed password after token was issued using the passwordChangeTimeStamp instance method (userModel)
@@ -141,11 +168,11 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   const message = `Forgot your password ? Submit a patch request with your new password and passwordConfirm to ${resetURL}.\n If you didn't make this request please ignore`;
   try {
-    await sendEmail({
-      email: user.email,
-      subject: 'Password reset token(Valid for 10 minutes)',
-      message,
-    });
+    // await sendEmail({
+    //   email: user.email,
+    //   subject: 'Password reset token(Valid for 10 minutes)',
+    //   message,
+    // });
     res.status(200).json({
       status: 'success',
       message: `Token sent to ${user.email}`,

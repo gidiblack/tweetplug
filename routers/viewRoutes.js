@@ -9,11 +9,15 @@ const router = express.Router();
 
 router.use(authController.isLoggedIn);
 
-router.route('/').get(intervaleController.clearTask, viewController.getHome);
+router.route('/').get(viewController.getHome);
 router.route('/login').get(viewController.getLogin);
 router.route('/register').get(viewController.getRegister);
 router.route('/faq').get(viewController.getFAQ);
 router.route('/admin').get(viewController.getAdminLogin);
+router
+  .route('/emailconfirm/:userId')
+  .patch(authController.confirmEmail)
+  .get(viewController.getEmailConfirm);
 
 router
   .route('/user/dashboard')

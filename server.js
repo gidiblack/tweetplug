@@ -17,7 +17,7 @@ const { validate } = require('node-cron');
 dotenv.config({ path: './config.env' });
 
 mongoose
-  .connect(process.env.DATABASE_LOCAL, {
+  .connect(process.env.DATABASE_URL, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useFindAndModify: false,
@@ -44,7 +44,7 @@ process.on('unhandledRejection', (err) => {
 });
 
 //scheduled fucntions
-const j = schedule.scheduleJob('28 21 * * *', async function () {
+const j = schedule.scheduleJob('01 22 * * *', async function () {
   try {
     await Task.deleteMany({ active: false });
     await Task.updateMany({ active: true }, { $set: { active: false } });
@@ -54,7 +54,7 @@ const j = schedule.scheduleJob('28 21 * * *', async function () {
   }
 });
 
-const j2 = schedule.scheduleJob('51 21 * * *', async function () {
+const j2 = schedule.scheduleJob('01 00 * * *', async function () {
   try {
     const users = await User.find({ Plan: { $ne: 'free influencer' } });
     users.forEach(async (user) => {

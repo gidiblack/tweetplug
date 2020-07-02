@@ -25,6 +25,13 @@ exports.getFAQ = catchAsync(async (req, res, next) => {
   res.status(200).render('faq');
 });
 
+exports.getEmailConfirm = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.userId);
+  res.status(200).render('emailConfirm', {
+    user,
+  });
+});
+
 exports.getUserDashboard = catchAsync(async (req, res, next) => {
   //time from which link submissions are no longer allowed
   const user = await User.findById(res.locals.user._id).populate({
@@ -75,10 +82,15 @@ exports.getWithdrawalPage = catchAsync(async (req, res, nex) => {
   const user = await User.findById(req.params.userId).populate({
     path: 'withdrawals',
   });
+  const date = moment(Date.now());
   res.status(200).render('withdrawals', {
     moment,
     user,
+    date,
   });
+
+  //const dow = date.day();
+  //console.log(dow);
 });
 
 exports.makeWithdrawalRequest = catchAsync(async (req, res, next) => {
@@ -221,7 +233,7 @@ exports.getAdminDashboard = catchAsync(async (req, res, next) => {
   const tasks = await Task.find({ active: true });
   const withdrawals = await Withdrawal.find({ status: 'unconfirmed' });
   const links = await Link.find({ status: 'unconfirmed' });
-  const users = await User.find().populate({
+  const users = await User.find({ role: 'user' }).populate({
     path: 'links',
     select: '-_id -user ',
   });

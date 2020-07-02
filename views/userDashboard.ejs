@@ -32,7 +32,7 @@
                     </div>
                     <div class="hero-card col-lg-3 col-md-6">
                         <h3>Yesterday</h3>
-                         <% if(user.links[0 + user.links.length -1 ].status === 'unconfirmed') {%>
+                         <% if( user.links.length > 0 && user.links[0 + user.links.length -1 ].status === 'unconfirmed') {%>
                         <p id="yesterdayAction"> Missed</p>
                         <% } else { %>
                            <p id="yesterdayAction"> Met</p> 

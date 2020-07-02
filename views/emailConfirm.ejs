@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+     <%- include('partials/head'); -%>
+<body>
+    <main>
+       <div class="container text-center py-5">
+            <h1 class="text-center large">Confirm email</h1>
+            <form action="/emailconfirm/<%=user._id%>?_method=PATCH" id="resetPassword" method="post">
+              
+                <button type="submit" class="button">Confirm Email</button>
+            </form>
+       </div>
+    </main>
+    <%- include('partials/footer'); -%>
+</body>
+     <%- include('partials/scripts'); -%>
+</html>

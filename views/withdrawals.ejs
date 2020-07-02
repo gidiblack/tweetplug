@@ -33,7 +33,11 @@
                         <small id="withdrawHelp" class="form-text text-muted">minimum withdrawal amount is &#8358;1,000</small>
                     </fieldset>
                     <input type="hidden" name="userID" value="<%= locals.user._id %>">
+                    <%if (date.day() == 0 ) { %>
                     <button type="submit">Make Withdrawal Request</button>
+                    <% } else { %>
+                    <P>Withdrawals can only be made on sundays</P>
+                    <% } %>
                 </form>
             </div>
         </section>

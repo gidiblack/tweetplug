@@ -31,7 +31,7 @@ const login = async (username, password) => {
     if (res.data.status === 'success') {
       showAlert('success', 'Logged in successfully');
       window.setTimeout(() => {
-        location.assign('/user/dashboard');
+        location.assign('/');
       }, 1500);
     } else {
       console.log(fail);

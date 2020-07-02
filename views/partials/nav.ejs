@@ -1,4 +1,4 @@
-<% if (!locals.user) {%>
+<% if (!locals.user || locals.user.emailConfirmed == false) {%>
     <header class="header">
         <nav class="nav-bar">
             <div class="container">
