@@ -24,6 +24,8 @@
                     <p>Account holder: <span id="accountHolder"><%=locals.user.bankAccountName %></span></p>
                     <p>Mobile number: <span id="mobileNumber"><%=locals.user.mobileNumber %></span></p>
                     <p>Email address: <span id="userEmail"><%= locals.user.email %></span></p>
+                    <p>Account Number: <span id="userEmail"><%= locals.user.bankAccountNumber %></span></p>
+                    <p>bank: <span id="userEmail"><%= locals.user.bank %></span></p>
                 </div>
                 <!-- Withdrawal Request Form -->
                 <form action="/user/withdrawals" id="withdrawalRequest" method="POST">
