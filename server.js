@@ -60,7 +60,7 @@ const j2 = schedule.scheduleJob('15 00 * * *', async function () {
     users.forEach(async (user) => {
       try {
         const newTimeLeft = user.timeLeft - 1;
-        //console.log(newTimeLeft);
+        console.log(newTimeLeft);
         await User.findByIdAndUpdate(user._id, { timeLeft: newTimeLeft });
       } catch (error) {
         console.log(error);
