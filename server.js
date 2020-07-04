@@ -54,7 +54,7 @@ const j = schedule.scheduleJob('01 22 * * *', async function () {
   }
 });
 
-const j2 = schedule.scheduleJob('01 00 * * *', async function () {
+const j2 = schedule.scheduleJob('15 00 * * *', async function () {
   try {
     const users = await User.find({ Plan: { $ne: 'free influencer' } });
     users.forEach(async (user) => {

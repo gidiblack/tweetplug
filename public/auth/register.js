@@ -24,7 +24,7 @@ const register = async (userObj) => {
       url: '/api/v1/user/signup',
       data: userObj,
     });
-    console.log(res);
+    //console.log(res);
     if (res.data.status === 'success') {
       showAlert('success', 'Registered successfully');
       window.setTimeout(() => {
