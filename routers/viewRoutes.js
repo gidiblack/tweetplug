@@ -3,12 +3,11 @@ const viewController = require('../controllers/viewController');
 const userController = require('../controllers/userControlle');
 const adminController = require('../controllers/adminController');
 const authController = require('../controllers/authController');
-const intervaleController = require('../controllers/intervalControllers');
 
 const router = express.Router();
 
 router.use(authController.isLoggedIn);
-
+//general routes
 router.route('/').get(viewController.getHome);
 router.route('/login').get(viewController.getLogin);
 router.route('/register').get(viewController.getRegister);
@@ -18,19 +17,59 @@ router
   .route('/emailconfirm/:userId')
   .patch(authController.confirmEmail)
   .get(viewController.getEmailConfirm);
+router.route('/advertise').get(viewController.getAdvertise);
+router.route('/contact').get(viewController.getContact);
+router.route('/terms').get(viewController.getTerms);
+router.route('/subscribe').get(viewController.getSubscribe);
 
+//user routes
 router
   .route('/user/dashboard')
-  .get(authController.authenticate, viewController.getUserDashboard);
+  .get(
+    authController.authenticate,
+    authController.restrictTo('user'),
+    viewController.getUserDashboard
+  );
 
-router.route('/user/links/new').post(viewController.userSubmitLinks);
-router.route('/user/withdrawals/:userId').get(viewController.getWithdrawalPage);
-router.route('/user/withdrawals').post(viewController.makeWithdrawalRequest);
-router.route('/user/profile/:userId').get(viewController.getMyProfile);
-router.route('/user/edit').patch(viewController.editProfile);
-router.route('/user/updatepassword').patch(viewController.changePassowrd);
-router.route('/user/upgrade').get(viewController.getUpgradePage);
+router
+  .route('/user/links/new')
+  .post(
+    authController.authenticate,
+    authController.restrictTo('user'),
+    viewController.userSubmitLinks
+  );
+router
+  .route('/user/withdrawals/:userId')
+  .get(
+    authController.authenticate,
+    authController.restrictTo('user'),
+    viewController.getWithdrawalPage
+  );
+router
+  .route('/user/withdrawals')
+  .post(
+    authController.authenticate,
+    authController.restrictTo('user'),
+    viewController.makeWithdrawalRequest
+  );
 
+router
+  .route('/user/profile/:userId')
+  .get(authController.authenticate, viewController.getMyProfile);
+
+router
+  .route('/user/edit')
+  .patch(authController.authenticate, viewController.editProfile);
+
+router
+  .route('/user/updatepassword')
+  .patch(authController.authenticate, viewController.changePassowrd);
+
+router
+  .route('/user/upgrade')
+  .get(authController.authenticate, viewController.getUpgradePage);
+
+//forgot password
 router.route('/forgotpassword').get(viewController.getForgotPasswordPage);
 router
   .route('/passwordresettoken')
@@ -40,6 +79,7 @@ router
   .route('/resetpassword/:token')
   .get(viewController.getResetPasswordPage)
   .patch(viewController.resetPassword);
+
 //admin routes
 //admin dashboard
 router

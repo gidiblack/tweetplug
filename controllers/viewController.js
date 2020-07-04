@@ -228,6 +228,19 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   res.redirect('/login');
 });
 
+exports.getContact = catchAsync(async (req, res, next) => {
+  res.status(200).render('contactUs');
+});
+exports.getTerms = catchAsync(async (req, res, next) => {
+  res.status(200).render('terms');
+});
+exports.getSubscribe = catchAsync(async (req, res, next) => {
+  res.status(200).render('subscribe');
+});
+exports.getAdvertise = catchAsync(async (req, res, next) => {
+  res.status(200).render('advertise');
+});
+
 //get the admin dashboard
 exports.getAdminDashboard = catchAsync(async (req, res, next) => {
   const tasks = await Task.find({ active: true });
