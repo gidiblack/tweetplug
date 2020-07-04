@@ -246,16 +246,26 @@ exports.getAdminDashboard = catchAsync(async (req, res, next) => {
   const tasks = await Task.find({ active: true });
   const withdrawals = await Withdrawal.find({ status: 'unconfirmed' });
   const links = await Link.find({ status: 'unconfirmed' });
-  const users = await User.find({ role: 'user' }).populate({
-    path: 'links',
-    select: '-_id -user ',
+  const users = await User.find({ role: 'user' })
+    .populate({
+      path: 'links',
+      select: '-_id -user ',
+    })
+    .populate({
+      path: 'withdrawals',
+    });
+  const usersWithWithdrawals = [];
+  users.forEach((user) => {
+    if (user.withdrawals.length > 0) {
+      usersWithWithdrawals.push(user);
+    }
   });
   res.status(200).render('admin/adminDashboard', {
     tasks,
     withdrawals,
     links,
     moment,
-    users,
+    users: usersWithWithdrawals,
   });
 });
 
@@ -277,7 +287,7 @@ exports.setTask = catchAsync(async (req, res, next) => {
 
 // function to get the detail page for a user by admin
 exports.getIndividualPageAdmin = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.params.userId)
+  const userr = await User.findById(req.params.userId)
     .populate({
       path: 'links',
       select: '-_id -user ',
@@ -286,13 +296,13 @@ exports.getIndividualPageAdmin = catchAsync(async (req, res, next) => {
       path: 'withdrawals',
       select: '-__v -user',
     });
-  if (!user) {
+  if (!userr) {
     return next(
       new AppError('No user found with that Id, please try again', 404)
     );
   }
   res.status(200).render('admin/userPage', {
-    user,
+    userr,
     moment,
   });
 });

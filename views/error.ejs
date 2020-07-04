@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-     <%- include('partials/head'); -%>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css"/>
+    <title><%= title %></title>
+</head>
 <body>
      <%- include('partials/nav'); -%>
     <main>
        <div class="container text-center py-5">
            <img src="assets/img/error404.jpg" alt="error404" class="error404">
            <h1 class="my-5">Oops, something went terribly wrong!</h1>
-           <button>Return to home</button>
+           <p><%=msg %></p>
+           <button><a style="color:white" href="/">ReturnTo Home</a></button>
        </div>
     </main>
      <%- include('partials/footer'); -%>

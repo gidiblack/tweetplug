@@ -112,7 +112,7 @@
                     <% users.forEach ( user => { %>
                         <tr>
                             <td><a href="/admin/user/<%=user._id %>"><%= user.username %></a></td>
-                            <td>2000</td>
+                            <td><%= user.withdrawals[0  + user.withdrawals.length -1].amount %></td>
                             <td><%=user.bankAccountNumber %> - <%=user.bank %></td>
                             <td><%= user.bankAccountName %></td>
                             <td>Revenue left</td>
