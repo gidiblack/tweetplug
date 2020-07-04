@@ -34,6 +34,7 @@ exports.getEmailConfirm = catchAsync(async (req, res, next) => {
 
 exports.getUserDashboard = catchAsync(async (req, res, next) => {
   //time from which link submissions are no longer allowed
+
   const user = await User.findById(res.locals.user._id).populate({
     path: 'links',
   });
@@ -48,10 +49,34 @@ exports.getUserDashboard = catchAsync(async (req, res, next) => {
   });
 });
 
+const linkCheck = (link) => {
+  const re = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
+  if (re.test(String(link)) == true) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 //function for user to submit new links anytime a new link set(3) is submitted the previous links set(3) are deleted from the DB
 exports.userSubmitLinks = catchAsync(async (req, res, next) => {
   //first we get the link set from the the req and save the 3 links into an array
   const linksArr = [req.body.link1, req.body.link2, req.body.link3];
+  const linkCheckValues = [];
+  linksArr.forEach((link) => {
+    if (linkCheck(link) == false) {
+      linkCheckValues.push(false);
+    }
+  });
+
+  if (linkCheckValues.includes(false)) {
+    return next(
+      new AppError(
+        'One of the links you submitted was invalid, please check the links and try again',
+        401
+      )
+    );
+  }
   //get the User that is making the request
   const user = await User.findById(req.body.userId);
   //get all previous linksIds of links the user has submitted (user.links is an array of linksIDs associated with the user)
@@ -253,6 +278,7 @@ exports.getAdminDashboard = catchAsync(async (req, res, next) => {
     })
     .populate({
       path: 'withdrawals',
+      select: '-user',
     });
   const usersWithWithdrawals = [];
   users.forEach((user) => {
@@ -265,7 +291,8 @@ exports.getAdminDashboard = catchAsync(async (req, res, next) => {
     withdrawals,
     links,
     moment,
-    users: usersWithWithdrawals,
+    users,
+    usersWithWithdrawals,
   });
 });
 
@@ -358,4 +385,17 @@ exports.setUserStatus = catchAsync(async (req, res, next) => {
     return res.status(204).redirect('/admin/dashboard');
   }
   res.status(200).redirect(`/admin/user/${req.body.user_id}`);
+});
+
+exports.confirmAllWithdrawals = catchAsync(async (req, res, next) => {
+  const withdrawalsIdArr = req.body.withdrawal;
+  if (Array.isArray(withdrawalsIdArr)) {
+    withdrawalsIdArr.forEach(async (Id) => {
+      await Withdrawal.findByIdAndUpdate(Id, { status: 'approves' });
+    });
+    return res.status(200).redirect('/admin/dashboard');
+  }
+  await Withdrawal.findByIdAndUpdate(withdrawalsIdArr, { status: 'approved' });
+  res.status(200).redirect('/admin/dashboard');
+  //console.log(withdrawalsIdArr);
 });

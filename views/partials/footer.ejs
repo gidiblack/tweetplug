@@ -27,6 +27,9 @@
                         <% if (!locals.user) {%>
                         <li><a href="/register">Register Now!</a></li>
                         <li><a href="/login">Login to your account</a></li>
+                        <% } else if (locals.user.role === 'user'){ %>
+                        <li><a href="/user/withdrawals/<%=locals.user._id %>">Withdraw</a></li>
+                        <li><a href="/user/upgrade">Upgrade</a></li>
                         <% } %>
                     </ul>
                 </div>

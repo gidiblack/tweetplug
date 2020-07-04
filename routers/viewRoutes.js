@@ -135,5 +135,6 @@ router
     viewController.setUserStatus
   );
 
+router.route('/admin/confirmall').post(viewController.confirmAllWithdrawals);
 //export router to app
 module.exports = router;

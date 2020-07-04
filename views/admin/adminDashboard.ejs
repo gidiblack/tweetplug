@@ -98,6 +98,7 @@
             <div class="container">
                 <h2 class="text-center my-4">Withdrawal Requests</h2>
                 <!-- Withdrawal Requests table -->
+                
                 <table id="withdrawalRequests" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
@@ -106,21 +107,28 @@
                             <th>Account Number & Bank</th>
                             <th>Account Holder</th>
                             <th>Total Revenue(&#8358;)</th>
+                            <th>Withdrawal Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <% users.forEach ( user => { %>
+                    <% usersWithWithdrawals.forEach ( user => { %>
                         <tr>
                             <td><a href="/admin/user/<%=user._id %>"><%= user.username %></a></td>
                             <td><%= user.withdrawals[0  + user.withdrawals.length -1].amount %></td>
                             <td><%=user.bankAccountNumber %> - <%=user.bank %></td>
                             <td><%= user.bankAccountName %></td>
                             <td>Revenue left</td>
+                            <td><%=user.withdrawals[0  + user.withdrawals.length -1].status %></td>
                         </tr>
                     <% }) %>
                     </tbody>
                 </table>
-                <button class="button mt-5">Confirm all</button>
+                <form action="/admin/confirmall" method="post">
+                    <% usersWithWithdrawals.forEach ( (user, index) => { %>
+                        <input type="hidden" name="withdrawal" value="<%= user.withdrawals[0  + user.withdrawals.length -1]._id %>">
+                    <% }) %>
+                <button  type="submit" class="button mt-5">Confirm all</button>
+                </form>
             </div>
         </section>
     </main>
