@@ -208,6 +208,15 @@ exports.getWithdrawalPage = catchAsync(async (req, res, nex) => {
 });
 
 exports.makeWithdrawalRequest = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.body.userID);
+  if (user.revenue < req.body.amount) {
+    return next(
+      new AppError(
+        'Withdrawal request is greater than total revenue please adjust',
+        401
+      )
+    );
+  }
   const newWithdrawal = await Withdrawal.create({
     user: req.body.userID,
     amount: req.body.amount,
@@ -480,7 +489,7 @@ exports.confirmAllWithdrawals = catchAsync(async (req, res, next) => {
   const withdrawalsIdArr = req.body.withdrawal;
   if (Array.isArray(withdrawalsIdArr)) {
     withdrawalsIdArr.forEach(async (Id) => {
-      await Withdrawal.findByIdAndUpdate(Id, { status: 'approves' });
+      await Withdrawal.findByIdAndUpdate(Id, { status: 'approved' });
     });
     return res.status(200).redirect('/admin/dashboard');
   }
