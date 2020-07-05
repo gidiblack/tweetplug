@@ -48,13 +48,10 @@ const logout = async () => {
       method: 'GET',
       url: '/api/v1/user/logout',
     });
+    console.log(res);
     if ((res.data.status = 'success')) {
-      const url = '/';
-      const uagent = navigator.userAgent.toLowerCase();
-      if (/safari/.test(uagent) && !/chrome/.test(uagent)) {
-        window.location.href = url;
-      }
-      window.location.href = location.href;
+      location.reload(true);
+      location.assign('/');
     }
   } catch (err) {
     console.log(err.response);
