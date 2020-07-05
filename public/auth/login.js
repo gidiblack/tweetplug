@@ -49,7 +49,7 @@ const logout = async () => {
       url: '/api/v1/user/logout',
     });
     //console.log(res);
-    if ((res.data.status = 'success')) location.reload(true);
+    if ((res.data.status = 'success')) location.href = location.href;
     location.assign('/');
   } catch (err) {
     console.log(err.response);
