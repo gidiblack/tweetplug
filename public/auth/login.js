@@ -50,8 +50,8 @@ const logout = async () => {
     });
     console.log(res);
     if ((res.data.status = 'success')) {
-      location.reload(true);
       location.assign('/');
+      location.reload(true);
     }
   } catch (err) {
     console.log(err.response);
