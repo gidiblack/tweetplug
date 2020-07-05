@@ -12,7 +12,7 @@
                     <form action="/admin/user/status?_method=PATCH" method="post">
                     <p>Full Name: <span id="fullName"><%=userr.firstname %> <%=userr.lastname %></span></p>
                     <p>Username: <span id="username"><%= userr.username %></span></p>
-                    <p>Total Revenue: <span id="totalRevenue">&#8358;Total revenue</span></p>
+                    <p>Total Revenue: <span id="totalRevenue">&#8358;<%= userr.revenue %></span></p>
                     <p>Current Plan: <span id="currentPlan"><%= userr.Plan %></span></p>
                     <p>Withdrawal Request: <span id="withdraw-request">Withdrawal</span></p>
                     <p>Remaining Duration: <span id="remainingDuration">Duration</span></p>
@@ -20,7 +20,6 @@
                     <p>Account Number: <span id="accountNumber"><%=userr.bankAccountNumber %></span></p>
                     <p>Bank: <span id="bank"><%=userr.bank %></span></p>
                     <p>Active User: <span id="status"><%=userr.active %></span></p>
-                    <p>Today's Acton: <span id="todayAction">CHeck open</span></p>
                     <input type="hidden" name="user_id" value=<%=userr._id %>>
                     <input type="submit" value="Change Plan" name="user_p">
                     <input type="submit" value="Suspend Account" class="sec-btn" name="user_s">

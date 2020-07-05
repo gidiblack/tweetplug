@@ -68,7 +68,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: 'free influencer',
     enum: [
-      'Free trial',
       'free influencer',
       'junior influencer',
       'whiz influencer',
@@ -98,6 +97,10 @@ const userSchema = new mongoose.Schema({
       },
       message: 'passwords do not match',
     },
+  },
+  revenue: {
+    type: Number,
+    default: 0,
   },
   links: [
     {

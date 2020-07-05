@@ -9,22 +9,83 @@ const crypto = require('crypto');
 
 const moment = require('moment');
 
+//revenue to be added for each user plan
+const freeinfluencerrev = 5;
+const juniorinfluencerrev = 270;
+const whizinfluencerrev = 250;
+const adeptinfluencerrev = 500;
+const chiefinfluencerrev = 1000;
+const expertinfluencerrev = 1500;
+const principalinfluencerrev = 2000;
+const liegeinfluencerrev = 2500;
+const professionalinfluencerrev = 3000;
+const primeinfluencerrev = 4000;
+const monarchinfluencerrev = 5000;
+const geniusinfluencerrev = 6000;
+
+//function to set the rev of user based on userPlan
+const setRevenue = (user) => {
+  let revenue;
+  if (user.Plan == 'free influencer') {
+    revenue = freeinfluencerrev;
+  }
+  if (user.Plan == 'junior influencer') {
+    revenue = juniorinfluencerrev;
+  }
+  if (user.Plan == 'whiz influencer') {
+    revenue = whizinfluencerrev;
+  }
+  if (user.Plan == 'adept influencer') {
+    revenue = adeptinfluencerrev;
+  }
+  if (user.Plan == 'chief influencer') {
+    revenue = chiefinfluencerrev;
+  }
+  if (user.Plan == 'expert influencer') {
+    revenue = expertinfluencerrev;
+  }
+  if (user.Plan == 'principal influencer') {
+    revenue = principalinfluencerrev;
+  }
+  if (user.Plan == 'liege influencer') {
+    revenue = liegeinfluencerrev;
+  }
+  if (user.Plan == 'professional influencer') {
+    revenue = professionalinfluencerrev;
+  }
+  if (user.Plan == 'prime influencer') {
+    revenue = primeinfluencerrev;
+  }
+  if (user.Plan == 'monarch influencer') {
+    revenue = monarchinfluencerrev;
+  }
+  if (user.Plan == 'genius influencer') {
+    revenue = geniusinfluencerrev;
+  }
+  return revenue;
+};
+
+// get home page
 exports.getHome = catchAsync(async (req, res, next) => {
   res.status(200).render('index');
 });
 
+//get login page
 exports.getLogin = catchAsync(async (req, res, next) => {
   res.status(200).render('login');
 });
 
+//get register page
 exports.getRegister = catchAsync(async (req, res, next) => {
   res.status(200).render('register');
 });
 
+//get faq page
 exports.getFAQ = catchAsync(async (req, res, next) => {
   res.status(200).render('faq');
 });
 
+//get page for users to confirm their email. link to this is sent to users via email
 exports.getEmailConfirm = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.params.userId);
   res.status(200).render('emailConfirm', {
@@ -32,20 +93,29 @@ exports.getEmailConfirm = catchAsync(async (req, res, next) => {
   });
 });
 
+//get user dashboard
 exports.getUserDashboard = catchAsync(async (req, res, next) => {
-  //time from which link submissions are no longer allowed
-
+  // get the previous days date
   const yesterday = moment().add(-1, 'days').format('MMMM Do YYYY');
+  //get user from db
   const user = await User.findById(res.locals.user._id).populate({
     path: 'links',
     select: '-user',
   });
-  const dateSet = moment(
-    user.links[0 + user.links.length - 1].createdAt
-  ).format('MMMM Do YYYY');
+
+  //get date on the last link submission made by the user
+  let dateSet;
+  if (user.links.length > 0) {
+    dateSet = moment(user.links[0 + user.links.length - 1].createdAt).format(
+      'MMMM Do YYYY'
+    );
+  }
+
   //console.log(yesterday);
   //console.log(dateSet);
+  // value that will be used to check if the user submitted the link the previous day. used for the yesterday's action functionality
   let confirmation;
+  // if the date on the user's last link submission is eqaul to the previous days submission then user submtted a link yesterday and cheeck is passed yesterday's action is set to met on dash, if not the the check fails and yesterday's action is set to missed.
   if (dateSet == yesterday) {
     //console.log('passed');
     confirmation = 'passed';
@@ -54,6 +124,7 @@ exports.getUserDashboard = catchAsync(async (req, res, next) => {
     confirmation = 'failed';
   }
 
+  // time from which users can no longer submit tasks
   const taskSubmissionLimit = '22:00:00';
   //console.log(taskSubmissionLimit);
   const tasks = await Task.find({ active: true });
@@ -66,6 +137,7 @@ exports.getUserDashboard = catchAsync(async (req, res, next) => {
   });
 });
 
+//regex to check if any of links user submitted is valid
 const linkCheck = (link) => {
   const re = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
   if (re.test(String(link)) == true) {
@@ -75,7 +147,7 @@ const linkCheck = (link) => {
   }
 };
 
-//function for user to submit new links anytime a new link set(3) is submitted the previous links set(3) are deleted from the DB
+//function for user to submit new links anytime a new set(3) of links are submitted the previous set(3) of links are deleted from the DB
 exports.userSubmitLinks = catchAsync(async (req, res, next) => {
   //first we get the link set from the the req and save the 3 links into an array
   const linksArr = [req.body.link1, req.body.link2, req.body.link3];
@@ -382,6 +454,10 @@ exports.setLinkStatus = catchAsync(async (req, res, next) => {
     }
   });
 
+  const rev = setRevenue(user);
+  const newRev = user.revenue + rev;
+  user.revenue = newRev;
+  await user.save({ validateBeforeSave: false });
   res.status(200).redirect(`/admin/user/${user._id}`);
 });
 

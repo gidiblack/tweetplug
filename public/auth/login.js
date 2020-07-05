@@ -42,23 +42,8 @@ const login = async (username, password) => {
   }
 };
 
-const logout = async () => {
-  try {
-    const res = await axios({
-      method: 'GET',
-      url: '/api/v1/user/logout',
-    });
-    //console.log(res);
-    if ((res.data.status = 'success')) location.href = location.href;
-    location.assign('/');
-  } catch (err) {
-    console.log(err.response);
-    showAlert('error', 'There was an error logging out please try again');
-  }
-};
-
 const loginSub = document.getElementById('loginForm');
-const logoutBtn = document.querySelector('.logout-btn');
+
 if (loginSub) {
   loginSub.addEventListener('submit', (e) => {
     console.log('clicked');
@@ -67,7 +52,4 @@ if (loginSub) {
     const password = document.getElementById('loginPassword').value;
     login(username, password);
   });
-}
-if (logoutBtn) {
-  logoutBtn.addEventListener('click', logout);
 }
