@@ -35,9 +35,25 @@ exports.getEmailConfirm = catchAsync(async (req, res, next) => {
 exports.getUserDashboard = catchAsync(async (req, res, next) => {
   //time from which link submissions are no longer allowed
 
+  const yesterday = moment().add(-1, 'days').format('MMMM Do YYYY');
   const user = await User.findById(res.locals.user._id).populate({
     path: 'links',
+    select: '-user',
   });
+  const dateSet = moment(
+    user.links[0 + user.links.length - 1].createdAt
+  ).format('MMMM Do YYYY');
+  console.log(yesterday);
+  console.log(dateSet);
+  let confirmation;
+  if (dateSet == yesterday) {
+    //console.log('passed');
+    confirmation = 'passed';
+  } else {
+    //console.log('failed');
+    confirmation = 'failed';
+  }
+
   const taskSubmissionLimit = '22:00:00';
   //console.log(taskSubmissionLimit);
   const tasks = await Task.find({ active: true });
@@ -46,6 +62,7 @@ exports.getUserDashboard = catchAsync(async (req, res, next) => {
     moment,
     taskSubmissionLimit,
     user,
+    confirmation,
   });
 });
 

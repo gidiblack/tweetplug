@@ -35,7 +35,11 @@
                          <% if( user.links.length > 0 && user.links[0 + user.links.length -1 ].status === 'unconfirmed') {%>
                         <p id="yesterdayAction"> Missed</p>
                         <% } else { %>
+                            <% if (confirmation == 'passed') {%>
                            <p id="yesterdayAction"> Met</p> 
+                           <% } else { %>
+                            <p id="yesterdayAction"> Missed</p> 
+                           <%} %>
                         <% } %>
                     </div>
                 </div>
