@@ -4,7 +4,7 @@ const Task = require('../models/taskModel');
 const Withdrawal = require('../models/withdrawalModel');
 const Link = require('../models/LinkModel');
 const User = require('../models/userModel');
-const sendEmail = require('../utils/email');
+const Email = require('../utils/email');
 const crypto = require('crypto');
 
 const moment = require('moment');
@@ -201,14 +201,10 @@ exports.sendPasswordResetToken = catchAsync(async (req, res, next) => {
   const resetUrl = `${req.protocol}://${req.get(
     'host'
   )}/resetpassword/${resetToken}`;
-  const message = `Forgot your password ? Submit a patch request with your new password and passwordConfirm to ${resetUrl}.\n If you didn't make this request please ignore`;
+
   try {
-    await sendEmail({
-      email: user.email,
-      subject: 'Password reset token(Valid for 10 minutes)',
-      message,
-    });
-    res.status(200).redirect('/login');
+    await new Email(user, resetUrl).sendPasswordReset();
+    res.status(200).redirect('/');
   } catch (error) {
     //console.log(error);
     user.passwordResetToken = undefined;

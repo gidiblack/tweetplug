@@ -198,7 +198,7 @@ userSchema.methods.createPasswordResetToken = function () {
 userSchema.pre('save', function (next) {
   if (this.Plan === 'free influencer') {
     this.timeLeft = 999;
-    console.log('original RAN');
+
     next();
   }
   if (this.Plan === 'junior influencer') {
@@ -206,7 +206,7 @@ userSchema.pre('save', function (next) {
     next();
   } else {
     this.timeLeft = 30;
-    console.log('ELSE RAN');
+
     next();
   }
   next();
