@@ -49,8 +49,12 @@ const logout = async () => {
       url: '/api/v1/user/logout',
     });
     if ((res.data.status = 'success')) {
-      window.location.reload(true);
-      window.location.assign('/');
+      const url = '/';
+      const uagent = navigator.userAgent.toLowerCase();
+      if (/safari/.test(uagent) && !/chrome/.test(uagent)) {
+        window.location.href = url;
+      }
+      window.location.href = location.href;
     }
   } catch (err) {
     console.log(err.response);
