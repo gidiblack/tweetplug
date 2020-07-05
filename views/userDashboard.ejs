@@ -15,7 +15,13 @@
                     <div class="hero-card col-lg-3 col-md-6">
                         <img src="/assets/img/tag-icon.png" alt="currentPlan" style="width: 24px;">
                         <h3>Current Plan</h3>
-                        <p id="currentPlan"><%=locals.user.Plan %>: <span id="planDuration"><%=locals.user.timeLeft %> Day(s) Left</span></p>
+                        <p id="currentPlan"><%=locals.user.Plan %>: 
+                        <% if (locals.user.Plan == 'free influencer') {%>
+                         <span id="planDuration">Unlimited Day(s) Left</span>
+                        <% } else { %>
+                        <span id="planDuration"><%=locals.user.timeLeft %> Day(s) Left</span>
+                        <% } %>
+                        </p>
                     </div>
                     <div class="hero-card col-lg-3 col-md-6">
                         <img src="/assets/img/nairabills-icon.png" alt="nairabills-icon" style="width: 36px;">

@@ -1,4 +1,4 @@
-console.log('connected');
+console.log('login connected');
 const hideAlert = () => {
   const el = document.querySelector('.error-modal');
   if (el) el.parentElement.removeChild(el);

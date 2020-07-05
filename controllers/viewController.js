@@ -43,8 +43,8 @@ exports.getUserDashboard = catchAsync(async (req, res, next) => {
   const dateSet = moment(
     user.links[0 + user.links.length - 1].createdAt
   ).format('MMMM Do YYYY');
-  console.log(yesterday);
-  console.log(dateSet);
+  //console.log(yesterday);
+  //console.log(dateSet);
   let confirmation;
   if (dateSet == yesterday) {
     //console.log('passed');

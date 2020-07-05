@@ -198,15 +198,14 @@ userSchema.methods.createPasswordResetToken = function () {
 userSchema.pre('save', function (next) {
   if (this.Plan === 'free influencer') {
     this.timeLeft = 999;
-
     next();
   }
+
   if (this.Plan === 'junior influencer') {
     this.timeLeft = 14;
     next();
   } else {
     this.timeLeft = 30;
-
     next();
   }
   next();
