@@ -48,8 +48,10 @@ const logout = async () => {
       method: 'GET',
       url: '/api/v1/user/logout',
     });
-    if ((res.data.status = 'success')) location.reload(true);
-    location.assign('/');
+    if ((res.data.status = 'success')) {
+      window.location.reload(true);
+      window.location.assign('/');
+    }
   } catch (err) {
     console.log(err.response);
     showAlert('error', 'There was an error logging out please try again');
