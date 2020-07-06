@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Oxygen:wght@300;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Oxygen:wght@300;400;700&display=swap");
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize * */
 html {
   font-family: sans-serif;
@@ -147,9 +147,9 @@ select {
 }
 
 button,
-html input[type='button'],
-input[type='reset'],
-input[type='submit'] {
+html input[type=button],
+input[type=reset],
+input[type=submit] {
   -webkit-appearance: button;
   cursor: pointer;
 }
@@ -169,26 +169,26 @@ input {
   line-height: normal;
 }
 
-input[type='checkbox'],
-input[type='radio'] {
+input[type=checkbox],
+input[type=radio] {
   box-sizing: border-box;
   padding: 0;
 }
 
-input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button {
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
   height: auto;
 }
 
-input[type='search'] {
+input[type=search] {
   -webkit-appearance: textfield;
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
 
-input[type='search']::-webkit-search-cancel-button,
-input[type='search']::-webkit-search-decoration {
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -265,9 +265,9 @@ main {
 
 .button,
 button,
-input[type='submit'],
-input[type='reset'],
-input[type='button'] {
+input[type=submit],
+input[type=reset],
+input[type=button] {
   display: inline-block;
   padding: 1rem 5rem;
   color: #fff;
@@ -275,7 +275,7 @@ input[type='button'] {
   font-size: 16px;
   letter-spacing: 1px;
   font-weight: 600;
-  font-family: 'Oxygen', sans-serif;
+  font-family: "Oxygen", sans-serif;
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
@@ -286,21 +286,19 @@ input[type='button'] {
   box-sizing: border-box;
   transition: all 0.2s ease;
 }
-.button:hover,
-.button:active,
-.button:focus,
+.button:hover, .button:active, .button:focus,
 button:hover,
 button:active,
 button:focus,
-input[type='submit']:hover,
-input[type='submit']:active,
-input[type='submit']:focus,
-input[type='reset']:hover,
-input[type='reset']:active,
-input[type='reset']:focus,
-input[type='button']:hover,
-input[type='button']:active,
-input[type='button']:focus {
+input[type=submit]:hover,
+input[type=submit]:active,
+input[type=submit]:focus,
+input[type=reset]:hover,
+input[type=reset]:active,
+input[type=reset]:focus,
+input[type=button]:hover,
+input[type=button]:active,
+input[type=button]:focus {
   background-color: #344785;
   color: #fff;
   outline: 0;
@@ -308,23 +306,35 @@ input[type='button']:focus {
   transform: translateY(3px);
 }
 
+.submit-btn {
+  display: block;
+  text-transform: inherit;
+  margin: 2rem auto 0;
+  padding: 1rem 2rem;
+}
+@media screen and (max-width: 425px) {
+  .submit-btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 14px;
+  }
+}
+
 a {
   color: #1d2951;
   text-decoration: none;
   outline: 0;
 }
-a:hover,
-a:focus {
+a:hover, a:focus {
   color: #344785;
   text-decoration: none;
 }
 
 ::selection {
-  background: #fff498;
+  background: #FFF498;
 }
 
 ::-moz-selection {
-  background: #fff498;
+  background: #FFF498;
 }
 
 img::selection {
@@ -335,20 +345,11 @@ img::-moz-selection {
   background: transparent;
 }
 
-.gigantic,
-.huge,
-.large,
-.bigger,
-.big,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+.gigantic, .huge, .large, .bigger, .big,
+h1, h2, h3, h4, h5, h6 {
   color: #222;
   font-weight: bold;
-  font-family: 'Oxygen', sans-serif;
+  font-family: "Oxygen", sans-serif;
   font-weight: 700;
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.07);
   margin-bottom: 0.8rem;
@@ -360,80 +361,68 @@ h6 {
   letter-spacing: -2px;
 }
 
-.huge,
-h1 {
+.huge, h1 {
   font-size: 42px;
   line-height: 1.2;
 }
 @media only screen and (max-width: 680px) {
-  .huge,
-  h1 {
+  .huge, h1 {
     font-size: 34px;
   }
 }
 @media only screen and (max-width: 425px) {
-  .huge,
-  h1 {
+  .huge, h1 {
     font-size: 30px;
   }
 }
 
-.large,
-h2 {
+.large, h2 {
   font-size: 26px;
   line-height: 1.16;
 }
 @media only screen and (max-width: 680px) {
-  .large,
-  h2 {
+  .large, h2 {
     font-size: 24px;
   }
 }
 @media only screen and (max-width: 425px) {
-  .large,
-  h2 {
+  .large, h2 {
     font-size: 22px;
   }
 }
 
-.bigger,
-h3 {
+.bigger, h3 {
   font-size: 20px;
   line-height: 1.38;
 }
 @media only screen and (max-width: 680px) {
-  .bigger,
-  h3 {
+  .bigger, h3 {
     font-size: 18px;
   }
 }
 @media only screen and (max-width: 425px) {
-  .bigger,
-  h3 {
+  .bigger, h3 {
     font-size: 17px;
   }
 }
 
-.big,
-h4 {
+.big, h4 {
   font-size: 18px;
   line-height: 1.38;
 }
 @media only screen and (max-width: 680px) {
-  .big,
-  h4 {
+  .big, h4 {
     font-size: 16px;
   }
 }
 
-.small,
-small {
+.small, small {
   font-size: 10px;
   line-height: 1.2;
 }
 
 p {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0 0 12px 0;
   font-weight: 400;
   font-size: 16px;
@@ -538,10 +527,8 @@ hr {
   z-index: 51;
   float: right;
 }
-.nav-bar .menu-icon .hamburger,
-.nav-bar .menu-icon .hamburger::before,
-.nav-bar .menu-icon .hamburger::after {
-  content: '';
+.nav-bar .menu-icon .hamburger, .nav-bar .menu-icon .hamburger::before, .nav-bar .menu-icon .hamburger::after {
+  content: "";
   display: block;
   background: #1d2951;
   height: 3px;
@@ -606,7 +593,7 @@ footer ul {
 }
 footer li {
   list-style: none;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 14px;
   margin-bottom: 6px;
 }
@@ -640,13 +627,11 @@ footer h3 {
     font-size: 18px;
   }
 }
-footer .col-md-2,
-footer .col-md-4 {
+footer .col-md-2, footer .col-md-4 {
   padding-right: 10px;
 }
 @media only screen and (min-width: 766px) {
-  footer .col-md-2,
-  footer .col-md-4 {
+  footer .col-md-2, footer .col-md-4 {
     padding-left: 0px;
   }
 }
@@ -676,14 +661,14 @@ footer .col-md-4 {
 }
 @media screen and (max-width: 768px) {
   .hero .carousel-control-next-icon,
-  .hero .carousel-control-prev-icon {
+.hero .carousel-control-prev-icon {
     width: 12px;
     height: 12px;
   }
 }
 @media screen and (max-width: 425px) {
   .hero .carousel-control-next-icon,
-  .hero .carousel-control-prev-icon {
+.hero .carousel-control-prev-icon {
     width: 10px;
     height: 10px;
   }
@@ -716,7 +701,7 @@ footer .col-md-4 {
   }
 }
 .hero .carousel-caption h1 {
-  font-family: 'montserrat';
+  font-family: "montserrat";
   font-weight: 800;
 }
 @media screen and (max-width: 768px) {
@@ -822,15 +807,14 @@ footer .col-md-4 {
   border-top: 1px solid #1d2951;
   padding-top: 1rem;
 }
-#loginForm input[type='checkbox'],
-#registerForm input[type='checkbox'],
-#editProfile input[type='checkbox'],
-#resetPassword input[type='checkbox'] {
+#loginForm input[type=checkbox],
+#registerForm input[type=checkbox],
+#editProfile input[type=checkbox],
+#resetPassword input[type=checkbox] {
   width: 1rem;
   height: 1rem;
 }
-#loginForm #forgotPassword,
-#loginForm #agreeClick,
+#loginForm #forgotPassword, #loginForm #agreeClick,
 #registerForm #forgotPassword,
 #registerForm #agreeClick,
 #editProfile #forgotPassword,
@@ -842,14 +826,13 @@ footer .col-md-4 {
   max-width: 80%;
 }
 @media screen and (max-width: 320px) {
-  #loginForm #forgotPassword,
-  #loginForm #agreeClick,
-  #registerForm #forgotPassword,
-  #registerForm #agreeClick,
-  #editProfile #forgotPassword,
-  #editProfile #agreeClick,
-  #resetPassword #forgotPassword,
-  #resetPassword #agreeClick {
+  #loginForm #forgotPassword, #loginForm #agreeClick,
+#registerForm #forgotPassword,
+#registerForm #agreeClick,
+#editProfile #forgotPassword,
+#editProfile #agreeClick,
+#resetPassword #forgotPassword,
+#resetPassword #agreeClick {
     max-width: 75%;
   }
 }
@@ -866,15 +849,15 @@ footer .col-md-4 {
 #resetPassword button {
   display: block;
   margin: 0.5rem auto;
-  padding: 1rem 6rem;
+  padding: 1rem 5rem;
   border-radius: 0.5rem;
   letter-spacing: 1px;
 }
 @media screen and (max-width: 425px) {
   #loginForm button,
-  #registerForm button,
-  #editProfile button,
-  #resetPassword button {
+#registerForm button,
+#editProfile button,
+#resetPassword button {
     padding: 1rem 3rem;
   }
 }
@@ -902,8 +885,7 @@ footer .col-md-4 {
   margin: 1rem 5px;
   padding: 1rem;
 }
-.hero-card h3,
-.hero-card p {
+.hero-card h3, .hero-card p {
   color: #fff;
 }
 .hero-card img {
@@ -948,48 +930,28 @@ footer .col-md-4 {
   color: #344785;
 }
 
-.tweetLinks {
+.tweetLinks,
+.tasks-form {
   margin: 4rem 0 2.5rem;
 }
-.tweetLinks label {
+.tweetLinks label,
+.tasks-form label {
   font-weight: bold;
 }
-.tweetLinks span {
+.tweetLinks span,
+.tasks-form span {
   font-size: 14px;
   font-weight: normal;
 }
-.tweetLinks textarea {
+.tweetLinks textarea,
+.tasks-form textarea {
   width: 100%;
   background-color: #a3b0d8;
   padding: 8px;
 }
-.tweetLinks input {
+.tweetLinks input,
+.tasks-form input {
   max-width: 600px;
-}
-.tweetLinks .button {
-  display: block;
-  text-transform: inherit;
-  margin: 2rem auto 0;
-  padding: 1rem 2rem;
-}
-@media screen and (max-width: 425px) {
-  .tweetLinks .button {
-    padding: 0.7rem 1.5rem;
-    font-size: 14px;
-  }
-}
-
-#withdraw-requests .button {
-  display: block;
-  text-transform: inherit;
-  margin: 2rem auto 0;
-  padding: 1rem 2rem;
-}
-@media screen and (max-width: 425px) {
-  #withdraw-requests .button {
-    padding: 0.7rem 1.5rem;
-    font-size: 14px;
-  }
 }
 
 #address-tabs {
@@ -1057,15 +1019,13 @@ footer .col-md-4 {
 #subscribe table {
   border: 1px solid black;
 }
-#subscribe table th,
-#subscribe table td {
+#subscribe table th, #subscribe table td {
   padding: 10px;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
 }
 @media screen and (max-width: 425px) {
-  #subscribe table th,
-  #subscribe table td {
+  #subscribe table th, #subscribe table td {
     padding: 6px;
   }
 }
@@ -1157,15 +1117,13 @@ footer .col-md-4 {
   border: 1px solid black;
   background: #a3b0d8;
 }
-.withdraw-history table th,
-.withdraw-history table td {
+.withdraw-history table th, .withdraw-history table td {
   padding: 10px;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
 }
 @media screen and (max-width: 425px) {
-  .withdraw-history table th,
-  .withdraw-history table td {
+  .withdraw-history table th, .withdraw-history table td {
     padding: 6px;
   }
 }
@@ -1206,7 +1164,7 @@ footer .col-md-4 {
 }
 .withdraw-history .del-btn {
   color: #fff;
-  background-color: #ff4136;
+  background-color: #FF4136;
 }
 
 #user-summary {
@@ -1219,7 +1177,7 @@ footer .col-md-4 {
 #user-summary p {
   font-size: 14px;
 }
-#user-summary button {
+#user-summary .button {
   padding: 0.7rem 2.5rem;
   margin-right: 16px;
   margin-top: 16px;
@@ -1232,7 +1190,7 @@ footer .col-md-4 {
 }
 #user-summary .del-btn {
   color: #fff;
-  background-color: #ff4136;
+  background-color: #FF4136;
 }
 
 .action-confirm {
@@ -1243,10 +1201,6 @@ footer .col-md-4 {
   max-width: 600px;
   width: 100%;
   padding-left: 16px;
-}
-.action-confirm button {
-  text-transform: none;
-  padding: 0.7rem 2.5rem;
 }
 
 /* The Modal (background) */
@@ -1272,15 +1226,15 @@ footer .col-md-4 {
   max-width: 700px;
 }
 .modal-content-error p {
-  color: #ff4136;
+  color: #FF4136;
 }
 @media screen and (min-width: 500px) {
-  .modal-content {
+  .modal-content-error {
     margin: 25% auto;
   }
 }
 @media screen and (min-width: 770px) {
-  .modal-content {
+  .modal-content-error {
     margin: 18% auto;
   }
 }
@@ -1295,15 +1249,15 @@ footer .col-md-4 {
   max-width: 700px;
 }
 .modal-content-success p {
-  color: green;
+  color: #12cf12;
 }
 @media screen and (min-width: 500px) {
-  .modal-content {
+  .modal-content-success {
     margin: 25% auto;
   }
 }
 @media screen and (min-width: 770px) {
-  .modal-content {
+  .modal-content-success {
     margin: 18% auto;
   }
 }

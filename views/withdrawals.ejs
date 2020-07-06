@@ -11,21 +11,20 @@
                     <li>Please note that withdrawal request is every Sunday before 4pm </li>
                     <li>Withdrawals are processed within few hours but note that it will never exceed 48hours.</li>
                     <li>Your payment will be processed into the bank account you registered with.</li>
-                    <li>You can cross-check your bank details at the “edit account” section.</li>
-                    <li>Input the amount you want to withdraw below and click on the withdraw button.</li>
                     <li>Your account details are already set in your profile.</li>
-                    <li>To edit your account details, go to edit profile.</li>
+                    <li>You can cross-check your bank details at the “edit profile” section.</li>
+                    <li>Input the amount you want to withdraw below and click on the withdraw button.</li>
                 </ul>
             </div>
         </section>
         <section id="withdraw-form">
             <div class="container">
                 <div id="user-info">
-                    <p>Account holder: <span id="accountHolder"><%=locals.user.bankAccountName %></span></p>
-                    <p>Mobile number: <span id="mobileNumber"><%=locals.user.mobileNumber %></span></p>
-                    <p>Email address: <span id="userEmail"><%= locals.user.email %></span></p>
-                    <p>Account Number: <span id="userEmail"><%= locals.user.bankAccountNumber %></span></p>
-                    <p>bank: <span id="userEmail"><%= locals.user.bank %></span></p>
+                    <p>Account holder: <span><%=locals.user.bankAccountName %></span></p>
+                    <p>Mobile number: <span><%=locals.user.mobileNumber %></span></p>
+                    <p>Email address: <span><%= locals.user.email %></span></p>
+                    <p>Account Number: <span><%= locals.user.bankAccountNumber %></span></p>
+                    <p>Bank: <span><%= locals.user.bank %></span></p>
                 </div>
                 <!-- Withdrawal Request Form -->
                 <form action="/user/withdrawals" id="withdrawalRequest" method="POST">
@@ -38,7 +37,7 @@
                     <%if (date.day() == 0 ) { %>
                     <button type="submit">Make Withdrawal Request</button>
                     <% } else { %>
-                    <P>Withdrawals can only be made on sundays</P>
+                    <p>Withdrawals can only be made on sundays</p>
                     <% } %>
                 </form>
             </div>

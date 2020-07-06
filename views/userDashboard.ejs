@@ -93,7 +93,7 @@
                        
                     </div>
                 </form>
-                <form action="/user/links/new" method="post">
+                <form action="/user/links/new" method="post" class="tasks-form">
                     <fieldset class="form-group">
                         <label for="tweet-link-1">Tweet link #1:</label>
                         <input type="text" class="form-control" name="link1" id="tweet-link-1" placeholder="Link to tweet 1" aria-placeholder="Link to tweet 1" required aria-required="true">
@@ -109,7 +109,7 @@
                     <input type="hidden" name="userId" value="<%=locals.user._id %>">
                 <% if (moment().format('HH:mm:ss') < taskSubmissionLimit){ %>
                         <%if (user.timeLeft > 0) { %>
-                            <button type="submit" class="button">Submit Links for Confirmation</button>
+                            <button type="submit" class="submit-btn">Submit Links for Confirmation</button>
                         <% } else { %>
                             <p>Your Subscription has expired, You can't submit links. Kindly contact the admin to renew</p>
                         <% } %>

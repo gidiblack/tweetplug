@@ -42,7 +42,7 @@
                         <label for="mobileNumber">Mobile Number</label>
                         <input type="number" class="form-control" name="mobile" id="mobileNumber" placeholder="Mobile number" aria-placeholder="Mobile number" required aria-required="true" value="<%=user.mobileNumber%>">
                     </fieldset>
-                    <h2 class="big col-md-12 mt-3 text-center last-child">Bank Details</h2>
+                    <h2 class="big col-md-12 mt-3 text-center">Bank Details</h2>
                     <fieldset class="form-group col-md-12">
                         <label for="accountName">Account Name</label>
                         <input type="text" class="form-control" name="bankaccountname" id="accountName" placeholder="Account Name" aria-placeholder="Account Name" required aria-required="true" value="<%=user.bankAccountName %>">
@@ -68,19 +68,25 @@
                     <button type="submit" class="button">Save Changes</button>
                 </form>
 
-                <h2 class="big col-md-12 mt-3 text-center">Security Details</h2>
-                <form action="/user/updatepassword?_method=PATCH" method="post" id="editProfile" class="row">
-                    <fieldset class="form-group col-md-12 mt-2">
-                        <label for="currentPassword">Current Password</label>
-                        <input type="password" class="form-control"  name="passwordCurrent" id="password" placeholder="Current Password" aria-placeholder="Current Password" required aria-required="true">
-                    </fieldset>
-                    <fieldset class="form-group col-md-12 mt-2">
-                        <label for="newPassword">New Password</label>
-                        <input type="password"  name="password" class="form-control" id="password" placeholder="New Password" aria-placeholder="New Password">
-                    </fieldset>
-                    <fieldset class="form-group col-md-12 mt-2">
-                        <label for="passwordConfirm">Confirm Password</label>
-                        <input type="password"  name="passwordConfirm" class="form-control" id="passwordConfirm" placeholder="Confirm Password" aria-placeholder="Confirm Password">
+                <h2 class="big col-md-12 mt-3 text-center">User Plan</h2>
+                <form action="" method="post" id="editProfile" class="row">
+                    
+                    <fieldset class="form-group col-md-6">
+                        <label for="plan">Plan</label>
+                        <select class="form-control" name="plan" id="plan" placeholder="Select Plan" aria-placeholder="Select Plan" required aria-required="true">
+                            <option value="Free Influencer" selected>Free Influencer</option>
+                            <option value="Junior Influencer">Junior Influencer</option>
+                            <option value="Whiz Influencer">Whiz Influencer</option>
+                            <option value="Adept Influencer">Adept Influencer</option>
+                            <option value="Chief Influencer">Chief Influencer</option>
+                            <option value="Expert Influencer">Expert Influencer</option>
+                            <option value="Principal Influencer">Principal Influencer</option>
+                            <option value="Liege Influencer">Liege Influencer</option>
+                            <option value="Professional Influencer">Professional Influencer</option>
+                            <option value="Prime Influencer">Prime Influencer</option>
+                            <option value="Monarch Influencer">Monarch Influencer</option>
+                            <option value="Genius Influencer">Genius Influencer</option>
+                        </select>
                     </fieldset>
                     <input type="hidden" name="userId" value="<%=user._id%>">
                     <button type="submit" class="button">Save Changes</button>

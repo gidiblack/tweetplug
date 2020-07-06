@@ -28,7 +28,7 @@
                             <textarea name="tweet3" id="tweet-3" rows="5" placeholder="Enter task details" ></textarea>
                         </fieldset>
                     </div>
-                    <button type="submit" class="button">Add New Tasks</button>
+                    <button type="submit" class="submit-btn">Add New Tasks</button>
                 </form>
             </div>
         </section>
@@ -127,7 +127,7 @@
                     <% usersWithWithdrawals.forEach ( (user, index) => { %>
                         <input type="hidden" name="withdrawal" value="<%= user.withdrawals[0  + user.withdrawals.length -1]._id %>">
                     <% }) %>
-                <button  type="submit" class="button mt-5">Confirm all</button>
+                <button  type="submit" class="submit-btn mt-5">Confirm all</button>
                 </form>
             </div>
         </section>
