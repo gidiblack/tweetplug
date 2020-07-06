@@ -15,20 +15,38 @@
                     <div class="hero-card col-lg-3 col-md-6">
                         <img src="/assets/img/tag-icon.png" alt="currentPlan" style="width: 24px;">
                         <h3>Current Plan</h3>
-                        <p id="currentPlan"><%=locals.user.Plan %>: <span id="planDuration">23 Day(s) Left</span></p>
+                        <p id="currentPlan"><%=locals.user.Plan %>: 
+                        <% if (locals.user.Plan == 'free influencer') {%>
+                         <span id="planDuration">Unlimited Day(s) Left</span>
+                        <% } else { %>
+                        <span id="planDuration"><%=locals.user.timeLeft %> Day(s) Left</span>
+                        <% } %>
+                        </p>
                     </div>
                     <div class="hero-card col-lg-3 col-md-6">
                         <img src="/assets/img/nairabills-icon.png" alt="nairabills-icon" style="width: 36px;">
                         <h3>Daily Revenue</h3>
-                        <p id="dailyRevenue"><span>&#8358;</span>4500</p>
+                        <p id="dailyRevenue"><span>&#8358;</span> <%= locals.user.revenue %></p>
                     </div>
                     <div class="hero-card col-lg-3 col-md-6">
                         <h3>Today's Action</h3>
-                        <p id="todayAction">Still Open</p>
+                        <% if(tasks.length == 0) {%>
+                        <p id="todayAction">CLOSED</p>
+                         <% } else { %>
+                         <p id="todayAction">Still Open</p>
+                        <% } %>
                     </div>
                     <div class="hero-card col-lg-3 col-md-6">
                         <h3>Yesterday</h3>
-                        <p id="yesterdayAction">Missed</p>
+                         <% if( user.links.length > 0 && user.links[0 + user.links.length -1 ].status === 'unconfirmed') {%>
+                        <p id="yesterdayAction"> Missed</p>
+                        <% } else { %>
+                            <% if (confirmation == 'passed') {%>
+                           <p id="yesterdayAction"> Met</p> 
+                           <% } else { %>
+                            <p id="yesterdayAction"> Missed</p> 
+                           <%} %>
+                        <% } %>
                     </div>
                 </div>
             </div>
@@ -43,30 +61,62 @@
                     <div class="tweet-links row">
                         <fieldset class="form-group col-md-4">
                             <label for="tweet-1">Tweet #1: <span>(copy&paste)</span></label>
-                            <textarea name="tweet-1" id="tweet-1" rows="5" readonly>Not available yet!</textarea>
+                            <textarea name="tweet-1" id="tweet-1" rows="5" readonly>
+                            <% if(tasks.length == 0) {%>
+                            The task for today has expired check back tomorrow for new tasks
+                            <% } else { %>
+                            <%= tasks[0].tweet1 %>
+                            <% } %>
+                            </textarea>
                         </fieldset>
                         <fieldset class="form-group col-md-4">
-                            <label for="tweet-2">Tweet #2: <span>(copy&paste)</span></label>
-                            <textarea name="tweet-2" id="tweet-2" rows="5" readonly>Not available yet!</textarea>
+                            <label for="tweet-1">Tweet #2: <span>(copy&paste)</span></label>
+                            <textarea name="tweet-1" id="tweet-1" rows="5" readonly>
+                            <% if(tasks.length == 0) {%>
+                             The task for today has expired check back tomorrow for new tasks
+                            <% } else { %>
+                            <%= tasks[0].tweet2 %>  
+                            <% } %>
+                            </textarea>
                         </fieldset>
                         <fieldset class="form-group col-md-4">
-                            <label for="tweet-3">Tweet #3: <span>(copy&paste)</span></label>
-                            <textarea name="tweet-3" id="tweet-3" rows="5" readonly>Not available yet!</textarea>
+                            <label for="tweet-1">Tweet #3: <span>(copy&paste)</span></label>
+                            <textarea name="tweet-1" id="tweet-1" rows="5" readonly>
+                            <% if(tasks.length == 0) {%>
+                             The task for today has expired check back tomorrow for new tasks
+                            <% } else { %>                            
+                            <%= tasks[0].tweet3 %>
+                            <% } %>
+                            </textarea>
                         </fieldset>
+
+                       
                     </div>
+                </form>
+                <form action="/user/links/new" method="post">
                     <fieldset class="form-group">
                         <label for="tweet-link-1">Tweet link #1:</label>
-                        <input type="text" class="form-control" id="tweet-link-1" placeholder="Link to tweet 1" aria-placeholder="Link to tweet 1" required aria-required="true">
+                        <input type="text" class="form-control" name="link1" id="tweet-link-1" placeholder="Link to tweet 1" aria-placeholder="Link to tweet 1" required aria-required="true">
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="tweet-link-2">Tweet link #2:</label>
-                        <input type="text" class="form-control" id="tweet-link-2" placeholder="Link to tweet 2" aria-placeholder="Link to tweet 2" required aria-required="true">
+                        <input type="text" class="form-control" name="link2"  id="tweet-link-2" placeholder="Link to tweet 2" aria-placeholder="Link to tweet 2" required aria-required="true">
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="tweet-link-3">Tweet link #3:</label>
-                        <input type="text" class="form-control" id="tweet-link-3" placeholder="Link to tweet 3" aria-placeholder="Link to tweet 3" required aria-required="true">
+                        <input type="text" class="form-control" name="link3"  id="tweet-link-3" placeholder="Link to tweet 3" aria-placeholder="Link to tweet 3" required aria-required="true">
                     </fieldset>
-                    <button type="submit" class="button">Submit Links for Confirmation</button>
+                    <input type="hidden" name="userId" value="<%=locals.user._id %>">
+                <% if (moment().format('HH:mm:ss') < taskSubmissionLimit){ %>
+                        <%if (user.timeLeft > 0) { %>
+                            <button type="submit" class="button">Submit Links for Confirmation</button>
+                        <% } else { %>
+                            <p>Your Subscription has expired, You can't submit links. Kindly contact the admin to renew</p>
+                        <% } %>
+                <% } else { %>
+                        <p>Sorry the time limit for submitting links has passed, Please try again tomorrow</p>
+                        
+                <% } %>
                 </form>
                 <br>
                 <div class="confirm-note">

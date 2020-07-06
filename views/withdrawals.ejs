@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('partials/head'); -%>
+<body>
+    <%- include('partials/nav'); -%>
+    <main>
+        <section>
+            <div class="container">
+                <h1 class="text-center mb-5">Withdrawal Dashboard</h1>
+                <ul>
+                    <li>Please note that withdrawal request is every Sunday before 4pm </li>
+                    <li>Withdrawals are processed within few hours but note that it will never exceed 48hours.</li>
+                    <li>Your payment will be processed into the bank account you registered with.</li>
+                    <li>You can cross-check your bank details at the “edit account” section.</li>
+                    <li>Input the amount you want to withdraw below and click on the withdraw button.</li>
+                    <li>Your account details are already set in your profile.</li>
+                    <li>To edit your account details, go to edit profile.</li>
+                </ul>
+            </div>
+        </section>
+        <section id="withdraw-form">
+            <div class="container">
+                <div id="user-info">
+                    <p>Account holder: <span id="accountHolder"><%=locals.user.bankAccountName %></span></p>
+                    <p>Mobile number: <span id="mobileNumber"><%=locals.user.mobileNumber %></span></p>
+                    <p>Email address: <span id="userEmail"><%= locals.user.email %></span></p>
+                    <p>Account Number: <span id="userEmail"><%= locals.user.bankAccountNumber %></span></p>
+                    <p>bank: <span id="userEmail"><%= locals.user.bank %></span></p>
+                </div>
+                <!-- Withdrawal Request Form -->
+                <form action="/user/withdrawals" id="withdrawalRequest" method="POST">
+                    <fieldset class="form-group">
+                        <label for="withdrawalAmount">Withdrawal Amount(&#8358;)</label>
+                        <input type="number" class="form-control" id="withdrawalAmount" placeholder="Withdrawal Amount" aria-placeholder="Withdrawal Amount" required aria-required="true" aria-describedby="withdrawHelp" name="amount" >
+                        <small id="withdrawHelp" class="form-text text-muted">minimum withdrawal amount is &#8358;1,000</small>
+                    </fieldset>
+                    <input type="hidden" name="userID" value="<%= locals.user._id %>">
+                    <%if (date.day() == 0 ) { %>
+                    <button type="submit">Make Withdrawal Request</button>
+                    <% } else { %>
+                    <P>Withdrawals can only be made on sundays</P>
+                    <% } %>
+                </form>
+            </div>
+        </section>
+        <!-- Withdrawal History -->
+        <section class="withdraw-history">
+            <div class="container">
+                <h2 class="text-center">Withdrawal History</h2>
+                
+                <table style="width:100%" class="my-5">
+                    <tr>
+                    <th>#</th>
+                    <th>DATE</th>
+                    <th>AMOUNT</th> 
+                    <th>STATUS</th>
+                    </tr>
+                    <tr>
+                     <% user.withdrawals.forEach((withdrawal,index) => {%>
+                        <tr>
+                        <td><%= index +1 %></td>
+                        <td><%=moment(withdrawal.createdAt).format('MMMM Do YYYY') %> </td>
+                        <td>&#8358;<%= withdrawal.amount %></td>
+                        <td><%= withdrawal.status %></td>
+                        </tr>
+                    <% }) %>
+                </table>
+            </div>
+        </section>
+    </main>
+    <%- include('partials/footer'); -%>
+</body>
+    <%- include('partials/scripts'); -%>
+</html>

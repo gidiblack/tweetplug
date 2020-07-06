@@ -10,6 +10,10 @@ const linkSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Please enter the link'],
     },
+    active: {
+      type: Boolean,
+      default: true,
+    },
     status: {
       type: String,
       default: 'unconfirmed',
@@ -22,9 +26,10 @@ const linkSchema = new mongoose.Schema(
 );
 linkSchema.pre(/^find/, function (next) {
   this.populate({
-    user: 'user',
+    path: 'user',
     select: '-_id -__v',
   });
+  next();
 });
 
 const Link = mongoose.model('Link', linkSchema);

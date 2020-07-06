@@ -42,6 +42,19 @@ const login = async (username, password) => {
   }
 };
 
+const logout = async () => {
+  try {
+    const res = await axios({
+      method: 'GET',
+      url: '/api/v1/user/logout',
+    });
+    if ((res.data.status = 'success')) location.reload(true);
+  } catch (err) {
+    console.log(err.response);
+    showAlert('error', 'There was an error logging out please try again');
+  }
+};
+
 document.getElementById('loginForm').addEventListener('submit', (e) => {
   console.log('clicked');
   e.preventDefault();

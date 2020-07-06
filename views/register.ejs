@@ -8,7 +8,7 @@
         <section>
             <div class="container signup-box">
                 <h1 class="text-center large">Sign up</h1>
-                <form action="/" id="registerForm" class="row">
+                <form  id="registerForm" class="row">
                     <fieldset class="form-group col-md-6">
                         <input type="text" class="form-control" id="firstName" placeholder="First Name" aria-placeholder="First Name" required aria-required="true">
                     </fieldset>
@@ -58,11 +58,11 @@
                     <fieldset class="form-group col-md-6 mt-2">
                         <input type="password" class="form-control" id="passwordConfirm" placeholder="Confirm Password" aria-placeholder="Confirm Password" required aria-required="true">
                     </fieldset>
-                    <fielset class="form-group form-check col-md-12 last-child pr-0">
+                    <fieldset class="form-group form-check col-md-12 last-child pr-0">
                         <input type="checkbox" class="form-check-input" id="agreeTerms">
                         <label class="form-check-label" for="agreeTerms">I Agree</label>
-                        <p id="agreeClick"><small>By clicking Register, you agree to the <a href="terms.html">Terms and Conditions</a> set out by this site, including our Cookie Use</small></p>
-                    </fielset>
+                        <p id="agreeClick"><small>By clicking Register, you agree to the <a href="/terms">Terms and Conditions</a> set out by this site, including our Cookie Use</small></p>
+                    </fieldset>
                     <button type="submit" class="button">Register</button>
                 </form>
                 <p class="text-center my-3">Already have an account?<span class="pl-3"><a href="/login">Login!</a></span></p>
@@ -70,8 +70,11 @@
         </section>
     </main>
     <%- include('partials/footer'); -%>
-    <%- include('partials/scripts'); -%>
-    <script src="/auth/register.js"></script>
 </body>
+    <script src="/assets/js/vendors/jquery.min.js"></script>
+    <script src="/assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="/auth/register.js"></script>
     
 </html>

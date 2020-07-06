@@ -1,8 +1,8 @@
-<% if (!locals.user) {%>
+<% if (!locals.user || locals.user.emailConfirmed == false) {%>
     <header class="header">
         <nav class="nav-bar">
             <div class="container">
-                <a class="logo" href="index.html"><img src="/assets/img/tweetplug-logo.png" alt="tweetplug-logo"></a>
+                <a class="logo" href="/"><img src="/assets/img/tweetplug-logo.png" alt="tweetplug-logo"></a>
                 <input type="checkbox" name="" id="menu-toggle" class="menu-toggle">
                 <label for="menu-toggle" class="menu-icon"><span class="hamburger"></span></label>
                 <ul class="main-nav">
@@ -15,11 +15,12 @@
         </nav>
     </header>
 <% } else { %>
+    <% if(locals.user.role === 'user') {%> 
      <header class="header">
         <!-- navigation -->
         <nav class="nav-bar">
             <div class="container">
-                <a class="logo" href="index.html"><img src="/assets/img/tweetplug-logo.png" alt="tweetplug-logo"></a>
+                <a class="logo" href="/"><img src="/assets/img/tweetplug-logo.png" alt="tweetplug-logo"></a>
                 <!-- hamburger menu toggler -->
                 <input type="checkbox" name="menu-toggle" id="menu-toggle" class="menu-toggle">
                 <label for="menu-toggle" class="menu-icon"><span class="hamburger"></span></label>
@@ -28,20 +29,47 @@
                     <li><a href="/faq">FAQs</a></li>
                     <!-- user logged in nav -->
                     <li><a href="/user/dashboard">Dashboard</a></li>
-                    <li><a href="withdraw.html">Withdraw</a></li>
-                    <li><a href="upgrade.html">Upgrade</a></li>
+                    <li><a href="/user/withdrawals/<%=locals.user._id%>">Withdraw</a></li>
+                    <li><a href="/user/upgrade">Upgrade</a></li>
                     <!-- dropdown menu -->
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> <%= locals.user.username %></a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item total-balance" href=""><span>&#8358;</span>4500</a>
-                            <a class="dropdown-item" href="user-profile.html">Edit profile</a>
+                            <a class="dropdown-item" href="/user/profile/<%=locals.user._id %>">Edit profile</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item logout-btn"  href="">Logout</a>
                         </div>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
+    <% } else { %>
+         <header class="header">
+        <!-- navigation -->
+        <nav class="nav-bar">
+            <div class="container">
+                <a class="logo" href="/"><img src="/assets/img/tweetplug-logo.png" alt="tweetplug-logo"></a>
+                <!-- hamburger menu toggle -->
+                <input type="checkbox" name="menu-toggle" id="menu-toggle" class="menu-toggle">
+                <label for="menu-toggle" class="menu-icon"><span class="hamburger"></span></label>
+                <ul class="main-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/faq">FAQs</a></li>
+                    <li><a href="/admin/dashboard">Dashboard</a></li>
+                    <!-- dropdown menu -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">administrator</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/user/profile/<%=locals.user._id %>">Edit profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item logout-btn" href="">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <% } %>
 <% } %>

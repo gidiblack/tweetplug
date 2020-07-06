@@ -1,4 +1,4 @@
-console.log('connected');
+console.log('login connected');
 const hideAlert = () => {
   const el = document.querySelector('.error-modal');
   if (el) el.parentElement.removeChild(el);
@@ -27,11 +27,11 @@ const login = async (username, password) => {
         password,
       },
     });
-    console.log(res);
+    //console.log(res);
     if (res.data.status === 'success') {
       showAlert('success', 'Logged in successfully');
       window.setTimeout(() => {
-        location.assign('/user/dashboard');
+        location.assign('/');
       }, 1500);
     } else {
       console.log(fail);
@@ -42,10 +42,14 @@ const login = async (username, password) => {
   }
 };
 
-document.getElementById('loginForm').addEventListener('submit', (e) => {
-  console.log('clicked');
-  e.preventDefault();
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('loginPassword').value;
-  login(username, password);
-});
+const loginSub = document.getElementById('loginForm');
+
+if (loginSub) {
+  loginSub.addEventListener('submit', (e) => {
+    console.log('clicked');
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('loginPassword').value;
+    login(username, password);
+  });
+}

@@ -1,13 +1,18 @@
 const User = require('../models/userModel');
-const List = require('../models/LinkModel');
+const Link = require('../models/LinkModel');
 const Task = require('../models/taskModel');
 const Withdrawal = require('../models/withdrawalModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
-const { json } = require('body-parser');
 
 //
 exports.setTask = catchAsync(async (req, res, next) => {
+  const oldTasks = await Task.find({ active: true });
+  if (oldTasks.length > 0) {
+    oldTasks.forEach(async (task) => {
+      await Task.findByIdAndUpdate(task._id, { active: false });
+    });
+  }
   const newTask = await Task.create({
     tweet1: req.body.tweet1,
     tweet2: req.body.tweet2,
@@ -82,7 +87,10 @@ exports.deleteTask = catchAsync(async (req, res, next) => {
 });
 
 exports.getUsers = catchAsync(async (req, res, next) => {
-  const users = await User.find();
+  const users = await User.find().populate({
+    path: 'links',
+    select: '-_id -user ',
+  });
   const deactivatedUser = [];
   users.forEach((user) => {
     if (user.active === false) {
@@ -185,5 +193,15 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
   res.status(204).json({
     status: 'success',
     data: null,
+  });
+});
+
+exports.getAllLinks = catchAsync(async (req, res, next) => {
+  const links = await Link.find();
+  res.status(200).json({
+    status: 'success',
+    data: {
+      links,
+    },
   });
 });

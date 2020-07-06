@@ -18,11 +18,11 @@
                     <fielset class="form-group form-check last-child">
                         <input type="checkbox" class="form-check-input" id="rememberLogin">
                         <label class="form-check-label" for="rememberLogin">Remember me</label>
-                        <a href="forgot-password.html" id="forgotPassword">Forgot Password?</a>
+                        <a href="/forgotpassword" id="forgotPassword">Forgot Password?</a>
                     </fielset>
                     <button type="submit" class="button">Login</button>
                 </form>
-                <p class="text-center my-3">Don't have an account?<span class="pl-3"><a href="register.html">Register!</a></span></p>
+                <p class="text-center my-3">Don't have an account?<span class="pl-3"><a href="/register">Register!</a></span></p>
             </div>
         </section>
     </main>
@@ -35,6 +35,9 @@
     </div> -->
     <%- include('partials/footer'); -%>
 </body>
-    <%- include('partials/scripts'); -%>
+    <script src="/assets/js/vendors/jquery.min.js"></script>
+    <script src="/assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="/auth/login.js"></script>
 </html>

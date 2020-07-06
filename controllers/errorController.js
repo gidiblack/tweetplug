@@ -27,27 +27,55 @@ const handleJWTExpiredError = () =>
   new AppError('Your token has expired, Please log in again', 401);
 
 const sendErrorDev = (err, req, res) => {
-  res.status(err.statusCode).json({
-    status: err.status,
-    error: err,
-    message: err.message,
-    stack: err.stack,
+  //error handling for api
+  if (req.originalUrl.startsWith('/api')) {
+    res.status(err.statusCode).json({
+      status: err.status,
+      error: err,
+      message: err.message,
+      stack: err.stack,
+    });
+  }
+  //error handling for rendered website
+  console.error('error', err);
+  return res.status(err.statusCode).render('error', {
+    title: 'Something went wrong!',
+    msg: err.message,
   });
 };
 
 const sendErrorProd = (err, req, res) => {
-  if (err.isOperational) {
-    res.status(err.statusCode).json({
-      status: err.status,
-      message: err.message,
-    });
-  } else {
+  // api
+  if (req.originalUrl.startsWith('/api')) {
+    //operational errors
+    if (err.isOperational) {
+      res.status(err.statusCode).json({
+        status: err.status,
+        message: err.message,
+      });
+    }
+    //internal errors
     console.error('Error', err);
     res.status(500).json({
       status: 'error',
       message: 'Looks like something went wrong',
     });
   }
+
+  //rendred website
+  //operational errors
+  if (err.isOperational) {
+    return res.status(err.statusCode).render('error', {
+      title: 'Something went wrong!',
+      msg: err.message,
+    });
+  }
+  //internal errors
+  console.error('error', err);
+  return res.status(err.statusCode).render('error', {
+    title: 'Something went wrong!',
+    msg: 'Please try again later.',
+  });
 };
 
 module.exports = (err, req, res, next) => {

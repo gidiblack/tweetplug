@@ -1,4 +1,4 @@
-console.log('connected');
+console.log(' register connected');
 const hideAlert = () => {
   const el = document.querySelector('.error-modal');
   if (el) el.parentElement.removeChild(el);
@@ -24,11 +24,11 @@ const register = async (userObj) => {
       url: '/api/v1/user/signup',
       data: userObj,
     });
-    console.log(res);
+    //console.log(res);
     if (res.data.status === 'success') {
       showAlert('success', 'Registered successfully');
       window.setTimeout(() => {
-        location.assign('/user/dashboard');
+        location.assign('/login');
       }, 1500);
     } else {
       console.log(fail);

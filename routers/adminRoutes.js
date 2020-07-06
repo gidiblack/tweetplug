@@ -28,4 +28,5 @@ router
   .delete(adminController.deleteTask);
 
 router.route('/task/:taskId/deactivate').patch(adminController.deactivateTask);
+router.route('/links/all').get(adminController.getAllLinks);
 module.exports = router;
