@@ -3,6 +3,7 @@ const viewController = require('../controllers/viewController');
 const userController = require('../controllers/userControlle');
 const adminController = require('../controllers/adminController');
 const authController = require('../controllers/authController');
+const { Router } = require('express');
 
 const router = express.Router();
 
@@ -98,7 +99,8 @@ router
     authController.restrictTo('admin'),
     viewController.setTask
   );
-
+router.route('/admin/:userId/changeplan').get(viewController.getPlanChangePage);
+router.route('/admin/:userId/changeplan').patch(viewController.changeUserPlan);
 //router to get user details page(GET)
 router
   .route('/admin/user/:userId')

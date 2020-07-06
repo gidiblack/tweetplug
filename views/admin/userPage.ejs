@@ -12,7 +12,7 @@
                     <form action="/admin/user/status?_method=PATCH" method="post">
                         <p>Full Name: <span><%=userr.firstname %> <%=userr.lastname %></span></p>
                         <p>Username: <span><%= userr.username %></span></p>
-                        <p>Total Revenue: <span>&#8358;<%= userr.revenue %></span></p>
+                        <p>Total Revenue: <span>&#8358; <%= userr.revenue %></span></p>
                         <p>Current Plan: <span><%= userr.Plan %></span></p>
                         <p>Withdrawal Request: <span id=>Withdrawal</span></p>
                         <p>Remaining Duration: <span>Duration</span></p>
@@ -24,7 +24,7 @@
                         <input type="submit" value="Suspend Account" class="button sec-btn" name="user_s">
                         <input type="submit" value="Delete Account" class="button del-btn" name="user_d">
                     </form>
-                    <a href="#" class="button">Change Plan</a>
+                    <a href="/admin/<%=userr._id %>/changeplan" class="button">Change Plan</a>
                 </div>
             </div>
         </section>
@@ -76,7 +76,7 @@
                 <% } else if (userr.withdrawals[0  + userr.withdrawals.length -1].status =='unconfirmed' ) { %>
                 <tr>
                 <td>1</td>
-                <td><%= moment(userr.withdrawals[0  + usrer.withdrawals.length -1].createdAt).format('MMMM Do YYYY') %></td>
+                <td><%= moment(userr.withdrawals[0  + userr.withdrawals.length -1].createdAt).format('MMMM Do YYYY') %></td>
                 <td>&#8358;<%= userr.withdrawals[0  + userr.withdrawals.length -1].amount %></td>
                 <td><%= userr.withdrawals[0  + userr.withdrawals.length -1].status %></td>
                 </tr>

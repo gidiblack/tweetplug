@@ -80,7 +80,7 @@
                             <td><a href="/admin/user/<%=user._id %>"><%=user.username %></a></td>
                             <td><%= user.twitterhandle %></td>
                             <td><%= user.Plan %></td>
-                            <td>revneue</td>
+                            <td><%= user.revenue %></td>
                             <td><%= user.timeLeft %> day(s)</td>
                             <% if (user.links[0] == undefined) { %>
                             <td> No link yet</td>
@@ -113,12 +113,14 @@
                     <tbody>
                     <% usersWithWithdrawals.forEach ( user => { %>
                         <tr>
+                           
                             <td><a href="/admin/user/<%=user._id %>"><%= user.username %></a></td>
                             <td><%= user.withdrawals[0  + user.withdrawals.length -1].amount %></td>
                             <td><%=user.bankAccountNumber %> - <%=user.bank %></td>
                             <td><%= user.bankAccountName %></td>
-                            <td>Revenue left</td>
+                            <td><%= user.revenue %></td>
                             <td><%=user.withdrawals[0  + user.withdrawals.length -1].status %></td>
+                            
                         </tr>
                     <% }) %>
                     </tbody>
@@ -127,7 +129,9 @@
                     <% usersWithWithdrawals.forEach ( (user, index) => { %>
                         <input type="hidden" name="withdrawal" value="<%= user.withdrawals[0  + user.withdrawals.length -1]._id %>">
                     <% }) %>
+                <% if (usersWithWithdrawals.length > 0) {%>
                 <button  type="submit" class="submit-btn mt-5">Confirm all</button>
+                <% } %>
                 </form>
             </div>
         </section>

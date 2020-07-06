@@ -56,7 +56,7 @@ const j = schedule.scheduleJob('01 22 * * *', async function () {
 
 const j2 = schedule.scheduleJob('01 00 * * *', async function () {
   try {
-    const users = await User.find({ Plan: { $ne: 'free influencer' } });
+    const users = await User.find({ Plan: { $ne: 'Free influencer' } });
     users.forEach(async (user) => {
       try {
         const newTimeLeft = user.timeLeft - 1;
