@@ -137,6 +137,14 @@ router
     viewController.setUserStatus
   );
 
-router.route('/admin/confirmall').post(viewController.confirmAllWithdrawals);
+router
+  .route('/admin/confirmall')
+  .post(
+    authController.authenticate,
+    authController.restrictTo('admin'),
+    viewController.confirmAllWithdrawals
+  );
+
+router.route('/admin/links/confirmall').post(viewController.confirmAllLinks);
 //export router to app
 module.exports = router;

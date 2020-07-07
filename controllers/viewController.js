@@ -221,6 +221,9 @@ exports.makeWithdrawalRequest = catchAsync(async (req, res, next) => {
     user: req.body.userID,
     amount: req.body.amount,
   });
+  const previousWithdrawalId =
+    user.withdrawals[0 + user.withdrawals.length - 1];
+  await Withdrawal.findByIdAndUpdate(previousWithdrawalId, { active: false });
   const updatedUser = await User.findByIdAndUpdate(req.body.userID, {
     $push: { withdrawals: newWithdrawal._id },
   });
@@ -267,6 +270,7 @@ exports.changePassowrd = catchAsync(async (req, res, next) => {
   }
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
+  //console.log(user);
   await user.save();
   res.redirect('/');
 });
@@ -375,15 +379,18 @@ exports.getAdminDashboard = catchAsync(async (req, res, next) => {
       select: '-user',
     });
   const usersWithWithdrawals = [];
+
   users.forEach((user) => {
-    if (user.withdrawals.length > 0) {
-      user.withdrawals.forEach((withdrawal) => {
-        if (withdrawal.status == 'unconfirmed') {
-          usersWithWithdrawals.push(user);
-        }
-      });
+    //console.log(user.withdrawals.length);
+    //console.log(user.withdrawals[0 + user.withdrawals.length - 1].status);
+    if (
+      user.withdrawals.length > 0 &&
+      user.withdrawals[0 + user.withdrawals.length - 1].status == 'unconfirmed'
+    ) {
+      usersWithWithdrawals.push(user);
     }
   });
+  //console.log(usersWithWithdrawals);
   res.status(200).render('admin/adminDashboard', {
     tasks,
     withdrawals,
@@ -447,12 +454,14 @@ exports.setWithdrawalStatus = catchAsync(async (req, res, next) => {
   if (!withdrawalRequest) {
     return next(new AppError('No request found with that id', 401));
   }
-  const amount = withdrawalRequest.amount;
-  const userId = req.body.userId;
-  const user = await User.findById(userId);
-  const newRev = user.revenue - amount;
-  user.revenue = newRev;
-  await user.save({ validateBeforeSave: false });
+  if (Check == 'approved') {
+    const amount = withdrawalRequest.amount;
+    const userId = req.body.userId;
+    const user = await User.findById(userId);
+    const newRev = user.revenue - amount;
+    user.revenue = newRev;
+    await user.save({ validateBeforeSave: false });
+  }
   res.status(200).redirect(`/admin/user/${req.body.userId}`);
 });
 
@@ -541,9 +550,9 @@ exports.confirmAllWithdrawals = catchAsync(async (req, res, next) => {
 });
 
 exports.getPlanChangePage = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.params.userId);
+  const userr = await User.findById(req.params.userId);
   res.status(200).render('changePlan', {
-    user,
+    userr,
   });
 });
 
@@ -552,4 +561,31 @@ exports.changeUserPlan = catchAsync(async (req, res, next) => {
     Plan: req.body.plan,
   });
   res.status(200).redirect(`/admin/user/${user._id}`);
+});
+
+exports.confirmAllLinks = catchAsync(async (req, res, next) => {
+  //console.log(req.body.userLinksID);
+  const userIds = req.body.userLinksID;
+  if (Array.isArray(userIds)) {
+    userIds.forEach(async (id) => {
+      const user = await User.findById(id);
+      linksArr = user.links;
+      linksArr.forEach(async (id) => {
+        await Link.findByIdAndUpdate(id, { status: 'confirmed' });
+      });
+    });
+
+    return res.status(200).redirect('/admin/dashboard');
+  }
+
+  if (typeof userIds == String) {
+    const linkIds = await User.findById(userIds);
+    linkIds.forEach(async (id) => {
+      await Link.findByIdAndUpdate(id, { status: 'confirmed' });
+    });
+
+    return res.status(200).redirect('/admin/dashboard');
+  }
+
+  res.status(200).redirect('/admin/dashboard');
 });

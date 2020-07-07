@@ -91,6 +91,17 @@
                     <% }) %>
                     </tbody>
                 </table>
+                <form action="/admin/links/confirmall" method="post">
+                <% users.forEach( (user)=> {%>
+                     <% if(user.links.length > 0 && user.links[user.links.length -1].status === 'unconfirmed')  {%>
+                   
+                <input type="hidden" name="userLinksID" value="<%= user._id %>">
+                    <% } %>
+                <% }) %>
+
+                
+                <button  type="submit" class="submit-btn mt-5">Confirm all links</button>
+                </form>
             </div>  
         </section>
         <!-- Withdrawal Requests -->

@@ -10,40 +10,40 @@
                 <form id="editProfile" class="row">
                     <fieldset class="form-group col-md-6">
                         <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" name="firstname" id="firstName" placeholder="First Name" aria-placeholder="First Name" required aria-required="true" value="<%=user.firstname %>" readonly>
+                        <input type="text" class="form-control" name="firstname" id="firstName" placeholder="First Name" aria-placeholder="First Name" required aria-required="true" value="<%=userr.firstname %>" readonly>
                     </fieldset>
                     <fieldset class="form-group col-md-6">
                         <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" name="lastname" id="lastName" placeholder="Last Name" aria-placeholder="Last Name" required aria-required="true" value="<%=user.lastname %>" readonly>
+                        <input type="text" class="form-control" name="lastname" id="lastName" placeholder="Last Name" aria-placeholder="Last Name" required aria-required="true" value="<%=userr.lastname %>" readonly>
                     </fieldset>
                     <fieldset class="form-group col-md-6">
                         <label for="lastName">Current Plan</label>
-                        <input type="text" class="form-control" name="lastname" id="lastName" placeholder="Last Name" aria-placeholder="Last Name" required aria-required="true" value="<%=user.Plan %>" readonly>
+                        <input type="text" class="form-control" name="lastname" id="lastName" placeholder="Last Name" aria-placeholder="Last Name" required aria-required="true" value="<%=userr.Plan %>" readonly>
                     </fieldset>
                 </form>
 
                 <h2 class="big col-md-12 mt-3 text-center">User Plan</h2>
-                <% console.log(user._id) %>
+                
                 <form action="/admin/TEST/changeplan?_method=PATCH" method="POST" id="editProfile" class="row">
                     
                     <fieldset class="form-group col-md-6">
                         <label for="plan">Plan</label>
                         <select class="form-control" name="plan" id="plan" placeholder="Select Plan" aria-placeholder="Select Plan" required aria-required="true">
-                            <option value="Free Influencer" selected>Free Influencer</option>
-                            <option value="Junior Influencer">Junior Influencer</option>
-                            <option value="Whiz Influencer">Whiz Influencer</option>
-                            <option value="Adept Influencer">Adept Influencer</option>
-                            <option value="Chief Influencer">Chief Influencer</option>
-                            <option value="Expert Influencer">Expert Influencer</option>
-                            <option value="Principal Influencer">Principal Influencer</option>
-                            <option value="Liege Influencer">Liege Influencer</option>
-                            <option value="Professional Influencer">Professional Influencer</option>
-                            <option value="Prime Influencer">Prime Influencer</option>
-                            <option value="Monarch Influencer">Monarch Influencer</option>
-                            <option value="Genius Influencer">Genius Influencer</option>
+                            <option value="Free influencer" selected>Free Influencer</option>
+                            <option value="Junior influencer">Junior Influencer</option>
+                            <option value="Whiz influencer">Whiz Influencer</option>
+                            <option value="Adept influencer">Adept Influencer</option>
+                            <option value="Chief influencer">Chief Influencer</option>
+                            <option value="Expert influencer">Expert Influencer</option>
+                            <option value="Principal influencer">Principal Influencer</option>
+                            <option value="Liege influencer">Liege Influencer</option>
+                            <option value="Professional influencer">Professional Influencer</option>
+                            <option value="Prime influencer">Prime Influencer</option>
+                            <option value="Monarch influencer">Monarch Influencer</option>
+                            <option value="Genius influencer">Genius Influencer</option>
                         </select>
                     </fieldset>
-                    <input type="hidden" name="userId" value="<%=user._id %>">
+                    <input type="hidden" name="userId" value="<%=userr._id %>">
                     <button type="submit" class="button">Save Changes</button>
                 </form>
             </div>
