@@ -28,7 +28,7 @@ const withdrawalSchema = new mongoose.Schema(
 withdrawalSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'user',
-    select: '-_id -__v -photo -links -withdrawals -role -gender',
+    select: '-__v -photo -links -withdrawals -role -gender',
   });
   next();
 });

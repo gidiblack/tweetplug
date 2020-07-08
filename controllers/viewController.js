@@ -26,40 +26,40 @@ const geniusinfluencerrev = 6000;
 //function to set the rev of user based on userPlan
 const setRevenue = (user) => {
   let revenue;
-  if (user.Plan == 'free influencer') {
+  if (user.Plan == 'Free influencer') {
     revenue = freeinfluencerrev;
   }
-  if (user.Plan == 'junior influencer') {
+  if (user.Plan == 'Junior influencer') {
     revenue = juniorinfluencerrev;
   }
-  if (user.Plan == 'whiz influencer') {
+  if (user.Plan == 'Whiz influencer') {
     revenue = whizinfluencerrev;
   }
-  if (user.Plan == 'adept influencer') {
+  if (user.Plan == 'Adept influencer') {
     revenue = adeptinfluencerrev;
   }
-  if (user.Plan == 'chief influencer') {
+  if (user.Plan == 'Chief influencer') {
     revenue = chiefinfluencerrev;
   }
-  if (user.Plan == 'expert influencer') {
+  if (user.Plan == 'Expert influencer') {
     revenue = expertinfluencerrev;
   }
-  if (user.Plan == 'principal influencer') {
+  if (user.Plan == 'Principal influencer') {
     revenue = principalinfluencerrev;
   }
-  if (user.Plan == 'liege influencer') {
+  if (user.Plan == 'Liege influencer') {
     revenue = liegeinfluencerrev;
   }
-  if (user.Plan == 'professional influencer') {
+  if (user.Plan == 'Professional influencer') {
     revenue = professionalinfluencerrev;
   }
-  if (user.Plan == 'prime influencer') {
+  if (user.Plan == 'Prime influencer') {
     revenue = primeinfluencerrev;
   }
-  if (user.Plan == 'monarch influencer') {
+  if (user.Plan == 'Monarch influencer') {
     revenue = monarchinfluencerrev;
   }
-  if (user.Plan == 'genius influencer') {
+  if (user.Plan == 'Genius influencer') {
     revenue = geniusinfluencerrev;
   }
   return revenue;
@@ -221,6 +221,9 @@ exports.makeWithdrawalRequest = catchAsync(async (req, res, next) => {
     user: req.body.userID,
     amount: req.body.amount,
   });
+  const previousWithdrawalId =
+    user.withdrawals[0 + user.withdrawals.length - 1];
+  await Withdrawal.findByIdAndUpdate(previousWithdrawalId, { active: false });
   const updatedUser = await User.findByIdAndUpdate(req.body.userID, {
     $push: { withdrawals: newWithdrawal._id },
   });
@@ -267,6 +270,7 @@ exports.changePassowrd = catchAsync(async (req, res, next) => {
   }
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
+  //console.log(user);
   await user.save();
   res.redirect('/');
 });
@@ -375,11 +379,18 @@ exports.getAdminDashboard = catchAsync(async (req, res, next) => {
       select: '-user',
     });
   const usersWithWithdrawals = [];
+
   users.forEach((user) => {
-    if (user.withdrawals.length > 0) {
+    //console.log(user.withdrawals.length);
+    //console.log(user.withdrawals[0 + user.withdrawals.length - 1].status);
+    if (
+      user.withdrawals.length > 0 &&
+      user.withdrawals[0 + user.withdrawals.length - 1].status == 'unconfirmed'
+    ) {
       usersWithWithdrawals.push(user);
     }
   });
+  //console.log(usersWithWithdrawals);
   res.status(200).render('admin/adminDashboard', {
     tasks,
     withdrawals,
@@ -443,6 +454,14 @@ exports.setWithdrawalStatus = catchAsync(async (req, res, next) => {
   if (!withdrawalRequest) {
     return next(new AppError('No request found with that id', 401));
   }
+  if (Check == 'approved') {
+    const amount = withdrawalRequest.amount;
+    const userId = req.body.userId;
+    const user = await User.findById(userId);
+    const newRev = user.revenue - amount;
+    user.revenue = newRev;
+    await user.save({ validateBeforeSave: false });
+  }
   res.status(200).redirect(`/admin/user/${req.body.userId}`);
 });
 
@@ -487,13 +506,86 @@ exports.setUserStatus = catchAsync(async (req, res, next) => {
 
 exports.confirmAllWithdrawals = catchAsync(async (req, res, next) => {
   const withdrawalsIdArr = req.body.withdrawal;
+  //console.log(withdrawalsIdArr);
+
+  const userIdArr = [];
+  const withAmountArr = [];
   if (Array.isArray(withdrawalsIdArr)) {
     withdrawalsIdArr.forEach(async (Id) => {
-      await Withdrawal.findByIdAndUpdate(Id, { status: 'approved' });
+      const withdrawal = await Withdrawal.findByIdAndUpdate(Id, {
+        status: 'approved',
+      });
+
+      //console.log(withdrawal);
+      const userId = withdrawal.user._id;
+      const amount = withdrawal.amount;
+      userIdArr.push(userId);
+      withAmountArr.push(amount);
+      userIdArr.forEach(async (id, index) => {
+        const user = await User.findById(id);
+        const newRev = user.revenue - withAmountArr[index];
+        //console.log(`newRev for user${index} is ${newRev}`);
+        user.revenue = newRev;
+        //console.log(`updatedRev for user${index} is ${user.revenue}`);
+
+        await user.save({ validateBeforeSave: false });
+      });
     });
+
     return res.status(200).redirect('/admin/dashboard');
   }
-  await Withdrawal.findByIdAndUpdate(withdrawalsIdArr, { status: 'approved' });
+
+  const withdrawal = await Withdrawal.findByIdAndUpdate(withdrawalsIdArr, {
+    status: 'approved',
+  });
+  const userId = withdrawal.user._id;
+  const amount = withdrawal.amount;
+  const user = await User.findById(userId);
+  const newRev = user.revenue - amount;
+  user.revenue = newRev;
+  await user.save({ validateBeforeSave: false });
+
   res.status(200).redirect('/admin/dashboard');
   //console.log(withdrawalsIdArr);
+});
+
+exports.getPlanChangePage = catchAsync(async (req, res, next) => {
+  const userr = await User.findById(req.params.userId);
+  res.status(200).render('changePlan', {
+    userr,
+  });
+});
+
+exports.changeUserPlan = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(req.body.userId, {
+    Plan: req.body.plan,
+  });
+  res.status(200).redirect(`/admin/user/${user._id}`);
+});
+
+exports.confirmAllLinks = catchAsync(async (req, res, next) => {
+  //console.log(req.body.userLinksID);
+  const userIds = req.body.userLinksID;
+  if (Array.isArray(userIds)) {
+    userIds.forEach(async (id) => {
+      const user = await User.findById(id);
+      linksArr = user.links;
+      linksArr.forEach(async (id) => {
+        await Link.findByIdAndUpdate(id, { status: 'confirmed' });
+      });
+    });
+
+    return res.status(200).redirect('/admin/dashboard');
+  }
+
+  if (typeof userIds == String) {
+    const linkIds = await User.findById(userIds);
+    linkIds.forEach(async (id) => {
+      await Link.findByIdAndUpdate(id, { status: 'confirmed' });
+    });
+
+    return res.status(200).redirect('/admin/dashboard');
+  }
+
+  res.status(200).redirect('/admin/dashboard');
 });

@@ -66,20 +66,20 @@ const userSchema = new mongoose.Schema({
   },
   Plan: {
     type: String,
-    default: 'free influencer',
+    default: 'Free influencer',
     enum: [
-      'free influencer',
-      'junior influencer',
-      'whiz influencer',
-      'adept influencer',
-      'chief influencer',
-      'expert influencer',
-      'principal influencer',
-      'liege influencer',
-      'professional influencer',
-      'prime influencer',
-      'monarch influencer',
-      'genius influencer',
+      'Free influencer',
+      'Junior influencer',
+      'Whiz influencer',
+      'Adept influencer',
+      'Chief influencer',
+      'Expert influencer',
+      'Principal influencer',
+      'Liege influencer',
+      'Professional influencer',
+      'Prime influencer',
+      'Monarch influencer',
+      'Genius influencer',
     ],
   },
   password: {
@@ -199,16 +199,16 @@ userSchema.methods.createPasswordResetToken = function () {
 };
 
 userSchema.pre('save', function (next) {
-  if (this.Plan === 'free influencer') {
+  if (this.Plan !== 'Free influencer' && this.Plan !== 'Junior influencer') {
+    this.timeLeft = 30;
+    next();
+  }
+  if (this.Plan === 'Free influencer') {
     this.timeLeft = 999;
     next();
   }
-
-  if (this.Plan === 'junior influencer') {
+  if (this.Plan === 'Junior influencer') {
     this.timeLeft = 14;
-    next();
-  } else {
-    this.timeLeft = 30;
     next();
   }
   next();
