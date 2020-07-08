@@ -87,8 +87,8 @@
              <% if (userr.withdrawals[0] == undefined || userr.withdrawals[0  + userr.withdrawals.length -1].status =='approved' || userr.withdrawals[0  + userr.withdrawals.length -1].status =='rejected' ) {%>
             <p>No requests made yet</p>
             <% } else if (userr.withdrawals[0  + userr.withdrawals.length -1].status =='unconfirmed' ) { %>
-            <input type="submit" name="withdrawB" value="Confirm_Withdrawal" class="submit-btn"> 
-            <input type="submit" name="withdrawB" value="Deny_Withdrawal" class="submit-btn del-btn"> 
+            <input type="submit" name="withdrawB" value="Confirm Withdrawal" class="button"> 
+            <input type="submit" name="withdrawB" value="Deny Withdrawal" class="button del-btn"> 
             <% } %>
             </form>
         </div>

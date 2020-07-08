@@ -26,7 +26,7 @@
                 
                 <form action="/admin/TEST/changeplan?_method=PATCH" method="POST" id="editProfile" class="row">
                     
-                    <fieldset class="form-group col-md-6">
+                    <fieldset class="form-group col-12">
                         <label for="plan">Plan</label>
                         <select class="form-control" name="plan" id="plan" placeholder="Select Plan" aria-placeholder="Select Plan" required aria-required="true">
                             <option value="Free influencer" selected>Free Influencer</option>
@@ -44,7 +44,7 @@
                         </select>
                     </fieldset>
                     <input type="hidden" name="userId" value="<%=userr._id %>">
-                    <button type="submit" class="button">Save Changes</button>
+                    <button type="submit" class="submit-btn">Save Changes</button>
                 </form>
             </div>
         </section>

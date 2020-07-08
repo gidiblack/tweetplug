@@ -318,6 +318,12 @@ input[type=button]:focus {
     font-size: 14px;
   }
 }
+@media screen and (max-width: 365px) {
+  .submit-btn {
+    padding: 0.6rem 1rem;
+    font-size: 12px;
+  }
+}
 
 a {
   color: #1d2951;
@@ -509,7 +515,8 @@ hr {
     font-size: 14px;
   }
 }
-.nav-bar .main-nav a:hover {
+.nav-bar .main-nav a:hover,
+.nav-bar .main-nav a:focus {
   color: #fff;
   background-color: #1d2951;
 }
@@ -613,8 +620,15 @@ footer .sm-links a img {
     width: 28px;
   }
 }
-footer .sm-links a:hover {
-  color: #1d2951;
+footer .sm-links a img:hover,
+footer .sm-links a img:focus {
+  width: 34px;
+}
+@media only screen and (max-width: 768px) {
+  footer .sm-links a img:hover,
+footer .sm-links a img:focus {
+    width: 30px;
+  }
 }
 footer p {
   margin: 20px 0 10px 0;
@@ -843,21 +857,21 @@ footer .col-md-2, footer .col-md-4 {
   padding-bottom: 1em;
   border-bottom: 1px solid #1d2951;
 }
-#loginForm button,
-#registerForm button,
-#editProfile button,
-#resetPassword button {
+#loginForm .button,
+#registerForm .button,
+#editProfile .button,
+#resetPassword .button {
   display: block;
   margin: 0.5rem auto;
-  padding: 1rem 5rem;
+  padding: 1rem 4.5rem;
   border-radius: 0.5rem;
   letter-spacing: 1px;
 }
 @media screen and (max-width: 425px) {
-  #loginForm button,
-#registerForm button,
-#editProfile button,
-#resetPassword button {
+  #loginForm .button,
+#registerForm .button,
+#editProfile .button,
+#resetPassword .button {
     padding: 1rem 3rem;
   }
 }
@@ -866,6 +880,32 @@ footer .col-md-2, footer .col-md-4 {
 #editProfile .form-check-label,
 #resetPassword .form-check-label {
   font-size: 14px;
+}
+
+.tweetLinks,
+.tasks-form {
+  padding: 3rem 0;
+}
+.tweetLinks label,
+.tasks-form label {
+  font-weight: bold;
+}
+.tweetLinks span,
+.tasks-form span {
+  font-size: 14px;
+  font-weight: normal;
+}
+.tweetLinks textarea,
+.tasks-form textarea {
+  width: 100%;
+  background-color: #a3b0d8;
+  padding: 8px;
+}
+
+.tasks-form {
+  width: 85%;
+  max-width: 660px;
+  margin: 0 auto;
 }
 
 .welcome-user {
@@ -906,7 +946,7 @@ footer .col-md-2, footer .col-md-4 {
 
 .task-hero {
   background-color: #debcbc;
-  max-width: 90%;
+  max-width: 95%;
   margin: 1rem auto;
   padding: 1.25rem 2.5rem;
 }
@@ -928,30 +968,6 @@ footer .col-md-2, footer .col-md-4 {
   font-size: 15px;
   font-weight: normal;
   color: #344785;
-}
-
-.tweetLinks,
-.tasks-form {
-  margin: 4rem 0 2.5rem;
-}
-.tweetLinks label,
-.tasks-form label {
-  font-weight: bold;
-}
-.tweetLinks span,
-.tasks-form span {
-  font-size: 14px;
-  font-weight: normal;
-}
-.tweetLinks textarea,
-.tasks-form textarea {
-  width: 100%;
-  background-color: #a3b0d8;
-  padding: 8px;
-}
-.tweetLinks input,
-.tasks-form input {
-  max-width: 600px;
 }
 
 #address-tabs {
@@ -1156,7 +1172,7 @@ footer .col-md-2, footer .col-md-4 {
     font-size: 10px;
   }
 }
-.withdraw-history button {
+.withdraw-history .button {
   text-transform: none;
   padding: 0.7rem 2.5rem;
   margin-right: 16px;
@@ -1165,6 +1181,10 @@ footer .col-md-2, footer .col-md-4 {
 .withdraw-history .del-btn {
   color: #fff;
   background-color: #FF4136;
+}
+.withdraw-history .del-btn:hover,
+.withdraw-history .del-btn:focus {
+  background-color: #85144B;
 }
 
 #user-summary {
@@ -1188,9 +1208,18 @@ footer .col-md-2, footer .col-md-4 {
   border: 1px solid #1d2951;
   background-color: #fff;
 }
+#user-summary .sec-btn:hover,
+#user-summary .sec-btn:focus {
+  color: #344785;
+  border: 1px solid #344785;
+}
 #user-summary .del-btn {
   color: #fff;
   background-color: #FF4136;
+}
+#user-summary .del-btn:hover,
+#user-summary .del-btn:focus {
+  background-color: #85144B;
 }
 
 .action-confirm {

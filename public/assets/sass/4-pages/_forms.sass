@@ -21,13 +21,32 @@
     .last-child
         padding-bottom: 1em
         border-bottom: 1px solid $accent
-    button
+    .button
         display: block
         margin: .5rem auto
-        padding: 1rem 5rem
+        padding: 1rem 4.5rem
         border-radius: .5rem
         letter-spacing: 1px
         @media screen and (max-width: 425px)
             padding: 1rem 3rem
     .form-check-label
         font-size: 14px
+
+// Tasks Form
+.tweetLinks,
+.tasks-form
+    padding: 3rem 0
+    label
+        font-weight: bold
+    span
+        font-size: 14px
+        font-weight: normal
+    textarea
+        width: 100%
+        background-color: $light-blue
+        padding: 8px
+
+.tasks-form
+    width: 85%
+    max-width: 660px
+    margin: 0 auto
