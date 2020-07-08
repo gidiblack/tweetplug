@@ -95,7 +95,7 @@ exports.logout = catchAsync(async (req, res, next) => {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
   });
-  res.status(200).json({ status: 'success' });
+  res.status(200).redirect('/');
 });
 
 exports.authenticate = catchAsync(async (req, res, next) => {
