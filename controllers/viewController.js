@@ -442,9 +442,9 @@ exports.getIndividualPageAdmin = catchAsync(async (req, res, next) => {
 //function to manage withdrawals
 exports.setWithdrawalStatus = catchAsync(async (req, res, next) => {
   let Check;
-  if (req.body.withdrawB === 'Confirm_Withdrawal') {
+  if (req.body.withdrawB === 'Confirm Withdrawal') {
     Check = 'approved';
-  } else if (req.body.withdrawB === 'Deny_Withdrawal') {
+  } else if (req.body.withdrawB === 'Deny Withdrawal') {
     Check = 'rejected';
   }
   const withdrawalRequest = await Withdrawal.findByIdAndUpdate(
