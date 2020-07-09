@@ -107,8 +107,7 @@
                         <input type="text" class="form-control" name="link3"  id="tweet-link-3" placeholder="Link to tweet 3" aria-placeholder="Link to tweet 3" required aria-required="true">
                     </fieldset>
                     <input type="hidden" name="userId" value="<%=locals.user._id %>">
-                    <% console.log(moment().format('HH:mm:ss'))%>
-                    <% console.log(taskSubmissionLimit) %>
+
                 <% if (moment().format('HH:mm:ss') < taskSubmissionLimit){ %>
                         <%if (user.timeLeft > 0) { %>
                             <button type="submit" class="submit-btn">Submit Links for Confirmation</button>
