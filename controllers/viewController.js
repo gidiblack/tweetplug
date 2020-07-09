@@ -6,8 +6,8 @@ const Link = require('../models/LinkModel');
 const User = require('../models/userModel');
 const Email = require('../utils/email');
 const crypto = require('crypto');
-
 const moment = require('moment');
+const momenttz = require('moment-timezone');
 
 //revenue to be added for each user plan
 const freeinfluencerrev = 5;
@@ -134,6 +134,7 @@ exports.getUserDashboard = catchAsync(async (req, res, next) => {
     taskSubmissionLimit,
     user,
     confirmation,
+    momenttz,
   });
 });
 
