@@ -37,14 +37,14 @@
                     <fieldset class="form-group">
                         <label for="tweet-link-1">Tweet link # <%=index + 1 %>:</label>
                         <input type="text" class="form-control" 
-                        id="tweet-link-1"
+                        id="tweet-link-1" name="link"
                         <% if (link.status !== 'confirmed') { %>
                             value="<%=link.link%>"
                         } else {
                             value=""
                         }
                         <% } %>
-                         >
+                        >
                     </fieldset>
                 <% }) %>
                     <input type="hidden" name="user_id" value="<%=userr._id%>">

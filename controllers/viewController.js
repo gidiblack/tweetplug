@@ -467,6 +467,15 @@ exports.setWithdrawalStatus = catchAsync(async (req, res, next) => {
 
 //function to manage links
 exports.setLinkStatus = catchAsync(async (req, res, next) => {
+  //console.log(req.body.link);
+  if (req.body.link[0] == '') {
+    return next(
+      new AppError(
+        'The current user has not submitted a link and as such links cannot be confirmed',
+        401
+      )
+    );
+  }
   //get the user from the id which is sent through a hidden input field
   const user = await User.findById(req.body.user_id);
   //get the links associated with the user
@@ -573,17 +582,24 @@ exports.confirmAllLinks = catchAsync(async (req, res, next) => {
       linksArr.forEach(async (id) => {
         await Link.findByIdAndUpdate(id, { status: 'confirmed' });
       });
+      const rev = setRevenue(user);
+      const newRev = user.revenue + rev;
+      user.revenue = newRev;
+      await user.save({ validateBeforeSave: false });
     });
 
     return res.status(200).redirect('/admin/dashboard');
   }
 
   if (typeof userIds == String) {
-    const linkIds = await User.findById(userIds);
-    linkIds.forEach(async (id) => {
+    const user = await User.findById(userIds);
+    user.links.forEach(async (id) => {
       await Link.findByIdAndUpdate(id, { status: 'confirmed' });
     });
-
+    const rev = setRevenue(user);
+    const newRev = user.revenue + rev;
+    user.revenue = newRev;
+    await user.save({ validateBeforeSave: false });
     return res.status(200).redirect('/admin/dashboard');
   }
 
