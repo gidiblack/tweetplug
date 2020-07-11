@@ -8,6 +8,7 @@ const Email = require('../utils/email');
 const crypto = require('crypto');
 const moment = require('moment');
 const momenttz = require('moment-timezone');
+const { isNull } = require('util');
 
 //revenue to be added for each user plan
 const freeinfluencerrev = 5;
@@ -178,18 +179,19 @@ exports.userSubmitLinks = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.body.userId);
   //get all previous linksIds of links the user has submitted (user.links is an array of linksIDs associated with the user)
   const allUserLinks = user.links;
-
-  allUserLinks.forEach(async (link) => {
-    const linkCheck = await Link.findById(link);
-    if (linkCheck.active == false) {
-      await Link.findByIdAndDelete(linkCheck._id);
-      await User.findByIdAndUpdate(req.body.userId, {
-        $pull: { links: linkCheck._id },
-      });
-    } else {
-      await Link.findByIdAndUpdate(linkCheck._id, { active: false });
-    }
-  });
+  if (allUserLinks.length > 0) {
+    allUserLinks.forEach(async (link) => {
+      const linkCheck = await Link.findById(link);
+      if (linkCheck.active == false) {
+        await Link.findByIdAndDelete(linkCheck._id);
+        await User.findByIdAndUpdate(req.body.userId, {
+          $pull: { links: linkCheck._id },
+        });
+      } else {
+        await Link.findByIdAndUpdate(linkCheck._id, { active: false });
+      }
+    });
+  }
 
   //create new link based on linkArr which is an array of incoming links on the req
   linksArr.forEach(async (link) => {
