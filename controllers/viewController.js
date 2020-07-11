@@ -106,11 +106,14 @@ exports.getUserDashboard = catchAsync(async (req, res, next) => {
   const yesterdaysLinksArr = [];
   const Links = await Link.find();
   //console.log(user.links);
-  user.links.forEach((link) => {
-    if (link.active == false) {
-      yesterdaysLinksArr.push(link);
-    }
-  });
+  if (user.links.length > 0) {
+    user.links.forEach((link) => {
+      if (link.active == false) {
+        yesterdaysLinksArr.push(link);
+      }
+    });
+  }
+
   //console.log(yesterdaysLinksArr);
   let confirmation = false;
   if (yesterdaysLinksArr.length > 0) {
