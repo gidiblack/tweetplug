@@ -96,33 +96,40 @@ exports.getEmailConfirm = catchAsync(async (req, res, next) => {
 //get user dashboard
 exports.getUserDashboard = catchAsync(async (req, res, next) => {
   // get the previous days date
-  const yesterday = moment().add(-1, 'days').format('MMMM Do YYYY');
+  const yesterday = moment().add(-1, 'days').format('MMMM DD YYYY');
   //get user from db
   const user = await User.findById(res.locals.user._id).populate({
     path: 'links',
     select: '-user',
   });
-
-  //get date on the last link submission made by the user
-  let dateSet;
-  if (user.links.length > 0) {
-    dateSet = moment(user.links[0 + user.links.length - 1].createdAt).format(
-      'MMMM Do YYYY'
-    );
+  const yesterdaysLinksArr = [];
+  const Links = await Link.find();
+  //console.log(user.links);
+  user.links.forEach((link) => {
+    if (link.active == false) {
+      yesterdaysLinksArr.push(link);
+    }
+  });
+  //console.log(yesterdaysLinksArr);
+  let confirmation = false;
+  if (yesterdaysLinksArr.length > 0) {
+    if (
+      moment(yesterdaysLinksArr[2].createdAt).format('MMMM DD YYYY') ==
+      yesterday
+    ) {
+      confirmation = true;
+    } else {
+      confirmation = false;
+    }
   }
 
-  //console.log(yesterday);
-  //console.log(dateSet);
-  // value that will be used to check if the user submitted the link the previous day. used for the yesterday's action functionality
-  let confirmation;
-  // if the date on the user's last link submission is eqaul to the previous days submission then user submtted a link yesterday and cheeck is passed yesterday's action is set to met on dash, if not the the check fails and yesterday's action is set to missed.
-  if (dateSet == yesterday) {
-    //console.log('passed');
-    confirmation = 'passed';
-  } else {
-    //console.log('failed');
-    confirmation = 'failed';
-  }
+  //console.log(confirmation);
+  // Links.some(function (link) {
+  //   const userToCheck = link.user.username;
+  //   if (userToCheck == user.username && link.active == false) {
+  //     userLinksArr.push(link);
+  //   }
+  // });
 
   // time from which users can no longer submit tasks
   const taskSubmissionLimit = '22:00:00';
@@ -148,7 +155,7 @@ const linkCheck = (link) => {
   }
 };
 
-//function for user to submit new links anytime a new set(3) of links are submitted the previous set(3) of links are deleted from the DB
+//function for user to submit new links, anytime a new set(3) of links are submitted the previous set(3) of links are deleted from the DB
 exports.userSubmitLinks = catchAsync(async (req, res, next) => {
   //first we get the link set from the the req and save the 3 links into an array
   const linksArr = [req.body.link1, req.body.link2, req.body.link3];
@@ -170,14 +177,20 @@ exports.userSubmitLinks = catchAsync(async (req, res, next) => {
   //get the User that is making the request
   const user = await User.findById(req.body.userId);
   //get all previous linksIds of links the user has submitted (user.links is an array of linksIDs associated with the user)
-  const linksToBeDeactivated = user.links;
-  //console.log(linksToBeDeactivated);
-  //loop through the array and delete each link from the link collection
-  //also pull the link id of the links from the user document
-  linksToBeDeactivated.forEach(async (link) => {
-    await Link.findByIdAndDelete(link);
-    await User.findByIdAndUpdate(req.body.userId, { $pull: { links: link } });
+  const allUserLinks = user.links;
+
+  allUserLinks.forEach(async (link) => {
+    const linkCheck = await Link.findById(link);
+    if (linkCheck.active == false) {
+      await Link.findByIdAndDelete(linkCheck._id);
+      await User.findByIdAndUpdate(req.body.userId, {
+        $pull: { links: linkCheck._id },
+      });
+    } else {
+      await Link.findByIdAndUpdate(linkCheck._id, { active: false });
+    }
   });
+
   //create new link based on linkArr which is an array of incoming links on the req
   linksArr.forEach(async (link) => {
     const newLink = await Link.create({
@@ -191,6 +204,43 @@ exports.userSubmitLinks = catchAsync(async (req, res, next) => {
   });
 
   res.status(201).redirect('/user/dashboard');
+});
+
+exports.getLinkEditPage = catchAsync(async (req, res, next) => {
+  const loggedInUser = await User.findById(req.params.userId).populate({
+    path: 'links',
+  });
+  counter = 0;
+  //console.log(loggedInUser.links);
+  res.status(200).render('editLink', { loggedInUser, counter });
+});
+
+exports.editUserLink = catchAsync(async (req, res, next) => {
+  const link1 = req.body.link1;
+  const link2 = req.body.link2;
+  const link3 = req.body.link3;
+  const LinksArr = [link1, link2, link3];
+  const user = await User.findById(req.body.userId).populate({
+    path: 'links',
+    select: '-user',
+  });
+  //console.log(link1);
+  //console.log(link2);
+  //console.log(link3);
+  //console.log(user);
+  const activeLinksArr = [];
+  user.links.forEach((link) => {
+    if (link.active == true) {
+      activeLinksArr.push(link);
+    }
+  });
+  //console.log(user);
+  //console.log(activeLinksArr);
+  activeLinksArr.forEach(async (link, index) => {
+    await Link.findByIdAndUpdate(link._id, { link: LinksArr[index] });
+  });
+
+  res.status(200).redirect(`/user/links/${user._id}`);
 });
 
 exports.getWithdrawalPage = catchAsync(async (req, res, nex) => {
@@ -434,9 +484,11 @@ exports.getIndividualPageAdmin = catchAsync(async (req, res, next) => {
       new AppError('No user found with that Id, please try again', 404)
     );
   }
+  const counter = 0;
   res.status(200).render('admin/userPage', {
     userr,
     moment,
+    counter,
   });
 });
 
@@ -567,9 +619,9 @@ exports.getPlanChangePage = catchAsync(async (req, res, next) => {
 });
 
 exports.changeUserPlan = catchAsync(async (req, res, next) => {
-  const user = await User.findByIdAndUpdate(req.body.userId, {
-    Plan: req.body.plan,
-  });
+  const user = await User.findById(req.body.userId);
+  user.Plan = req.body.plan;
+  await user.save({ validateBeforeSave: false });
   res.status(200).redirect(`/admin/user/${user._id}`);
 });
 

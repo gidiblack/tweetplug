@@ -37,16 +37,17 @@
                         <% } %>
                     </div>
                     <div class="hero-card col-lg-3 col-md-6">
-                        <h3>Yesterday</h3>
-                         <% if( user.links.length > 0 && user.links[0 + user.links.length -1 ].status === 'unconfirmed') {%>
-                        <p id="yesterdayAction"> Missed</p>
-                        <% } else { %>
-                            <% if (confirmation == 'passed') {%>
-                           <p id="yesterdayAction"> Met</p> 
+                        <h3>Yesterday's Action</h3>
+                            <% if (confirmation == true) {%>
+                          <% if (user.links[user.links.length - 1].status == 'confirmed') {%> 
+                           <p id="yesterdayAction"> Met</p>  
                            <% } else { %>
-                            <p id="yesterdayAction"> Missed</p> 
+                           <p id="yesterdayAction"> Missed</p> 
                            <%} %>
-                        <% } %>
+                           <% } else { %>
+                            <p id="yesterdayAction"> You did not submit a Link yesterday</p> 
+                           <%} %>
+                        
                     </div>
                 </div>
             </div>
@@ -111,7 +112,12 @@
                     <% console.log(taskSubmissionLimit) %>
                 <% if (momenttz().tz('Africa/Lagos').format('HH:mm:ss') < taskSubmissionLimit){ %>
                         <%if (user.timeLeft > 0) { %>
-                            <button type="submit" class="submit-btn">Submit Links for Confirmation</button>
+                            <% if (user.links.length > 0 && moment(user.links[user.links.length - 1].createdAt).format('MMMM DD YYYY') == moment().format('MMMM DD YYYY')) {%>
+                                <p>You have already submitted a link today</p>
+                                <p>Would you like to <a href="/user/links/<%=user._id %>">Edit</a> your link instead ??</p>
+                            <% } else { %>
+                                <button type="submit" class="submit-btn">Submit Links for Confirmation</button>
+                            <%} %>
                         <% } else { %>
                             <p>Your Subscription has expired, You can't submit links. Kindly contact the admin to renew</p>
                         <% } %>

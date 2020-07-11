@@ -82,11 +82,15 @@
                             <td><%= user.Plan %></td>
                             <td><%= user.revenue %></td>
                             <td><%= user.timeLeft %> day(s)</td>
-                            <% if (user.links[0] == undefined) { %>
+                            <%if (user.links.length > 0) {%>
+                            <% if (moment(user.links[user.links.length - 1].createdAt).format('MMMM DD YYYY') !== moment().format('MMMM DD YYYY')) { %>
                             <td> No link yet</td>
                             <% } else { %>
-                             <td><%= user.links[0].status %></td>
+                             <td><%= user.links[user.links.length -1].status %></td>
                              <% } %>
+                            <%} else {%> 
+                             <td> No link yet</td>
+                            <%} %>
                         </tr>
                     <% }) %>
                     </tbody>

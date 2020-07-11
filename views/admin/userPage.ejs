@@ -34,8 +34,10 @@
                 <h2 class="mb-5">Today's Action</h2>
                 <form action="/admin/links/setstatus?_method=PATCH" id="" method="POST">
                 <% userr.links.forEach((link, index) => { %>
+                    <%  if (link.active == true) {%>
+                    <% counter ++ %>
                     <fieldset class="form-group">
-                        <label for="tweet-link-1">Tweet link # <%=index + 1 %>:</label>
+                        <label for="tweet-link-1">Tweet link # <%=counter %>:</label>
                         <input type="text" class="form-control" 
                         id="tweet-link-1" name="link"
                         <% if (link.status !== 'confirmed') { %>
@@ -46,6 +48,7 @@
                         <% } %>
                         >
                     </fieldset>
+                    <% } %>
                 <% }) %>
                     <input type="hidden" name="user_id" value="<%=userr._id%>">
                     <button type="submit"class="submit-btn mt-3">Confirm Tweets</button>
