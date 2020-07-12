@@ -119,7 +119,9 @@ const userSchema = new mongoose.Schema({
     default: 'user',
     enum: ['user', 'admin'],
   },
-
+  lastSubmissionDate: {
+    type: Date,
+  },
   //records date password was changed at
   passwordChangedAt: {
     type: Date,

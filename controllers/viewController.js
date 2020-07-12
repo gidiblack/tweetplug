@@ -103,6 +103,7 @@ exports.getUserDashboard = catchAsync(async (req, res, next) => {
     path: 'links',
     select: '-user',
   });
+  //console.log(user.lastSubmissionDate);
   const yesterdaysLinksArr = [];
   const Links = await Link.find();
   //console.log(user.links);
@@ -115,6 +116,7 @@ exports.getUserDashboard = catchAsync(async (req, res, next) => {
   }
 
   //console.log(yesterdaysLinksArr);
+  //console.log();
   let confirmation = false;
   if (yesterdaysLinksArr.length > 0) {
     if (
@@ -159,11 +161,16 @@ const linkCheck = (link) => {
   }
 };
 
-//function for user to submit new links, anytime a new set(3) of links are submitted the previous set(3) of links are deleted from the DB
+//function for user to submit new links,
+//user is limited to one submission a day
+// anytime a new set(3) of links is submitted, the inactive links are deleted,
+//the previous links are set to false
+//links are saved
 exports.userSubmitLinks = catchAsync(async (req, res, next) => {
   //first we get the link set from the the req and save the 3 links into an array
   const linksArr = [req.body.link1, req.body.link2, req.body.link3];
   const linkCheckValues = [];
+  //use the link to check function to see if the links being submitted are valid.
   linksArr.forEach((link) => {
     if (linkCheck(link) == false) {
       linkCheckValues.push(false);
@@ -180,20 +187,32 @@ exports.userSubmitLinks = catchAsync(async (req, res, next) => {
   }
   //get the User that is making the request
   const user = await User.findById(req.body.userId);
-  //get all previous linksIds of links the user has submitted (user.links is an array of linksIDs associated with the user)
+
+  //get the Id of the user's last links (user.links is an array of linksIDs associated with the user)
   const allUserLinks = user.links;
   if (allUserLinks.length > 0) {
+    let newLink;
     allUserLinks.forEach(async (link) => {
+      //loop through array of link ids associated with user(allUserLinks)
       const linkCheck = await Link.findById(link);
       if (linkCheck.active == false) {
+        // if link is inactive delete the link
         await Link.findByIdAndDelete(linkCheck._id);
+        // and remove the link id from the user.links
         await User.findByIdAndUpdate(req.body.userId, {
           $pull: { links: linkCheck._id },
         });
       } else {
-        await Link.findByIdAndUpdate(linkCheck._id, { active: false });
+        //if the link is still active, set the active value to false
+        newLink = await Link.findByIdAndUpdate(linkCheck._id, {
+          active: false,
+        });
+        //set the last submission date to the date of the link being deactivated
+        //user.lastSubmissionDate = newLink.createdAt;
       }
     });
+
+    //await user.save({ validateBeforeSave: false });
   }
 
   //create new link based on linkArr which is an array of incoming links on the req
@@ -265,6 +284,12 @@ exports.getWithdrawalPage = catchAsync(async (req, res, nex) => {
 
 exports.makeWithdrawalRequest = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.body.userID);
+  if (req.body.amount < 1000) {
+    return next(
+      new AppError('You cannot withdraw less than a 1000 naira', 401)
+    );
+  }
+
   if (user.revenue < req.body.amount) {
     return next(
       new AppError(
