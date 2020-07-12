@@ -12,10 +12,10 @@ const { isNull } = require('util');
 
 //revenue to be added for each user plan
 const freeinfluencerrev = 5;
-const juniorinfluencerrev = 270;
-const whizinfluencerrev = 250;
-const adeptinfluencerrev = 500;
-const chiefinfluencerrev = 1000;
+const juniorinfluencerrev = 615;
+const whizinfluencerrev = 500;
+const adeptinfluencerrev = 1000;
+const chiefinfluencerrev = 2000;
 const expertinfluencerrev = 1500;
 const principalinfluencerrev = 2000;
 const liegeinfluencerrev = 2500;
