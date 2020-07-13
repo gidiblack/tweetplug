@@ -271,11 +271,14 @@ exports.getWithdrawalPage = catchAsync(async (req, res, nex) => {
   const user = await User.findById(req.params.userId).populate({
     path: 'withdrawals',
   });
+  const timeLimit = 16;
   const date = moment(Date.now());
   res.status(200).render('withdrawals', {
     moment,
     user,
     date,
+    timeLimit,
+    momenttz,
   });
 
   //const dow = date.day();
@@ -479,6 +482,7 @@ exports.getAdminDashboard = catchAsync(async (req, res, next) => {
     moment,
     users,
     usersWithWithdrawals,
+    momenttz,
   });
 });
 
