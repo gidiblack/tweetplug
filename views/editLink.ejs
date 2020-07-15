@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('partials/head'); -%>
+<body>
+    <%- include('partials/nav'); -%>
+    <main>
+        <section>
+            <div class="container">
+                <h1 class="large text-center">Edit Submitted Links</h1>
+
+                <form action="/user/links/<%=loggedInUser._id %>?_method=PATCH" id="editProfile"method="POST" class="row">
+                    <% loggedInUser.links.forEach((link, index)=> { %>
+                        
+                        <% if( link.active == true) {%>
+                        <% counter ++ %>
+                        <fieldset class="form-group col-md-12">
+                            <label for="lastName">Link <%= counter %> </label>
+                            <input type="text" class="form-control" name="link<%=counter%>" id="lastName" placeholder="Last Name" aria-placeholder="Last Name" required aria-required="true" value="<%= link.link %>">
+                        </fieldset>
+                        <% }else{ %>
+                        <% } %>
+                    <% }) %>
+                    <input type="hidden" name="userId" value="<%=loggedInUser._id %>">
+                    <button type="submit" class="submit-btn">Save Changes</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <%- include('partials/footer'); -%>
+</body>
+    <%- include('partials/scripts'); -%>
+</html>

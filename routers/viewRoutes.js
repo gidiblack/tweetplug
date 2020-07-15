@@ -70,6 +70,11 @@ router
   .route('/user/upgrade')
   .get(authController.authenticate, viewController.getUpgradePage);
 
+router
+  .route('/user/links/:userId')
+  .get(viewController.getLinkEditPage)
+  .patch(viewController.editUserLink);
+
 //forgot password
 router.route('/forgotpassword').get(viewController.getForgotPasswordPage);
 router

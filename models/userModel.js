@@ -119,7 +119,9 @@ const userSchema = new mongoose.Schema({
     default: 'user',
     enum: ['user', 'admin'],
   },
-
+  lastSubmissionDate: {
+    type: Date,
+  },
   //records date password was changed at
   passwordChangedAt: {
     type: Date,
@@ -199,7 +201,13 @@ userSchema.methods.createPasswordResetToken = function () {
 };
 
 userSchema.pre('save', function (next) {
-  if (this.Plan !== 'Free influencer' && this.Plan !== 'Junior influencer') {
+  if (
+    this.Plan !== 'Free influencer' &&
+    this.Plan !== 'Junior influencer' &&
+    this.Plan !== 'Whiz influencer' &&
+    this.Plan !== 'Adept influencer' &&
+    this.Plan !== 'Chief influencer'
+  ) {
     this.timeLeft = 30;
     next();
   }
@@ -208,7 +216,15 @@ userSchema.pre('save', function (next) {
     next();
   }
   if (this.Plan === 'Junior influencer') {
-    this.timeLeft = 14;
+    this.timeLeft = 7;
+    next();
+  }
+  if (
+    this.Plan === 'Whiz influencer' ||
+    this.Plan === 'Adept influencer' ||
+    this.Plan === 'Chief influencer'
+  ) {
+    this.timeLeft = 15;
     next();
   }
   next();

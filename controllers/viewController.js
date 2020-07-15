@@ -6,15 +6,16 @@ const Link = require('../models/LinkModel');
 const User = require('../models/userModel');
 const Email = require('../utils/email');
 const crypto = require('crypto');
-
 const moment = require('moment');
+const momenttz = require('moment-timezone');
+const { isNull } = require('util');
 
 //revenue to be added for each user plan
 const freeinfluencerrev = 5;
-const juniorinfluencerrev = 270;
-const whizinfluencerrev = 250;
-const adeptinfluencerrev = 500;
-const chiefinfluencerrev = 1000;
+const juniorinfluencerrev = 615;
+const whizinfluencerrev = 500;
+const adeptinfluencerrev = 1000;
+const chiefinfluencerrev = 2000;
 const expertinfluencerrev = 1500;
 const principalinfluencerrev = 2000;
 const liegeinfluencerrev = 2500;
@@ -96,33 +97,45 @@ exports.getEmailConfirm = catchAsync(async (req, res, next) => {
 //get user dashboard
 exports.getUserDashboard = catchAsync(async (req, res, next) => {
   // get the previous days date
-  const yesterday = moment().add(-1, 'days').format('MMMM Do YYYY');
+  const yesterday = moment().add(-1, 'days').format('MMMM DD YYYY');
   //get user from db
   const user = await User.findById(res.locals.user._id).populate({
     path: 'links',
     select: '-user',
   });
-
-  //get date on the last link submission made by the user
-  let dateSet;
+  //console.log(user.lastSubmissionDate);
+  const yesterdaysLinksArr = [];
+  const Links = await Link.find();
+  //console.log(user.links);
   if (user.links.length > 0) {
-    dateSet = moment(user.links[0 + user.links.length - 1].createdAt).format(
-      'MMMM Do YYYY'
-    );
+    user.links.forEach((link) => {
+      if (link.active == false) {
+        yesterdaysLinksArr.push(link);
+      }
+    });
   }
 
-  //console.log(yesterday);
-  //console.log(dateSet);
-  // value that will be used to check if the user submitted the link the previous day. used for the yesterday's action functionality
-  let confirmation;
-  // if the date on the user's last link submission is eqaul to the previous days submission then user submtted a link yesterday and cheeck is passed yesterday's action is set to met on dash, if not the the check fails and yesterday's action is set to missed.
-  if (dateSet == yesterday) {
-    //console.log('passed');
-    confirmation = 'passed';
-  } else {
-    //console.log('failed');
-    confirmation = 'failed';
+  //console.log(yesterdaysLinksArr);
+  //console.log();
+  let confirmation = false;
+  if (yesterdaysLinksArr.length > 0) {
+    if (
+      moment(yesterdaysLinksArr[2].createdAt).format('MMMM DD YYYY') ==
+      yesterday
+    ) {
+      confirmation = true;
+    } else {
+      confirmation = false;
+    }
   }
+
+  //console.log(confirmation);
+  // Links.some(function (link) {
+  //   const userToCheck = link.user.username;
+  //   if (userToCheck == user.username && link.active == false) {
+  //     userLinksArr.push(link);
+  //   }
+  // });
 
   // time from which users can no longer submit tasks
   const taskSubmissionLimit = '22:00:00';
@@ -134,6 +147,7 @@ exports.getUserDashboard = catchAsync(async (req, res, next) => {
     taskSubmissionLimit,
     user,
     confirmation,
+    momenttz,
   });
 });
 
@@ -147,11 +161,16 @@ const linkCheck = (link) => {
   }
 };
 
-//function for user to submit new links anytime a new set(3) of links are submitted the previous set(3) of links are deleted from the DB
+//function for user to submit new links,
+//user is limited to one submission a day
+// anytime a new set(3) of links is submitted, the inactive links are deleted,
+//the previous links are set to false
+//links are saved
 exports.userSubmitLinks = catchAsync(async (req, res, next) => {
   //first we get the link set from the the req and save the 3 links into an array
   const linksArr = [req.body.link1, req.body.link2, req.body.link3];
   const linkCheckValues = [];
+  //use the link to check function to see if the links being submitted are valid.
   linksArr.forEach((link) => {
     if (linkCheck(link) == false) {
       linkCheckValues.push(false);
@@ -168,15 +187,34 @@ exports.userSubmitLinks = catchAsync(async (req, res, next) => {
   }
   //get the User that is making the request
   const user = await User.findById(req.body.userId);
-  //get all previous linksIds of links the user has submitted (user.links is an array of linksIDs associated with the user)
-  const linksToBeDeactivated = user.links;
-  //console.log(linksToBeDeactivated);
-  //loop through the array and delete each link from the link collection
-  //also pull the link id of the links from the user document
-  linksToBeDeactivated.forEach(async (link) => {
-    await Link.findByIdAndDelete(link);
-    await User.findByIdAndUpdate(req.body.userId, { $pull: { links: link } });
-  });
+
+  //get the Id of the user's last links (user.links is an array of linksIDs associated with the user)
+  const allUserLinks = user.links;
+  if (allUserLinks.length > 0) {
+    let newLink;
+    allUserLinks.forEach(async (link) => {
+      //loop through array of link ids associated with user(allUserLinks)
+      const linkCheck = await Link.findById(link);
+      if (linkCheck.active == false) {
+        // if link is inactive delete the link
+        await Link.findByIdAndDelete(linkCheck._id);
+        // and remove the link id from the user.links
+        await User.findByIdAndUpdate(req.body.userId, {
+          $pull: { links: linkCheck._id },
+        });
+      } else {
+        //if the link is still active, set the active value to false
+        newLink = await Link.findByIdAndUpdate(linkCheck._id, {
+          active: false,
+        });
+        //set the last submission date to the date of the link being deactivated
+        //user.lastSubmissionDate = newLink.createdAt;
+      }
+    });
+
+    //await user.save({ validateBeforeSave: false });
+  }
+
   //create new link based on linkArr which is an array of incoming links on the req
   linksArr.forEach(async (link) => {
     const newLink = await Link.create({
@@ -192,15 +230,55 @@ exports.userSubmitLinks = catchAsync(async (req, res, next) => {
   res.status(201).redirect('/user/dashboard');
 });
 
+exports.getLinkEditPage = catchAsync(async (req, res, next) => {
+  const loggedInUser = await User.findById(req.params.userId).populate({
+    path: 'links',
+  });
+  counter = 0;
+  //console.log(loggedInUser.links);
+  res.status(200).render('editLink', { loggedInUser, counter });
+});
+
+exports.editUserLink = catchAsync(async (req, res, next) => {
+  const link1 = req.body.link1;
+  const link2 = req.body.link2;
+  const link3 = req.body.link3;
+  const LinksArr = [link1, link2, link3];
+  const user = await User.findById(req.body.userId).populate({
+    path: 'links',
+    select: '-user',
+  });
+  //console.log(link1);
+  //console.log(link2);
+  //console.log(link3);
+  //console.log(user);
+  const activeLinksArr = [];
+  user.links.forEach((link) => {
+    if (link.active == true) {
+      activeLinksArr.push(link);
+    }
+  });
+  //console.log(user);
+  //console.log(activeLinksArr);
+  activeLinksArr.forEach(async (link, index) => {
+    await Link.findByIdAndUpdate(link._id, { link: LinksArr[index] });
+  });
+
+  res.status(200).redirect(`/user/links/${user._id}`);
+});
+
 exports.getWithdrawalPage = catchAsync(async (req, res, nex) => {
   const user = await User.findById(req.params.userId).populate({
     path: 'withdrawals',
   });
+  const timeLimit = 16;
   const date = moment(Date.now());
   res.status(200).render('withdrawals', {
     moment,
     user,
     date,
+    timeLimit,
+    momenttz,
   });
 
   //const dow = date.day();
@@ -209,6 +287,12 @@ exports.getWithdrawalPage = catchAsync(async (req, res, nex) => {
 
 exports.makeWithdrawalRequest = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.body.userID);
+  if (req.body.amount < 1000) {
+    return next(
+      new AppError('You cannot withdraw less than a 1000 naira', 401)
+    );
+  }
+
   if (user.revenue < req.body.amount) {
     return next(
       new AppError(
@@ -398,6 +482,7 @@ exports.getAdminDashboard = catchAsync(async (req, res, next) => {
     moment,
     users,
     usersWithWithdrawals,
+    momenttz,
   });
 });
 
@@ -433,18 +518,20 @@ exports.getIndividualPageAdmin = catchAsync(async (req, res, next) => {
       new AppError('No user found with that Id, please try again', 404)
     );
   }
+  const counter = 0;
   res.status(200).render('admin/userPage', {
     userr,
     moment,
+    counter,
   });
 });
 
 //function to manage withdrawals
 exports.setWithdrawalStatus = catchAsync(async (req, res, next) => {
   let Check;
-  if (req.body.withdrawB === 'Confirm_Withdrawal') {
+  if (req.body.withdrawB === 'Confirm Withdrawal') {
     Check = 'approved';
-  } else if (req.body.withdrawB === 'Deny_Withdrawal') {
+  } else if (req.body.withdrawB === 'Deny Withdrawal') {
     Check = 'rejected';
   }
   const withdrawalRequest = await Withdrawal.findByIdAndUpdate(
@@ -467,6 +554,15 @@ exports.setWithdrawalStatus = catchAsync(async (req, res, next) => {
 
 //function to manage links
 exports.setLinkStatus = catchAsync(async (req, res, next) => {
+  //console.log(req.body.link);
+  if (req.body.link[0] == '') {
+    return next(
+      new AppError(
+        'The current user has not submitted a link and as such links cannot be confirmed',
+        401
+      )
+    );
+  }
   //get the user from the id which is sent through a hidden input field
   const user = await User.findById(req.body.user_id);
   //get the links associated with the user
@@ -557,9 +653,9 @@ exports.getPlanChangePage = catchAsync(async (req, res, next) => {
 });
 
 exports.changeUserPlan = catchAsync(async (req, res, next) => {
-  const user = await User.findByIdAndUpdate(req.body.userId, {
-    Plan: req.body.plan,
-  });
+  const user = await User.findById(req.body.userId);
+  user.Plan = req.body.plan;
+  await user.save({ validateBeforeSave: false });
   res.status(200).redirect(`/admin/user/${user._id}`);
 });
 
@@ -573,17 +669,24 @@ exports.confirmAllLinks = catchAsync(async (req, res, next) => {
       linksArr.forEach(async (id) => {
         await Link.findByIdAndUpdate(id, { status: 'confirmed' });
       });
+      const rev = setRevenue(user);
+      const newRev = user.revenue + rev;
+      user.revenue = newRev;
+      await user.save({ validateBeforeSave: false });
     });
 
     return res.status(200).redirect('/admin/dashboard');
   }
 
   if (typeof userIds == String) {
-    const linkIds = await User.findById(userIds);
-    linkIds.forEach(async (id) => {
+    const user = await User.findById(userIds);
+    user.links.forEach(async (id) => {
       await Link.findByIdAndUpdate(id, { status: 'confirmed' });
     });
-
+    const rev = setRevenue(user);
+    const newRev = user.revenue + rev;
+    user.revenue = newRev;
+    await user.save({ validateBeforeSave: false });
     return res.status(200).redirect('/admin/dashboard');
   }
 

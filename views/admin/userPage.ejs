@@ -15,7 +15,7 @@
                         <p>Total Revenue: <span>&#8358; <%= userr.revenue %></span></p>
                         <p>Current Plan: <span><%= userr.Plan %></span></p>
                         <p>Withdrawal Request: <span id=>Withdrawal</span></p>
-                        <p>Remaining Duration: <span>Duration</span></p>
+                        <p>Remaining Duration: <span><%=userr.timeLeft %> Day(s)</span></p>
                         <p>Account Name: <span><%= userr.bankAccountName %></span></p>
                         <p>Account Number: <span><%=userr.bankAccountNumber %></span></p>
                         <p>Bank: <span><%=userr.bank %></span></p>
@@ -34,18 +34,21 @@
                 <h2 class="mb-5">Today's Action</h2>
                 <form action="/admin/links/setstatus?_method=PATCH" id="" method="POST">
                 <% userr.links.forEach((link, index) => { %>
+                    <%  if (link.active == true) {%>
+                    <% counter ++ %>
                     <fieldset class="form-group">
-                        <label for="tweet-link-1">Tweet link # <%=index + 1 %>:</label>
+                        <label for="tweet-link-1">Tweet link # <%=counter %>:</label>
                         <input type="text" class="form-control" 
-                        id="tweet-link-1"
+                        id="tweet-link-1" name="link"
                         <% if (link.status !== 'confirmed') { %>
                             value="<%=link.link%>"
                         } else {
                             value=""
                         }
                         <% } %>
-                         >
+                        >
                     </fieldset>
+                    <% } %>
                 <% }) %>
                     <input type="hidden" name="user_id" value="<%=userr._id%>">
                     <button type="submit"class="submit-btn mt-3">Confirm Tweets</button>
