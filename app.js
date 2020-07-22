@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
 const compression = require('compression');
+const cors = require('cors');
 const AppError = require('./utils/AppError');
 const globalErrorHandler = require('./controllers/errorController');
 
@@ -18,6 +19,10 @@ const app = express();
 //set view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+//cors
+app.use(cors());
+app.options('*', cors());
 
 //set up static files
 app.use(express.static(path.join(__dirname, 'public')));
