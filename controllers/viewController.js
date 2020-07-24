@@ -441,6 +441,9 @@ exports.getContact = catchAsync(async (req, res, next) => {
 exports.getTerms = catchAsync(async (req, res, next) => {
   res.status(200).render('terms');
 });
+exports.getPrivacy = catchAsync(async (req, res, next) => {
+  res.status(200).render('privacy');
+});
 exports.getSubscribe = catchAsync(async (req, res, next) => {
   res.status(200).render('subscribe');
 });
