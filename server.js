@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 const schedule = require('node-schedule');
+const scheduletz = require('node-schedule-tz');
 const User = require('./models/userModel');
 const Task = require('./models/taskModel');
 const moment = require('moment');
@@ -45,7 +46,20 @@ process.on('unhandledRejection', (err) => {
 });
 
 //scheduled fucntions
-const j = schedule.scheduleJob('01 22 * * *', async function () {
+// const rule = new scheduletz.RecurrenceRule();
+// rule.minute = 32;
+// rule.hour = 11;
+// rule.tz = "Africa/Lagos";
+// const j = scheduletz.scheduleJob(rule, async function () {
+//     try {
+//       await Task.deleteMany({ active: false });
+//       await Task.updateMany({ active: true }, { $set: { active: false } });
+//       console.log('Task job done');
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   });
+const j = schedule.scheduleJob('01 17 * * *', async function () {
   try {
     await Task.deleteMany({ active: false });
     await Task.updateMany({ active: true }, { $set: { active: false } });
@@ -55,7 +69,7 @@ const j = schedule.scheduleJob('01 22 * * *', async function () {
   }
 });
 
-const j2 = schedule.scheduleJob('01 00 * * *', async function () {
+const j2 = schedule.scheduleJob('01 19 * * *', async function () {
   try {
     const users = await User.find({ Plan: { $ne: 'Free influencer' } });
     users.forEach(async (user) => {
