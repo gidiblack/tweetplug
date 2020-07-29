@@ -5,6 +5,7 @@ const schedule = require('node-schedule');
 const scheduletz = require('node-schedule-tz');
 const User = require('./models/userModel');
 const Task = require('./models/taskModel');
+const Link = require('./models/LinkModel');
 const moment = require('moment');
 
 process.on('uncaughtException', (err) => {
@@ -59,7 +60,7 @@ process.on('unhandledRejection', (err) => {
 //       console.log(error);
 //     }
 //   });
-const j = schedule.scheduleJob('57 09 * * *', async function () {
+const j = schedule.scheduleJob('01 17 * * *', async function () {
   try {
     await Task.deleteMany({ active: false });
     await Task.updateMany({ active: true }, { $set: { active: false } });
@@ -87,4 +88,11 @@ const j2 = schedule.scheduleJob('01 19 * * *', async function () {
   }
 });
 
-//const j3 = schedule.scheduleJob('')
+const j3 = schedule.scheduleJob('01 19 * * *', async function () {
+  try {
+    await Link.updateMany({ active: true }, { $set: { active: false } });
+    console.log('Link Job done');
+  } catch (error) {
+    console.log(error);
+  }
+});
