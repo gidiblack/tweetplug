@@ -15,8 +15,8 @@ const ejs = require('ejs');
 
 const auth = {
   auth: {
-    api_key: '7f461412d2651e3047f271030bdad2e0-a65173b1-a45e1a50',
-    domain: 'tweetplug.com',
+    api_key: process.env.MAILGUN_APIKEY,
+    domain: process.env.MAILGUN_DOMAIN,
   },
 };
 
