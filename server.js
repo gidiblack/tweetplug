@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+dotenv.config({ path: './config.env' });
+const mongoose = require('mongoose');
 
 const schedule = require('node-schedule');
 const scheduletz = require('node-schedule-tz');
@@ -15,8 +16,6 @@ process.on('uncaughtException', (err) => {
 });
 
 const app = require('./app');
-const { validate } = require('node-cron');
-dotenv.config({ path: './config.env' });
 
 mongoose
   .connect(process.env.DATABASE_URL, {
