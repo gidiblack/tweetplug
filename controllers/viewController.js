@@ -455,13 +455,13 @@ exports.contactAdmin = catchAsync(async (req, res, next) => {
   const supportEmail = 'admin@tweetplug.com';
   const user = {
     firstname: name,
-    email: supportEmail,
+    email: userEmail,
   };
   // await new Email(user, url).sendContact();
   nodemailerMailgun.sendMail(
     {
-      from: process.env.EMAIL_FROM,
-      to: user.email,
+      from: user.email,
+      to: supportEmail,
       subject: `Message from ${name} `,
       text: message,
     },
