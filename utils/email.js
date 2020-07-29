@@ -45,7 +45,7 @@ module.exports = class Email {
       },
       (err, html) => {
         if (err) console.log(err);
-        //console.log(html);
+        //        console.log(html);
         temp = html;
       }
     );
@@ -70,5 +70,8 @@ module.exports = class Email {
       'passwordReset',
       'Your password reset token, (valid for 10 minutes) '
     );
+  }
+  async sendContact() {
+    await this.send('contact', 'Contact message from user');
   }
 };

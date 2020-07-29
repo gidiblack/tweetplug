@@ -59,7 +59,7 @@ process.on('unhandledRejection', (err) => {
 //       console.log(error);
 //     }
 //   });
-const j = schedule.scheduleJob('01 17 * * *', async function () {
+const j = schedule.scheduleJob('57 09 * * *', async function () {
   try {
     await Task.deleteMany({ active: false });
     await Task.updateMany({ active: true }, { $set: { active: false } });
@@ -86,3 +86,5 @@ const j2 = schedule.scheduleJob('01 19 * * *', async function () {
     console.log(error);
   }
 });
+
+//const j3 = schedule.scheduleJob('')

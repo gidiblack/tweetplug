@@ -5,6 +5,19 @@ const crypto = require('crypto');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
 const Email = require('../utils/email');
+const nodemailer = require('nodemailer');
+const mg = require('nodemailer-mailgun-transport');
+const htmltotext = require('html-to-text');
+const ejs = require('ejs');
+
+const auth = {
+  auth: {
+    api_key: '7f461412d2651e3047f271030bdad2e0-a65173b1-a45e1a50',
+    domain: 'tweetplug.com',
+  },
+};
+
+const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
 const signToken = (id) => {
   return JWT.sign({ id }, process.env.JWT_SECRET, {
@@ -53,7 +66,35 @@ exports.signup = catchAsync(async (req, res, next) => {
   const url = `${req.protocol}://${req.get('host')}/emailconfirm/${
     newUser._id
   }`;
-  await new Email(newUser, url).sendWelcome();
+  let temp;
+  const html = ejs.renderFile(
+    `${__dirname}/../views/emails/welcome.ejs`,
+    {
+      firstName: newUser.firstname,
+      url: url,
+      subject: 'Welcome to the tweetplug family',
+    },
+    (err, html) => {
+      if (err) console.log(err);
+      temp = html;
+    }
+  );
+  //await new Email(newUser, url).sendWelcome();
+  nodemailerMailgun.sendMail(
+    {
+      from: process.env.EMAIL_FROM,
+      to: newUser.email,
+      subject: 'Welcome to the tweetplug family',
+      html: temp,
+    },
+    (err, info) => {
+      if (err) {
+        console.log(`Error: ${err}`);
+      } else {
+        console.log(`Info: ${info}`);
+      }
+    }
+  );
   createSendToken(newUser, 201, res);
 });
 
@@ -176,7 +217,35 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   )}/api/v1/user/resetpassword/${resetToken}`;
 
   try {
-    await new Email(user, resetURL).sendPasswordReset();
+    //await new Email(user, resetURL).sendPasswordReset();
+    let temp;
+    const html = ejs.renderFile(
+      `${__dirname}/../views/emails/passwordReset.ejs`,
+      {
+        firstName: user.firstName,
+        url: resetURL,
+        subject: 'Your password reset token (valid for 10 minutes)',
+      },
+      (err, html) => {
+        if (err) console.log(err);
+        temp = html;
+      }
+    );
+    nodemailerMailgun.sendMail(
+      {
+        from: process.env.EMAIL_FROM,
+        to: user.email,
+        subject: 'Your password reset token (valid for 10 minutes)',
+        html: temp,
+      },
+      (err, info) => {
+        if (err) {
+          console.log(`Error: ${err}`);
+        } else {
+          console.log(`Info: ${info}`);
+        }
+      }
+    );
 
     res.status(200).json({
       status: 'success',
