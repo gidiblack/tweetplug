@@ -201,6 +201,10 @@ userSchema.methods.createPasswordResetToken = function () {
 };
 
 userSchema.pre('save', function (next) {
+  if (!this.isNew) {
+    return next();
+  }
+
   if (
     this.Plan !== 'Free influencer' &&
     this.Plan !== 'Junior influencer' &&

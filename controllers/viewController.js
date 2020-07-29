@@ -549,8 +549,7 @@ exports.setWithdrawalStatus = catchAsync(async (req, res, next) => {
     const userId = req.body.userId;
     const user = await User.findById(userId);
     const newRev = user.revenue - amount;
-    user.revenue = newRev;
-    await user.save({ validateBeforeSave: false });
+    await User.findByIdAndUpdate(userId, { revenue: newRev });
   }
   res.status(200).redirect(`/admin/user/${req.body.userId}`);
 });
@@ -583,8 +582,8 @@ exports.setLinkStatus = catchAsync(async (req, res, next) => {
 
   const rev = setRevenue(user);
   const newRev = user.revenue + rev;
-  user.revenue = newRev;
-  await user.save({ validateBeforeSave: false });
+  const id = user._id;
+  await User.findByIdAndUpdate(id, { revenue: newRev });
   res.status(200).redirect(`/admin/user/${user._id}`);
 });
 
@@ -624,10 +623,8 @@ exports.confirmAllWithdrawals = catchAsync(async (req, res, next) => {
         const user = await User.findById(id);
         const newRev = user.revenue - withAmountArr[index];
         //console.log(`newRev for user${index} is ${newRev}`);
-        user.revenue = newRev;
         //console.log(`updatedRev for user${index} is ${user.revenue}`);
-
-        await user.save({ validateBeforeSave: false });
+        await User.findByIdAndUpdate(id, { revenue: newRev });
       });
     });
 
@@ -641,8 +638,7 @@ exports.confirmAllWithdrawals = catchAsync(async (req, res, next) => {
   const amount = withdrawal.amount;
   const user = await User.findById(userId);
   const newRev = user.revenue - amount;
-  user.revenue = newRev;
-  await user.save({ validateBeforeSave: false });
+  await User.findByIdAndUpdate(userId, { revenue: newRev });
 
   res.status(200).redirect('/admin/dashboard');
   //console.log(withdrawalsIdArr);
@@ -674,8 +670,7 @@ exports.confirmAllLinks = catchAsync(async (req, res, next) => {
       });
       const rev = setRevenue(user);
       const newRev = user.revenue + rev;
-      user.revenue = newRev;
-      await user.save({ validateBeforeSave: false });
+      await User.findByIdAndUpdate(id, { revenue: newRev });
     });
 
     return res.status(200).redirect('/admin/dashboard');
@@ -688,8 +683,7 @@ exports.confirmAllLinks = catchAsync(async (req, res, next) => {
     });
     const rev = setRevenue(user);
     const newRev = user.revenue + rev;
-    user.revenue = newRev;
-    await user.save({ validateBeforeSave: false });
+    await User.findByIdAndUpdate(id, { revenue: newRev });
     return res.status(200).redirect('/admin/dashboard');
   }
 
