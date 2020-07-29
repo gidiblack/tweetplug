@@ -8,7 +8,19 @@ const Email = require('../utils/email');
 const crypto = require('crypto');
 const moment = require('moment');
 const momenttz = require('moment-timezone');
-const { isNull } = require('util');
+const nodemailer = require('nodemailer');
+const mg = require('nodemailer-mailgun-transport');
+const htmltotext = require('html-to-text');
+const ejs = require('ejs');
+
+const auth = {
+  auth: {
+    api_key: process.env.MAILGUN_APIKEY,
+    domain: process.env.MAILGUN_DOMAIN,
+  },
+};
+
+const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
 //revenue to be added for each user plan
 const freeinfluencerrev = 5;
@@ -389,10 +401,38 @@ exports.sendPasswordResetToken = catchAsync(async (req, res, next) => {
   )}/resetpassword/${resetToken}`;
 
   try {
-    await new Email(user, resetUrl).sendPasswordReset();
+    //await new Email(user, resetUrl).sendPasswordReset();
+    let temp;
+    const html = ejs.renderFile(
+      `${__dirname}/../views/emails/passwordReset.ejs`,
+      {
+        firstName: user.firstName,
+        url: resetUrl,
+        subject: 'Your password reset token (valid for 10 minutes)',
+      },
+      (err, html) => {
+        if (err) console.log(err);
+        temp = html;
+      }
+    );
+    nodemailerMailgun.sendMail(
+      {
+        from: process.env.EMAIL_FROM,
+        to: user.email,
+        subject: 'Your password reset token (valid for 10 minutes)',
+        html: temp,
+      },
+      (err, info) => {
+        if (err) {
+          console.log(`Error: ${err}`);
+        } else {
+          console.log(`Info: ${info}`);
+        }
+      }
+    );
     res.status(200).redirect('/');
   } catch (error) {
-    //console.log(error);
+    console.log(error);
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false });
@@ -403,6 +443,37 @@ exports.sendPasswordResetToken = catchAsync(async (req, res, next) => {
       )
     );
   }
+});
+
+exports.contactAdmin = catchAsync(async (req, res, next) => {
+  const name = req.body.name;
+  const userEmail = req.body.email;
+  //const url = req.body.message;
+  const message = `${name} sent an Email from ${userEmail} 
+  content: ${req.body.message}
+  `;
+  const supportEmail = 'admin@tweetplug.com';
+  const user = {
+    firstname: name,
+    email: userEmail,
+  };
+  // await new Email(user, url).sendContact();
+  nodemailerMailgun.sendMail(
+    {
+      from: user.email,
+      to: supportEmail,
+      subject: `Message from ${name} `,
+      text: message,
+    },
+    (err, info) => {
+      if (err) {
+        console.log(`Error: ${err}`);
+      } else {
+        console.log(`Info: ${info}`);
+      }
+    }
+  );
+  res.status(200).redirect('/');
 });
 
 exports.getResetPasswordPage = catchAsync(async (req, res, next) => {

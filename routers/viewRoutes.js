@@ -20,6 +20,7 @@ router
   .get(viewController.getEmailConfirm);
 router.route('/advertise').get(viewController.getAdvertise);
 router.route('/contact').get(viewController.getContact);
+router.route('/contact/admin/support').post(viewController.contactAdmin);
 router.route('/terms').get(viewController.getTerms);
 router.route('/privacy').get(viewController.getPrivacy);
 router.route('/subscribe').get(viewController.getSubscribe);
