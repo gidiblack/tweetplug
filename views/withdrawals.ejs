@@ -30,6 +30,9 @@
                     <p>Revenue: <span><%= locals.user.revenue %></span></p>
                 </div>
                 <!-- Withdrawal Request Form -->
+                <% const currentTime = momenttz().tz('Africa/Lagos').format('HH:mm:ss') %>
+                <% const currentHour = parseInt(currentTime.split(':')[0])%>
+                <%if (date.day() == 5 ) { %>
                 <form action="/user/withdrawals" id="withdrawalRequest" method="POST">
                     <fieldset class="form-group">
                         <label for="withdrawalAmount">Withdrawal Amount(&#8358;)</label>
@@ -37,7 +40,7 @@
                         <small id="withdrawHelp" class="form-text text-muted">minimum withdrawal amount is &#8358;1,000</small>
                     </fieldset>
                     <input type="hidden" name="userID" value="<%= locals.user._id %>">
-                    <%if (date.day() == 5 ) { %>
+                    
                     <% const currentTime = momenttz().tz('Africa/Lagos').format('HH:mm:ss') %>
                     <% const currentHour = parseInt(currentTime.split(':')[0])%>
                     <% if (currentHour < timeLimit) {%> 

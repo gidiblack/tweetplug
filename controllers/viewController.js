@@ -725,6 +725,21 @@ exports.getPlanChangePage = catchAsync(async (req, res, next) => {
 exports.changeUserPlan = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.body.userId);
   user.Plan = req.body.plan;
+  let newTimeLeft;
+  if (req.body.plan == 'Junior influencer') {
+    newTimeLeft = 7;
+  } else if (req.body.plan == 'Free influencer') {
+    newTimeLeft = 999;
+  } else if (
+    req.body.plan == 'Whiz influencer' ||
+    req.body.plan == 'Adept influencer' ||
+    req.body.plan == 'Chief influencer'
+  ) {
+    newTimeLeft = 15;
+  } else {
+    newTimeLeft = 30;
+  }
+  user.timeLeft = newTimeLeft;
   await user.save({ validateBeforeSave: false });
   res.status(200).redirect(`/admin/user/${user._id}`);
 });
