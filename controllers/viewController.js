@@ -165,7 +165,7 @@ exports.getUserDashboard = catchAsync(async (req, res, next) => {
 
 //regex to check if any of links user submitted is valid
 const linkCheck = (link) => {
-  const re = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
+  const re = /[(http(s)?):\/\/(www\.)?twitter._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
   if (re.test(String(link)) == true) {
     return true;
   } else {

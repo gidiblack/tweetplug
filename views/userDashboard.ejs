@@ -13,7 +13,7 @@
                     <p><strong><span id="username"><%=locals.user.username %></span>, Welcome to your personalized dashboard!</strong></p>
                 </div>
                 <div class="row mt-5">
-                    <div class="hero-card col-lg-3 col-md-6">
+                    <div class="hero-card col-md-4">
                         <img src="/assets/img/tag-icon.png" alt="currentPlan" style="width: 24px;">
                         <h3>Current Plan</h3>
                         <p id="currentPlan"><%=locals.user.Plan %>: 
@@ -24,12 +24,12 @@
                         <% } %>
                         </p>
                     </div>
-                    <div class="hero-card col-lg-3 col-md-6">
+                    <div class="hero-card col-md-4">
                         <img src="/assets/img/nairabills-icon.png" alt="nairabills-icon" style="width: 36px;">
                         <h3>Daily Revenue</h3>
                         <p id="dailyRevenue"><span>&#8358;</span> <%= locals.user.revenue %></p>
                     </div>
-                    <div class="hero-card col-lg-3 col-md-6">
+                    <div class="hero-card col-md-4">
                         <h3>Today's Action</h3>
                         <% if(tasks.length == 0) {%>
                         <p id="todayAction">CLOSED</p>
@@ -37,7 +37,7 @@
                          <p id="todayAction">Still Open</p>
                         <% } %>
                     </div>
-                    <div class="hero-card col-lg-3 col-md-6">
+                    <!-- <div class="hero-card col-lg-3 col-md-6">
                         <h3>Yesterday's Action</h3>
                             <% if (confirmation == true) {%>
                           <% if (user.links[user.links.length - 1].status == 'confirmed') {%> 
@@ -48,8 +48,7 @@
                            <% } else { %>
                             <p id="yesterdayAction"> </p> 
                            <%} %>
-                        <small style="color: white;">* ensure you see “met” before submitting the new day’s links</small>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
