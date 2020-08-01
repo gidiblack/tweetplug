@@ -22,7 +22,13 @@
                         <p>Bank: <span><%=userr.bank %></span></p>
                         <p>Active User: <span><%=userr.active %></span></p>
                         <input type="hidden" name="user_id" value=<%=userr._id %>>
-                        <input type="submit" value="Suspend Account" class="button sec-btn" name="user_s">
+                        <input type="submit" 
+                        <% if(userr.active == true) {%>
+                        value="Suspend Account" 
+                        <%} else {%>
+                        value="Reactivate Acount"
+                        <%} %>
+                        class="button sec-btn" name="user_s">
                         <input type="submit" value="Delete Account" class="button del-btn" name="user_d">
                     </form>
                     <a href="/admin/<%=userr._id %>/changeplan" class="button">Change Plan</a>
