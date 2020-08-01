@@ -664,7 +664,12 @@ exports.setUserStatus = catchAsync(async (req, res, next) => {
     console.log('change user plan');
   }
   if (req.body.user_s) {
-    await User.findByIdAndUpdate(req.body.user_id, { active: false });
+    const user = await User.findById(req.body.user_id);
+    if (user.active == true) {
+      await User.findByIdAndUpdate(req.body.user_id, { active: false });
+    } else if (user.active == false) {
+      await User.findByIdAndUpdate(req.body.user_id, { active: true });
+    }
   }
   if (req.body.user_d) {
     await User.findByIdAndDelete(req.body.user_id);
