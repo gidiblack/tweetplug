@@ -452,7 +452,7 @@ exports.contactAdmin = catchAsync(async (req, res, next) => {
   const message = `${name} sent an Email from ${userEmail} 
   content: ${req.body.message}
   `;
-  const supportEmail = 'support@tweetplug.com';
+  const supportEmail = 'tweetpluginc@gmail.com';
   const user = {
     firstname: name,
     email: userEmail,
