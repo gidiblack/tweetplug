@@ -41,7 +41,7 @@
                     </fieldset>
                     <fieldset class="form-group col-md-5">
                         <label for="mobileNumber">Mobile Number</label>
-                        <input type="text" class="form-control" name="mobile" id="mobileNumber" placeholder="Mobile number" aria-placeholder="Mobile number" required aria-required="true" value="<%=user.mobileNumber%>">
+                        <input type="text" inputmode="numeric" pattern="[-+]?[0-9]*[.,]?[0-9]+" class="form-control" name="mobile" id="mobileNumber" placeholder="Mobile number" aria-placeholder="Mobile number" required aria-required="true" value="<%=user.mobileNumber%>">
                     </fieldset>
                     <h2 class="big col-md-12 mt-3 text-center last-child">Bank Details</h2>
                     <fieldset class="form-group col-md-12">
@@ -50,7 +50,7 @@
                     </fieldset>
                     <fieldset class="form-group col-md-6">
                         <label for="accountNumber">Account Number</label>
-                        <input type="text" class="form-control" name="bankaccountnumber" id="accountNumber" placeholder="Account number" aria-placeholder="Account number" required aria-required="true" value="<%=user.bankAccountNumber%>">
+                        <input type="text" inputmode="numeric" pattern="[-+]?[0-9]*[.,]?[0-9]+" class="form-control" name="bankaccountnumber" id="accountNumber" placeholder="Account number" aria-placeholder="Account number" required aria-required="true" value="<%=user.bankAccountNumber%>">
                     </fieldset>
                     <fieldset class="form-group col-md-6">
                         <label for="bank">Bank</label>

@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Please enter your twitter handle'],
   },
   bankAccountNumber: {
-    type: Number,
+    type: String,
     required: [true, 'Please enter your bank account number'],
   },
   bankAccountName: {
@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Please select your bank'],
   },
   mobileNumber: {
-    type: Number,
+    type: String,
     required: [true, 'please enter your phone number'],
     min: [11, 'A phone number must be at least 11 characters in length'],
   },
