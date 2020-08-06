@@ -209,8 +209,7 @@ userSchema.pre('save', function (next) {
     this.Plan !== 'Free influencer' &&
     this.Plan !== 'Junior influencer' &&
     this.Plan !== 'Whiz influencer' &&
-    this.Plan !== 'Adept influencer' &&
-    this.Plan !== 'Chief influencer'
+    this.Plan !== 'Adept influencer'
   ) {
     this.timeLeft = 30;
     next();
@@ -225,8 +224,7 @@ userSchema.pre('save', function (next) {
   }
   if (
     this.Plan === 'Whiz influencer' ||
-    this.Plan === 'Adept influencer' ||
-    this.Plan === 'Chief influencer'
+    this.Plan === 'Adept influencer'
   ) {
     this.timeLeft = 15;
     next();

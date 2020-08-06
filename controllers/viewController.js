@@ -23,18 +23,18 @@ const auth = {
 const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
 //revenue to be added for each user plan
-const freeinfluencerrev = 5;
-const juniorinfluencerrev = 615;
-const whizinfluencerrev = 500;
-const adeptinfluencerrev = 1000;
-const chiefinfluencerrev = 2000;
-const expertinfluencerrev = 1500;
-const principalinfluencerrev = 2000;
-const liegeinfluencerrev = 2500;
-const professionalinfluencerrev = 3000;
-const primeinfluencerrev = 4000;
-const monarchinfluencerrev = 5000;
-const geniusinfluencerrev = 6000;
+const freeinfluencerrev = 20;
+const juniorinfluencerrev = 786;
+const whizinfluencerrev = 734;
+const adeptinfluencerrev = 1467;
+const chiefinfluencerrev = 1467;
+const expertinfluencerrev = 2200;
+const principalinfluencerrev = 2934;
+const liegeinfluencerrev = 3667;
+const professionalinfluencerrev = 4400;
+const primeinfluencerrev = 5134;
+const monarchinfluencerrev = 5867;
+const geniusinfluencerrev = 6600;
 
 //function to set the rev of user based on userPlan
 const setRevenue = (user) => {
