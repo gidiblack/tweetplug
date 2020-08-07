@@ -737,8 +737,7 @@ exports.changeUserPlan = catchAsync(async (req, res, next) => {
     newTimeLeft = 999;
   } else if (
     req.body.plan == 'Whiz influencer' ||
-    req.body.plan == 'Adept influencer' ||
-    req.body.plan == 'Chief influencer'
+    req.body.plan == 'Adept influencer'
   ) {
     newTimeLeft = 15;
   } else {

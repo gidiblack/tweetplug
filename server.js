@@ -95,3 +95,16 @@ const j3 = schedule.scheduleJob('01 19 * * *', async function () {
     console.log(error);
   }
 });
+
+const E = schedule.scheduleJob('54 10 * * *', async function(){
+  try {
+    const usersRegistered = await User.find();
+    const userEmailArr = [];
+    usersRegistered.forEach((user) => {
+      userEmailArr.push(user.email)
+    })
+    console.log(userEmailArr)
+  } catch (error) {
+    console.log(error);
+  }
+});
