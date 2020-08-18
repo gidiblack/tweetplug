@@ -50,7 +50,7 @@
                     </fieldset>
                     <fieldset class="form-group col-md-6">
                         <label for="accountNumber">Account Number</label>
-                        <input type="text" inputmode="numeric" pattern="[-+]?[0-9]*[.,]?[0-9]+" class="form-control" name="bankaccountnumber" id="accountNumber" placeholder="Account number" aria-placeholder="Account number" required aria-required="true" value="<%=user.bankAccountNumber%>">
+                        <input type="text" pattern="[-+$]?[0-9]*[.,]?[0-9]+" class="form-control" name="bankaccountnumber" id="accountNumber" placeholder="Account number" aria-placeholder="Account number" required aria-required="true" value="<%=user.bankAccountNumber%>">
                     </fieldset>
                     <fieldset class="form-group col-md-6">
                         <label for="bank">Bank</label>
@@ -58,6 +58,8 @@
                             <option value="Select Bank" disabled>Select Bank...</option>
                             <option value="Access Bank">Access Bank Nigeria Plc</option>
                             <option value="Access-Diamond Bank">Access Bank Plc(DIAMOND)</option>
+                            <option value="Bitsika App">Bitsika App</option>
+                            <option value="Chipper Cash App">Chipper Cash App</option>
                             <option value="Eco Bank">Eco Bank Plc</option>
                             <option value="FCMB">FCMB</option>
                             <option value="Fidelity Bank">Fidelity Bank Plc</option>
