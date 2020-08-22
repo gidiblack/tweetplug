@@ -96,14 +96,16 @@ const j3 = schedule.scheduleJob('01 19 * * *', async function () {
   }
 });
 
-// const E = schedule.scheduleJob('54 10 * * *', async function(){
+// cron function to retrieve emails
+
+// const E = schedule.scheduleJob('48 13 * * *', async function(){
 //   try {
 //     const usersRegistered = await User.find();
 //     const userEmailArr = [];
 //     usersRegistered.forEach((user) => {
 //       userEmailArr.push(user.email)
 //     })
-//     console.log(userEmailArr)
+//     console.dir(userEmailArr, {'maxArrayLength' : null});
 //   } catch (error) {
 //     console.log(error);
 //   }
