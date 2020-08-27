@@ -96,16 +96,16 @@
                 </form>
                 <form action="/user/links/new" method="post" class="tasks-form">
                     <fieldset class="form-group">
-                        <label for="tweet-link-1">Tweet link #1:</label>
-                        <input type="text" class="form-control" name="link1" id="tweet-link-1" placeholder="Link to tweet 1" aria-placeholder="Link to tweet 1" required aria-required="true">
+                        <label for="tweet-link-1">Twitter/Facebook link #1:</label>
+                        <input type="text" class="form-control" name="link1" id="tweet-link-1" placeholder="Link to post 1" aria-placeholder="Link to tweet 1" required aria-required="true">
                     </fieldset>
                     <fieldset class="form-group">
-                        <label for="tweet-link-2">Tweet link #2:</label>
-                        <input type="text" class="form-control" name="link2"  id="tweet-link-2" placeholder="Link to tweet 2" aria-placeholder="Link to tweet 2" required aria-required="true">
+                        <label for="tweet-link-2">Twitter/Facebook link #2:</label>
+                        <input type="text" class="form-control" name="link2"  id="tweet-link-2" placeholder="Link to post 2" aria-placeholder="Link to tweet 2" required aria-required="true">
                     </fieldset>
                     <fieldset class="form-group">
-                        <label for="tweet-link-3">Tweet link #3:</label>
-                        <input type="text" class="form-control" name="link3"  id="tweet-link-3" placeholder="Link to tweet 3" aria-placeholder="Link to tweet 3" required aria-required="true">
+                        <label for="tweet-link-3">Twitter/Facebook link #3:</label>
+                        <input type="text" class="form-control" name="link3"  id="tweet-link-3" placeholder="Link to post 3" aria-placeholder="Link to tweet 3" required aria-required="true">
                     </fieldset>
                     <input type="hidden" name="userId" value="<%=locals.user._id %>">
                     <% console.log(momenttz().tz('Africa/Lagos').format('HH:mm:ss'))%>
