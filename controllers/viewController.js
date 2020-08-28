@@ -152,7 +152,9 @@ exports.getUserDashboard = catchAsync(async (req, res, next) => {
   // time from which users can no longer submit tasks
   const taskSubmissionLimit = '22:00:00';
   //console.log(taskSubmissionLimit);
-  const tasks = await Task.find({ active: true });
+  const tasks = await Task.find({
+    active: true
+  });
   res.status(200).render('userDashboard', {
     tasks,
     moment,
@@ -212,7 +214,9 @@ exports.userSubmitLinks = catchAsync(async (req, res, next) => {
         await Link.findByIdAndDelete(linkCheck._id);
         // and remove the link id from the user.links
         await User.findByIdAndUpdate(req.body.userId, {
-          $pull: { links: linkCheck._id },
+          $pull: {
+            links: linkCheck._id
+          },
         });
       } else {
         //if the link is still active, set the active value to false
@@ -235,7 +239,9 @@ exports.userSubmitLinks = catchAsync(async (req, res, next) => {
     });
     //add id of new links created to the user document
     await User.findByIdAndUpdate(req.body.userId, {
-      $push: { links: newLink._id },
+      $push: {
+        links: newLink._id
+      },
     });
   });
 
@@ -248,7 +254,10 @@ exports.getLinkEditPage = catchAsync(async (req, res, next) => {
   });
   counter = 0;
   //console.log(loggedInUser.links);
-  res.status(200).render('editLink', { loggedInUser, counter });
+  res.status(200).render('editLink', {
+    loggedInUser,
+    counter
+  });
 });
 
 exports.editUserLink = catchAsync(async (req, res, next) => {
@@ -273,7 +282,9 @@ exports.editUserLink = catchAsync(async (req, res, next) => {
   //console.log(user);
   //console.log(activeLinksArr);
   activeLinksArr.forEach(async (link, index) => {
-    await Link.findByIdAndUpdate(link._id, { link: LinksArr[index] });
+    await Link.findByIdAndUpdate(link._id, {
+      link: LinksArr[index]
+    });
   });
 
   res.status(200).redirect(`/user/links/${user._id}`);
@@ -299,6 +310,12 @@ exports.getWithdrawalPage = catchAsync(async (req, res, nex) => {
 
 exports.makeWithdrawalRequest = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.body.userID);
+
+  if (user.timeLeft <= 0) {
+    return next(
+      new AppError('Your subscription has expired and you cannot make withdrawals. Please contact Admin', 401)
+    )
+  }
   if (req.body.amount < 1000) {
     return next(
       new AppError('You cannot withdraw less than a 1000 naira', 401)
@@ -319,9 +336,13 @@ exports.makeWithdrawalRequest = catchAsync(async (req, res, next) => {
   });
   const previousWithdrawalId =
     user.withdrawals[0 + user.withdrawals.length - 1];
-  await Withdrawal.findByIdAndUpdate(previousWithdrawalId, { active: false });
+  await Withdrawal.findByIdAndUpdate(previousWithdrawalId, {
+    active: false
+  });
   const updatedUser = await User.findByIdAndUpdate(req.body.userID, {
-    $push: { withdrawals: newWithdrawal._id },
+    $push: {
+      withdrawals: newWithdrawal._id
+    },
   });
 
   res.status(200).redirect('/');
@@ -336,8 +357,7 @@ exports.getMyProfile = catchAsync(async (req, res, next) => {
 
 exports.editProfile = catchAsync(async (req, res, next) => {
   const updatedUser = await User.findByIdAndUpdate(
-    req.body.userId,
-    {
+    req.body.userId, {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       username: req.body.username,
@@ -348,8 +368,7 @@ exports.editProfile = catchAsync(async (req, res, next) => {
       bank: req.body.bank,
       mobileNumber: req.body.mobile,
       email: req.body.email,
-    },
-    {
+    }, {
       runValidators: true,
     }
   );
@@ -384,7 +403,9 @@ exports.getForgotPasswordPage = catchAsync(async (req, res, next) => {
 });
 
 exports.sendPasswordResetToken = catchAsync(async (req, res, next) => {
-  const user = await User.findOne({ email: req.body.email });
+  const user = await User.findOne({
+    email: req.body.email
+  });
   if (!user) {
     return next(
       new AppError(
@@ -394,7 +415,9 @@ exports.sendPasswordResetToken = catchAsync(async (req, res, next) => {
     );
   }
   const resetToken = user.createPasswordResetToken();
-  await user.save({ validateBeforeSave: false });
+  await user.save({
+    validateBeforeSave: false
+  });
 
   const resetUrl = `${req.protocol}://${req.get(
     'host'
@@ -404,8 +427,7 @@ exports.sendPasswordResetToken = catchAsync(async (req, res, next) => {
     //await new Email(user, resetUrl).sendPasswordReset();
     let temp;
     const html = ejs.renderFile(
-      `${__dirname}/../views/emails/passwordReset.ejs`,
-      {
+      `${__dirname}/../views/emails/passwordReset.ejs`, {
         firstName: user.firstName,
         url: resetUrl,
         subject: 'Your password reset token (valid for 10 minutes)',
@@ -415,8 +437,7 @@ exports.sendPasswordResetToken = catchAsync(async (req, res, next) => {
         temp = html;
       }
     );
-    nodemailerMailgun.sendMail(
-      {
+    nodemailerMailgun.sendMail({
         from: process.env.EMAIL_FROM,
         to: user.email,
         subject: 'Your password reset token (valid for 10 minutes)',
@@ -435,7 +456,9 @@ exports.sendPasswordResetToken = catchAsync(async (req, res, next) => {
     console.log(error);
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
-    await user.save({ validateBeforeSave: false });
+    await user.save({
+      validateBeforeSave: false
+    });
     return next(
       new AppError(
         'There was an error sending your email, try again later',
@@ -458,8 +481,7 @@ exports.contactAdmin = catchAsync(async (req, res, next) => {
     email: userEmail,
   };
   // await new Email(user, url).sendContact();
-  nodemailerMailgun.sendMail(
-    {
+  nodemailerMailgun.sendMail({
       from: user.email,
       to: supportEmail,
       subject: `Message from ${name} `,
@@ -491,7 +513,9 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   const user = await User.findOne({
     passwordResetToken: hashedtoken,
-    passwordResetExpires: { $gt: Date.now() }, //check if reset token has expired
+    passwordResetExpires: {
+      $gt: Date.now()
+    }, //check if reset token has expired
   });
   //set new password if token has not expired
   if (!user) {
@@ -524,10 +548,18 @@ exports.getAdvertise = catchAsync(async (req, res, next) => {
 
 //get the admin dashboard
 exports.getAdminDashboard = catchAsync(async (req, res, next) => {
-  const tasks = await Task.find({ active: true });
-  const withdrawals = await Withdrawal.find({ status: 'unconfirmed' });
-  const links = await Link.find({ status: 'unconfirmed' });
-  const users = await User.find({ role: 'user' })
+  const tasks = await Task.find({
+    active: true
+  });
+  const withdrawals = await Withdrawal.find({
+    status: 'unconfirmed'
+  });
+  const links = await Link.find({
+    status: 'unconfirmed'
+  });
+  const users = await User.find({
+      role: 'user'
+    })
     .populate({
       path: 'links',
       select: '-_id -user ',
@@ -562,10 +594,14 @@ exports.getAdminDashboard = catchAsync(async (req, res, next) => {
 
 //function to set a new task by admin
 exports.setTask = catchAsync(async (req, res, next) => {
-  const oldTasks = await Task.find({ active: true });
+  const oldTasks = await Task.find({
+    active: true
+  });
   if (oldTasks.length > 0) {
     oldTasks.forEach(async (task) => {
-      await Task.findByIdAndUpdate(task._id, { active: false });
+      await Task.findByIdAndUpdate(task._id, {
+        active: false
+      });
     });
   }
   const newTask = await Task.create({
@@ -609,8 +645,9 @@ exports.setWithdrawalStatus = catchAsync(async (req, res, next) => {
     Check = 'rejected';
   }
   const withdrawalRequest = await Withdrawal.findByIdAndUpdate(
-    req.body.withdrawalID,
-    { status: Check }
+    req.body.withdrawalID, {
+      status: Check
+    }
   );
   if (!withdrawalRequest) {
     return next(new AppError('No request found with that id', 401));
@@ -620,7 +657,9 @@ exports.setWithdrawalStatus = catchAsync(async (req, res, next) => {
     const userId = req.body.userId;
     const user = await User.findById(userId);
     const newRev = user.revenue - amount;
-    await User.findByIdAndUpdate(userId, { revenue: newRev });
+    await User.findByIdAndUpdate(userId, {
+      revenue: newRev
+    });
   }
   res.status(200).redirect(`/admin/user/${req.body.userId}`);
 });
@@ -654,7 +693,9 @@ exports.setLinkStatus = catchAsync(async (req, res, next) => {
   const rev = setRevenue(user);
   const newRev = user.revenue + rev;
   const id = user._id;
-  await User.findByIdAndUpdate(id, { revenue: newRev });
+  await User.findByIdAndUpdate(id, {
+    revenue: newRev
+  });
   res.status(200).redirect(`/admin/user/${user._id}`);
 });
 
@@ -666,9 +707,13 @@ exports.setUserStatus = catchAsync(async (req, res, next) => {
   if (req.body.user_s) {
     const user = await User.findById(req.body.user_id);
     if (user.active == true) {
-      await User.findByIdAndUpdate(req.body.user_id, { active: false });
+      await User.findByIdAndUpdate(req.body.user_id, {
+        active: false
+      });
     } else if (user.active == false) {
-      await User.findByIdAndUpdate(req.body.user_id, { active: true });
+      await User.findByIdAndUpdate(req.body.user_id, {
+        active: true
+      });
     }
   }
   if (req.body.user_d) {
@@ -700,7 +745,9 @@ exports.confirmAllWithdrawals = catchAsync(async (req, res, next) => {
         const newRev = user.revenue - withAmountArr[index];
         //console.log(`newRev for user${index} is ${newRev}`);
         //console.log(`updatedRev for user${index} is ${user.revenue}`);
-        await User.findByIdAndUpdate(id, { revenue: newRev });
+        await User.findByIdAndUpdate(id, {
+          revenue: newRev
+        });
       });
     });
 
@@ -714,7 +761,9 @@ exports.confirmAllWithdrawals = catchAsync(async (req, res, next) => {
   const amount = withdrawal.amount;
   const user = await User.findById(userId);
   const newRev = user.revenue - amount;
-  await User.findByIdAndUpdate(userId, { revenue: newRev });
+  await User.findByIdAndUpdate(userId, {
+    revenue: newRev
+  });
 
   res.status(200).redirect('/admin/dashboard');
   //console.log(withdrawalsIdArr);
@@ -744,7 +793,9 @@ exports.changeUserPlan = catchAsync(async (req, res, next) => {
     newTimeLeft = 30;
   }
   user.timeLeft = newTimeLeft;
-  await user.save({ validateBeforeSave: false });
+  await user.save({
+    validateBeforeSave: false
+  });
   res.status(200).redirect(`/admin/user/${user._id}`);
 });
 
@@ -756,11 +807,15 @@ exports.confirmAllLinks = catchAsync(async (req, res, next) => {
       const user = await User.findById(id);
       linksArr = user.links;
       linksArr.forEach(async (id) => {
-        await Link.findByIdAndUpdate(id, { status: 'confirmed' });
+        await Link.findByIdAndUpdate(id, {
+          status: 'confirmed'
+        });
       });
       const rev = setRevenue(user);
       const newRev = user.revenue + rev;
-      await User.findByIdAndUpdate(id, { revenue: newRev });
+      await User.findByIdAndUpdate(id, {
+        revenue: newRev
+      });
     });
 
     return res.status(200).redirect('/admin/dashboard');
@@ -769,11 +824,15 @@ exports.confirmAllLinks = catchAsync(async (req, res, next) => {
   if (typeof userIds == String) {
     const user = await User.findById(userIds);
     user.links.forEach(async (id) => {
-      await Link.findByIdAndUpdate(id, { status: 'confirmed' });
+      await Link.findByIdAndUpdate(id, {
+        status: 'confirmed'
+      });
     });
     const rev = setRevenue(user);
     const newRev = user.revenue + rev;
-    await User.findByIdAndUpdate(id, { revenue: newRev });
+    await User.findByIdAndUpdate(id, {
+      revenue: newRev
+    });
     return res.status(200).redirect('/admin/dashboard');
   }
 
