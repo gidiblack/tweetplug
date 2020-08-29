@@ -150,7 +150,7 @@ exports.getUserDashboard = catchAsync(async (req, res, next) => {
   // });
 
   // time from which users can no longer submit tasks
-  const taskSubmissionLimit = '22:00:00';
+  const taskSubmissionLimit = '19:00:00';
   //console.log(taskSubmissionLimit);
   const tasks = await Task.find({
     active: true

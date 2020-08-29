@@ -63,7 +63,7 @@ module.exports = class Email {
   }
 
   async sendWelcome() {
-    await this.send('welcome', 'Welcome to the tweetPlug family');
+    await this.send('welcome', 'Welcome to the Tweetplug family');
   }
   async sendPasswordReset() {
     await this.send(
