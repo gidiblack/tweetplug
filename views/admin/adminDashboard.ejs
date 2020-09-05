@@ -17,15 +17,15 @@
                 <form action="/admin/newtask" class="tweetLinks" method='POST'>
                     <div class="tweet-links row">
                         <fieldset class="form-group col-md-4">
-                            <label for="tweet-1">Tweet #1: <span></span></label>
+                            <label for="tweet-1">Content #1: <span></span></label>
                             <textarea name="tweet1" id="tweet-1" rows="5" placeholder="Enter task details" ></textarea>
                         </fieldset>
                         <fieldset class="form-group col-md-4">
-                            <label for="tweet-2">Tweet #2: <span></span></label>
+                            <label for="tweet-2">Content #2: <span></span></label>
                             <textarea name="tweet2" id="tweet-2" rows="5" placeholder="Enter task details" ></textarea>
                         </fieldset>
                         <fieldset class="form-group col-md-4">
-                            <label for="tweet-3">Tweet #3: <span></span></label>
+                            <label for="tweet-3">Content #3: <span></span></label>
                             <textarea name="tweet3" id="tweet-3" rows="5" placeholder="Enter task details" ></textarea>
                         </fieldset>
                     </div>
@@ -51,7 +51,7 @@
                         <tr>
                             <td> <%= index + 1 %></td>
                             <% const currentTime = momenttz().tz('Africa/Lagos').format('HH:mm:ss') %>
-                            <% const timeLeft = 22 - parseInt(currentTime.split(':')[0])%>
+                            <% const timeLeft = 19 - parseInt(currentTime.split(':')[0])%>
                             <% if (timeLeft > 0) { %> 
                             <td><%= timeLeft %> Hours Left</td>
                             <% } else {%>
