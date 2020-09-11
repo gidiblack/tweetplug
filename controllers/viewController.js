@@ -202,6 +202,10 @@ exports.userSubmitLinks = catchAsync(async (req, res, next) => {
   //get the User that is making the request
   const user = await User.findById(req.body.userId);
 
+  //check if user's sub has expired 
+  if (user.timeLeft <= 0) {
+    return next(new AppError('Looks like your subscription has expired, kindly contact admin to renew your subscription or to switch to a free plan', 401))
+  }
   //get the Id of the user's last links (user.links is an array of linksIDs associated with the user)
   const allUserLinks = user.links;
   if (allUserLinks.length > 0) {
